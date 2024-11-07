@@ -1,16 +1,20 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
+const LoginPage = require('../../../pages/login');
+
 
 When('I enter email {kraken-string}', async function (email) {
-  let element = await this.driver.$('#identification');
-  return await element.setValue(email);
+  const loginPage = new LoginPage(this.driver);
+  let element = await loginPage.getEmailElement();
+  return await loginPage.setEmailElement(element, email);
 });
 
 When('I enter password {kraken-string}', async function (password) {
-  let element = await this.driver.$('#password');
-  return await element.setValue(password);
+  const loginPage = new LoginPage(this.driver);
+  let element = await loginPage.getPasswordElement();
+  return await loginPage.setPasswordElement(element, password);
 });
 
 When('I click on sign-in', async function () {
-  let element = await this.driver.$('button[type=submit]');
-  return await element.click();
+  const loginPage = new LoginPage(this.driver);
+  return await loginPage.clickOnSignInElement();
 });
