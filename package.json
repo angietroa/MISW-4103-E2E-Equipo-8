@@ -1,0 +1,16 @@
+{
+  "name": "misw-4103-e2e-equipo-8",
+  "version": "1.0.0",
+  "description": "Proyecto que contiene escenarios de pruebas E2E de Kraken y Cypress para GHOST",
+  "main": "index.js",
+  "scripts": {
+    "e2e:kraken": "cd kraken && ../node_modules/kraken-node/bin/kraken-node run",
+    "e2e:cypress": "cd cypress && ../node_modules/.bin/cypress run --headless"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^13.15.2",
+    "kraken-node": "^1.0.24"
+  }
+}
