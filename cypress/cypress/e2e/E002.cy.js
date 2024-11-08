@@ -5,7 +5,7 @@ import PostPage from "../../pages/postPage";
 const numImages = Math.floor(Math.random() * 6) + 1;
 
 function loadRandomImages() {
-  const imagenes = [
+  const images = [
     "image_1.jpg",
     "image_2.jpg",
     "image_3.jpg",
@@ -20,11 +20,10 @@ function loadRandomImages() {
     cy.get('div[data-kg="editor"]')
       .should("be.visible")
       .then(($editorDiv) => {
-        const imagenAleatoria =
-          imagenes[Math.floor(Math.random() * imagenes.length)];
+        const randomImage = images[Math.floor(Math.random() * images.length)];
         cy.wrap($editorDiv)
           .find('input[type="file"]')
-          .attachFile(`../fixtures/${imagenAleatoria}`);
+          .attachFile(`../fixtures/${randomImage}`);
       });
     cy.get("textarea").type("{enter}");
   }
