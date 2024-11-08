@@ -17,7 +17,7 @@ class TagPage {
     this.cy.get('button[type="button"][data-test-button="save"].gh-btn-primary').click();
     this.cy.wait(4000);
 
-    cy.get('body').then(body => {
+    this.cy.get('body').then(body => {
       if (body.find('button[type="button"][data-test-leave-button]').length > 0) {
         cy.get('button[type="button"][data-test-leave-button]').click();
         this.cy.wait(2000);
@@ -27,6 +27,11 @@ class TagPage {
 
   async clickOnExpandMetadataForm() {
     this.cy.get('.gh-btn-expand').eq(0).click();
+    this.cy.wait(2000);
+  }
+
+  async clickOnExpandXForm() {
+    this.cy.get('.gh-btn-expand').eq(1).click();
     this.cy.wait(2000);
   }
 
@@ -59,6 +64,19 @@ class TagPage {
 
     this.cy.get('#canonical-url').type(url);
     this.cy.wait(2000);
+  }
+
+  async setXCardValues(pathImg, title, description) {
+    this.cy.get('.gh-twitter-settings').within(() => {
+      this.cy.get('input[type="file"]').attachFile({ filePath: pathImg });
+      this.cy.wait(2000);
+
+      this.cy.get('#twitter-title').type(title);
+      this.cy.wait(2000);
+
+      this.cy.get('#twitter-description').type(description);
+      this.cy.wait(2000);
+    });
   }
 
   async findTagNameCreated(tagName) {
