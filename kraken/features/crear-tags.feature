@@ -9,6 +9,15 @@ Scenario: E011 - Crear tag solo con nombre
   And I enter password "<password>"
   And I wait for 2 seconds
   And I click on sign-in
+  And I wait for 3 seconds
+  And I click on tags menu
+  And I wait for 2 seconds
+  And I click on new tag
+  And I wait for 2 seconds
+  And I enter a tag name "$name_1"
+  And I wait for 2 seconds
+  And I click on save a tag
   And I wait for 7 seconds
-  And I click on tags option
-  And I wait for 7 seconds
+  And I click on tags menu
+  And I wait for 2 seconds
+  Then I see a tag named "$$name_1"
