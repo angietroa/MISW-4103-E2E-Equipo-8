@@ -2,7 +2,7 @@ Feature: Crear tags
 
 @user1 @web
 Scenario: E015 - Crear tag con Facebook card
-  Given I navigate to page "http://localhost:2368/ghost/"
+  Given I navigate to page "<url>"
   And I wait for 5 seconds
   When I enter email "<username>"
   And I wait for 1 seconds

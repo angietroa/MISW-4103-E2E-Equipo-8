@@ -9,8 +9,8 @@ describe('Crear tag', () => {
 
     it('E012 - Crear tag con nombre y demas atributos', () => {
         // Given: I navigate to page
-        cy.log({ displayName: 'Given', message: 'I navigate to page http://localhost:2368/ghost' });
-        loginPage.visitPage('http://localhost:2368/ghost');
+        cy.log({ displayName: 'Given', message: 'I navigate to page' });
+        loginPage.visitPage();
 
         // When: I enter email, password and I do click on Sign-in
         cy.log({ displayName: 'When', message: 'I enter email, password and I do click on Sign-in' });

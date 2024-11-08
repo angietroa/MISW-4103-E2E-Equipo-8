@@ -3,9 +3,11 @@ class LoginPage {
     this.cy = cy;
   }
 
-  async visitPage(page) {
-    this.cy.visit(page);
-    this.cy.wait(3000);
+  async visitPage() {
+    this.cy.fixture('properties').then((data) => {
+      this.cy.visit(data.url);
+      this.cy.wait(3000);
+    });
   }
 
   async singInPage() {
