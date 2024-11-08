@@ -18,6 +18,11 @@ When('I click on expand metadata form', async function () {
   return await tagPage.clickOnExpandMetadataForm();
 });
 
+When('I click on expand x card form', async function () {
+  const tagPage = new TagPage(this.driver);
+  return await tagPage.clickOnExpandXCardForm();
+});
+
 When('I click on save a tag', async function () {
   const tagPage = new TagPage(this.driver);
   return await tagPage.clickOnSaveTag();
@@ -47,6 +52,14 @@ When('I upload a tag file', async function () {
 When('I enter tag medatata title as {kraken-string}, descripcion as {kraken-string} and url as {kraken-string}', async function (title, description, url) {
   const tagPage = new TagPage(this.driver);
   return await tagPage.setTagMetadataValues(title, description, url);
+});
+
+When('I enter x card values with an image, a title as {kraken-string} and a description as {kraken-string}', async function (title, description) {
+  const tagPage = new TagPage(this.driver);
+  const pathImg = path.join(__dirname, '../../../../assets/rocket-icon.png');
+
+  return await tagPage.setXCardValues(pathImg, title, description);
+  return;
 });
 
 Then('I see a tag named {kraken-string}', async function (tagName) {

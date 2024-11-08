@@ -18,6 +18,16 @@ class TagPage {
     return await expandButtons[0].click();
   }
 
+  async clickOnExpandXCardForm() {
+    const expandButtons = await this.driver.$$('.gh-btn-expand');
+    return await expandButtons[1].click();
+  }
+
+  async clickOnSaveTag() {
+    const element = await this.driver.$('button[type="button"][data-test-button="save"]');
+    return await element.click();
+  }
+
   async setTagName(tagName) {
     const element = await this.driver.$('#tag-name');
     return await element.setValue(tagName);
@@ -49,9 +59,15 @@ class TagPage {
     return await urlEl.setValue(url);
   }
 
-  async clickOnSaveTag() {
-    const element = await this.driver.$('button[type="button"][data-test-button="save"]');
-    return await element.click();
+  async setXCardValues(pathImg, title, description) {
+    const fileEl = await this.driver.$('.gh-twitter-settings').$('input[type="file"]');
+    await fileEl.setValue(pathImg);
+
+    const titleEl = await this.driver.$('#twitter-title');
+    await titleEl.setValue(title);
+
+    const descriptionEl = await this.driver.$('#twitter-description');
+    return await descriptionEl.setValue(description);
   }
 
   async findTagNameCreated(tagName) {
