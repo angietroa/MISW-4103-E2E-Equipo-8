@@ -18,7 +18,7 @@ Scenario: E013 - Crear tag con metadata
   And I wait for 1 seconds
   And I click on expand metadata form
   And I wait for 1 seconds
-  And I enter tag medatata title as "$$name_1", descripcion as "$string_1" and url as "$url_1"
+  And I enter tag medatata title as "$$name_1", description as "$string_1" and url as "$url_1"
   And I wait for 4 seconds
   And I click on save a tag
   And I wait for 2 seconds

@@ -54,7 +54,7 @@ When('I upload a tag file', async function () {
   return await tagPage.setTagImage(fullPath);
 });
 
-When('I enter tag medatata title as {kraken-string}, descripcion as {kraken-string} and url as {kraken-string}', async function (title, description, url) {
+When('I enter tag medatata title as {kraken-string}, description as {kraken-string} and url as {kraken-string}', async function (title, description, url) {
   const tagPage = new TagPage(this.driver);
   return await tagPage.setTagMetadataValues(title, description, url);
 });
