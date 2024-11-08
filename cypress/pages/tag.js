@@ -14,8 +14,20 @@ class TagPage {
   }
 
   async clickOnSaveTag() {
-    this.cy.get('button[type="button"][data-test-button="save"]').click();
+    this.cy.get('button[type="button"][data-test-button="save"].gh-btn-primary').click();
     this.cy.wait(4000);
+
+    cy.get('body').then(body => {
+      if (body.find('button[type="button"][data-test-leave-button]').length > 0) {
+        cy.get('button[type="button"][data-test-leave-button]').click();
+        this.cy.wait(2000);
+      }
+    });
+  }
+
+  async clickOnExpandMetadataForm() {
+    this.cy.get('.gh-btn-expand').eq(0).click();
+    this.cy.wait(2000);
   }
 
   async setTagName(tagName) {
@@ -35,6 +47,17 @@ class TagPage {
 
   async setTagImage(path) {
     this.cy.get('input[type="file"]').attachFile({ filePath: path });
+    this.cy.wait(2000);
+  }
+
+  async setTagMetadataValues(title, description, url) {
+    this.cy.get('#meta-title').type(title);
+    this.cy.wait(2000);
+
+    this.cy.get('#meta-description').type(description);
+    this.cy.wait(2000);
+
+    this.cy.get('#canonical-url').type(url);
     this.cy.wait(2000);
   }
 
