@@ -13,13 +13,24 @@ class TagPage {
     return await element.click();
   }
 
-  async getTagNameElement() {
+  async setTagName(tagName) {
     const element = await this.driver.$('#tag-name');
-    return element;
+    return await element.setValue(tagName);
   }
 
-  async setTagNameElement(element, tagName) {
-    return await element.setValue(tagName);
+  async setTagColor(tagColor) {
+    const element = await this.driver.$('input[data-test-input="accentColor"]');
+    return await element.setValue(tagColor);
+  }
+
+  async setTagDescription(tagDescription) {
+    const element = await this.driver.$('#tag-description');
+    return await element.setValue(tagDescription);
+  }
+
+  async setTagImage(path) {
+    const element = await this.driver.$('input[type="file"]');
+    return await element.setValue(path);
   }
 
   async clickOnSaveTag() {
