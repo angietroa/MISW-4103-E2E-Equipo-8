@@ -13,6 +13,16 @@ When('I click on new tag', async function () {
   return await tagPage.clickOnNewTag();
 });
 
+When('I click on expand metadata form', async function () {
+  const tagPage = new TagPage(this.driver);
+  return await tagPage.clickOnExpandMetadataForm();
+});
+
+When('I click on save a tag', async function () {
+  const tagPage = new TagPage(this.driver);
+  return await tagPage.clickOnSaveTag();
+});
+
 When('I enter a tag name {kraken-string}', async function (tagName) {
   const tagPage = new TagPage(this.driver);
   return await tagPage.setTagName(tagName);
@@ -34,9 +44,9 @@ When('I upload a tag file', async function () {
   return await tagPage.setTagImage(fullPath);
 });
 
-When('I click on save a tag', async function () {
+When('I enter tag medatata title as {kraken-string}, descripcion as {kraken-string} and url as {kraken-string}', async function (title, description, url) {
   const tagPage = new TagPage(this.driver);
-  return await tagPage.clickOnSaveTag();
+  return await tagPage.setTagMetadataValues(title, description, url);
 });
 
 Then('I see a tag named {kraken-string}', async function (tagName) {

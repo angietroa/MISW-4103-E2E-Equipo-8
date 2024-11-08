@@ -13,6 +13,11 @@ class TagPage {
     return await element.click();
   }
 
+  async clickOnExpandMetadataForm() {
+    const expandButtons = await this.driver.$$('.gh-btn-expand');
+    return await expandButtons[0].click();
+  }
+
   async setTagName(tagName) {
     const element = await this.driver.$('#tag-name');
     return await element.setValue(tagName);
@@ -33,6 +38,17 @@ class TagPage {
     return await element.setValue(path);
   }
 
+  async setTagMetadataValues(title, description, url) {
+    const titleEl = await this.driver.$('#meta-title');
+    await titleEl.setValue(title);
+
+    const descriptionEl = await this.driver.$('#meta-description');
+    await descriptionEl.setValue(description);
+
+    const urlEl = await this.driver.$('#canonical-url');
+    return await urlEl.setValue(url);
+  }
+
   async clickOnSaveTag() {
     const element = await this.driver.$('button[type="button"][data-test-button="save"]');
     return await element.click();
@@ -42,7 +58,7 @@ class TagPage {
     const tagNameExists = (await this.driver.$$('h3[data-test-tag-name]'))
       .some(async (element) => await element.getText() === tagName);
 
-    if(!tagNameExists) throw new Error(`Tag ${tagName} was not found`);
+    if (!tagNameExists) throw new Error(`Tag ${tagName} was not found`);
     return tagNameExists;
   }
 }
