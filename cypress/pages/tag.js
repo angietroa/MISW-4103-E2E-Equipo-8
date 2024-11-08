@@ -9,7 +9,7 @@ class TagPage {
   }
 
   async clickOnNewTag() {
-    this.cy.get('a[href="#/tags/new/"]').click();
+    this.cy.get('a[href="#/tags/new/"].gh-btn-primary').click();
     this.cy.wait(2000);
   }
 
@@ -20,6 +20,21 @@ class TagPage {
 
   async setTagName(tagName) {
     this.cy.get('#tag-name').type(tagName);
+    this.cy.wait(2000);
+  }
+
+  async setTagColor(tagColor) {
+    this.cy.get('input[data-test-input="accentColor"]').type(tagColor);
+    this.cy.wait(2000);
+  }
+
+  async setTagDescription(tagDescription) {
+    this.cy.get('#tag-description').type(tagDescription);
+    this.cy.wait(2000);
+  }
+
+  async setTagImage(path) {
+    this.cy.get('input[type="file"]').attachFile({ filePath: path });
     this.cy.wait(2000);
   }
 

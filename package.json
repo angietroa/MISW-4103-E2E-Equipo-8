@@ -12,6 +12,9 @@
   "dependencies": {
     "@faker-js/faker": "^9.2.0",
     "cypress": "^13.15.2",
-    "kraken-node": "^1.0.24"
+    "cypress-file-upload": "^5.0.8",
+    "install": "^0.13.0",
+    "kraken-node": "^1.0.24",
+    "npm": "^10.9.0"
   }
 }

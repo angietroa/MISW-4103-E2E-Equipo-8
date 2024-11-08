@@ -50,7 +50,7 @@ When('I enter a tag description {kraken-string}', async function (tagDescription
 
 When('I upload a tag file', async function () {
   const tagPage = new TagPage(this.driver);
-  const fullPath = path.join(__dirname, '../../../../assets/rocket-icon.png');
+  const fullPath = path.join(__dirname, '../../../assets/rocket-icon.png');
   return await tagPage.setTagImage(fullPath);
 });
 
@@ -61,14 +61,14 @@ When('I enter tag medatata title as {kraken-string}, descripcion as {kraken-stri
 
 When('I enter x card values with an image, a title as {kraken-string} and a description as {kraken-string}', async function (title, description) {
   const tagPage = new TagPage(this.driver);
-  const pathImg = path.join(__dirname, '../../../../assets/rocket-icon.png');
+  const pathImg = path.join(__dirname, '../../../assets/rocket-icon.png');
 
   return await tagPage.setXCardValues(pathImg, title, description);
 });
 
 When('I enter facebook card values with an image, a title as {kraken-string} and a description as {kraken-string}', async function (title, description) {
   const tagPage = new TagPage(this.driver);
-  const pathImg = path.join(__dirname, '../../../../assets/rocket-icon.png');
+  const pathImg = path.join(__dirname, '../../../assets/rocket-icon.png');
 
   return await tagPage.setFacebookCardValues(pathImg, title, description);
 });
