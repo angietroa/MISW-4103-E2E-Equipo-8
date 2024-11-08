@@ -23,6 +23,11 @@ When('I click on expand x card form', async function () {
   return await tagPage.clickOnExpandXCardForm();
 });
 
+When('I click on expand facebook card form', async function () {
+  const tagPage = new TagPage(this.driver);
+  return await tagPage.clickOnExpandFacebookCardForm();
+});
+
 When('I click on save a tag', async function () {
   const tagPage = new TagPage(this.driver);
   return await tagPage.clickOnSaveTag();
@@ -59,7 +64,13 @@ When('I enter x card values with an image, a title as {kraken-string} and a desc
   const pathImg = path.join(__dirname, '../../../../assets/rocket-icon.png');
 
   return await tagPage.setXCardValues(pathImg, title, description);
-  return;
+});
+
+When('I enter facebook card values with an image, a title as {kraken-string} and a description as {kraken-string}', async function (title, description) {
+  const tagPage = new TagPage(this.driver);
+  const pathImg = path.join(__dirname, '../../../../assets/rocket-icon.png');
+
+  return await tagPage.setFacebookCardValues(pathImg, title, description);
 });
 
 Then('I see a tag named {kraken-string}', async function (tagName) {
