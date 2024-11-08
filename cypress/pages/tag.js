@@ -35,6 +35,11 @@ class TagPage {
     this.cy.wait(2000);
   }
 
+  async clickOnExpandFacebookCardForm() {
+    this.cy.get('.gh-btn-expand').eq(2).click();
+    this.cy.wait(2000);
+  }
+
   async setTagName(tagName) {
     this.cy.get('#tag-name').type(tagName);
     this.cy.wait(2000);
@@ -75,6 +80,19 @@ class TagPage {
       this.cy.wait(2000);
 
       this.cy.get('#twitter-description').type(description);
+      this.cy.wait(2000);
+    });
+  }
+
+  async setFacebookCardValues(pathImg, title, description) {
+    this.cy.get('.gh-og-settings').within(() => {
+      this.cy.get('input[type="file"]').attachFile({ filePath: pathImg });
+      this.cy.wait(2000);
+
+      this.cy.get('#og-title').type(title);
+      this.cy.wait(2000);
+
+      this.cy.get('#og-description').type(description);
       this.cy.wait(2000);
     });
   }
