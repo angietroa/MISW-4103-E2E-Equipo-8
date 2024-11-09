@@ -13,10 +13,12 @@ class PostPage {
   }
 
   navigateToPosts() {
+    cy.wait(2000);
     cy.contains("a", "Posts").click();
   }
 
   createNewPost() {
+    cy.wait(2000);
     cy.get(this.newPostButton).should("be.visible").click();
   }
 
