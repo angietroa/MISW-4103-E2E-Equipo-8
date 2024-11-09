@@ -1,7 +1,7 @@
 import LoginPage from "../../pages/login";
 import PageObj from "../../pages/page";
 
-describe("template spec", () => {
+describe("Funcionalidad de crear página embebiendo link de Spotify", () => {
   before(() => {
     Cypress.on("uncaught:exception", (err, runnable) => {
       if (err.message.includes("The play() request was interrupted")) {

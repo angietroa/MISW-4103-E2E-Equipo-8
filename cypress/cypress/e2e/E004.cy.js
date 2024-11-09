@@ -9,7 +9,7 @@ describe("Funcionalidad de Creación de un Post con Youtube Embebido", () => {
 
   it("Debe iniciar sesión y crear un post con Youtube embebido", () => {
     loginPage.visitPage();
-    loginPage.singInPage();
+    loginPage.signInPage();
 
     postPage.navigateToPosts();
     postPage.createNewPost();

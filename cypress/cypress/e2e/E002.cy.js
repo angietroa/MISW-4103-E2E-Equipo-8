@@ -35,7 +35,7 @@ describe("Funcionalidad de Creación de un Post con Imágenes", () => {
 
   it("Debe iniciar sesión y crear un post con imágenes", () => {
     loginPage.visitPage();
-    loginPage.singInPage();
+    loginPage.signInPage();
 
     postPage.navigateToPosts();
     postPage.createNewPost();

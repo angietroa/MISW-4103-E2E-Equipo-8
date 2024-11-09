@@ -10,7 +10,7 @@ describe("Funcionalidad de Creación de un Post con Botón", () => {
 
   it("Debe crear un post con un botón y validarlo", () => {
     loginPage.visitPage();
-    loginPage.singInPage();
+    loginPage.signInPage();
 
     postPage.navigateToPosts();
     postPage.createNewPost();
