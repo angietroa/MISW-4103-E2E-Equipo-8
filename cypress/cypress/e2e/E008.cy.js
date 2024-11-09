@@ -1,4 +1,7 @@
 import "cypress-file-upload";
+import LoginPage from "../../pages/login";
+import PageObj from "../../pages/page";
+
 describe("Funcionalidad de crear página asociando una galeria", () => {
   // Configuración global para manejar excepciones
   before(() => {
@@ -10,30 +13,42 @@ describe("Funcionalidad de crear página asociando una galeria", () => {
     });
   });
 
-  it("Crear pagina adjuntando galeria", () => {
-    cy.visit("http://localhost:2368/ghost/");
-    cy.get("#identification").type("e.herediar@uniandes.edu.co");
+  it("E008 - Crear pagina adjuntando galeria", () => {
+    const loginPage = new LoginPage(cy);
+    const page = new PageObj(cy);
 
-    cy.get("#password").type("1015456264");
+    // Given: I navigate to page
+    cy.log({ displayName: "Given", message: "I navigate to page" });
+    loginPage.visitPage();
 
-    cy.get('[data-test-button="sign-in"]').click();
+    // When: I enter email, password and I do click on Sign-in
+    cy.log({
+      displayName: "When",
+      message: "I enter email, password and I do click on Sign-in",
+    });
+    loginPage.signInPage();
 
-    cy.get('a[href="#/pages/"]').click();
+    // When: I enter admin, I go to page and create a new one
+    cy.log({
+      displayName: "When",
+      message: "I enter admin, I go to page and create a new one",
+    });
+    page.goToPageAndCreate();
 
-    cy.contains("New page").click();
+    // When: I enter page, I set a title
+    cy.log({
+      displayName: "When",
+      message: "I enter page, I set a title",
+    });
+    page.pageTitle("Escenario página - Galeria");
 
-    cy.get(".gh-editor-title-container")
-      .should("be.visible")
-      .type("Escenario página - galeria");
-
-    cy.get('.koenig-react-editor .kg-prose[contenteditable="true"]')
-      .should("be.visible")
-      .first()
-      .click();
-
-    cy.get('button[aria-label="Add a card"]').click();
-
-    cy.contains("Gallery").click();
+    // When: I enter the title, I want to add an element to page, in this case bookmark
+    cy.log({
+      displayName: "When",
+      message:
+        "I enter the title, I want to add an element to page, in this case gallery",
+    });
+    page.addPageElement("Gallery");
 
     const imagePaths = [
       "cypress/fixtures/gallery_1.jpg",
@@ -41,16 +56,18 @@ describe("Funcionalidad de crear página asociando una galeria", () => {
       "cypress/fixtures/gallery_3.webp",
     ];
 
-    cy.contains("Click to select up to 9 images").click();
+    // When: I add the gallery, I want to add some files
+    cy.log({
+      displayName: "When",
+      message: "I add the gallery, I want to add some files",
+    });
+    page.setContentToGallery(imagePaths);
 
-    cy.get('input[name="image-input"]').selectFile(imagePaths, { force: true });
-
-    cy.contains("button", "Publish").click();
-
-    cy.contains("button", "Continue, final review").click();
-
-    cy.contains("button", "Publish page, right now").click();
-
-    cy.get('[data-test-button="close-publish-flow"]').click();
+    // Then: I save all changes
+    cy.log({
+      displayName: "Then",
+      message: "I save all changes",
+    });
+    page.publishPage();
   });
 });

@@ -1,16 +1,16 @@
-import LoginPage from "../../pages/loginPage";
+import LoginPage from "../../pages/login";
 import PostPage from "../../pages/postPage";
 import AddPostContent from "../../pages/addPostContent";
 
 describe("Funcionalidad de Creación de un Post con HTML", () => {
-  const loginPage = new LoginPage();
+  const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
   const addPostContent = new AddPostContent();
 
   it("Debe iniciar sesión y crear un post con HTML", () => {
-    cy.visit(Cypress.env("url"));
-    loginPage.login(Cypress.env("email"), Cypress.env("password"));
-
+    loginPage.visitPage();
+    loginPage.singInPage();
+    
     postPage.navigateToPosts();
     postPage.createNewPost();
 

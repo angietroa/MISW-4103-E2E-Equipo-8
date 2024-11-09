@@ -1,3 +1,6 @@
+import LoginPage from "../../pages/login";
+import PageObj from "../../pages/page";
+
 describe("Funcionalidad de crear página asociando un Bookmark", () => {
   // Configuración global para manejar excepciones
   before(() => {
@@ -9,56 +12,55 @@ describe("Funcionalidad de crear página asociando un Bookmark", () => {
     });
   });
 
-  it("Crear página con bookmarks (asociando posts)", () => {
-    cy.visit("http://localhost:2368/ghost/");
-    cy.get("#identification").type("e.herediar@uniandes.edu.co");
+  it("E006 - Crear página con bookmarks (asociando posts)", () => {
+    const loginPage = new LoginPage(cy);
+    const page = new PageObj(cy);
 
-    cy.get("#password").type("1015456264");
+    // Given: I navigate to page
+    cy.log({ displayName: "Given", message: "I navigate to page" });
+    loginPage.visitPage();
 
-    cy.get('[data-test-button="sign-in"]').click();
+    // When: I enter email, password and I do click on Sign-in
+    cy.log({
+      displayName: "When",
+      message: "I enter email, password and I do click on Sign-in",
+    });
+    loginPage.signInPage();
 
-    cy.get('a[href="#/posts/"]').click();
+    // When: I enter admin, I go to page and create a new one
+    cy.log({
+      displayName: "When",
+      message: "I enter admin, I go to page and create a new one",
+    });
+    page.goToPageAndCreate();
 
-    cy.contains("New post").click();
+    // When: I enter page, I set a title
+    cy.log({
+      displayName: "When",
+      message: "I enter page, I set a title",
+    });
+    page.pageTitle("Escenario página - Bookmark");
 
-    cy.get(".gh-editor-title")
-      .should("be.visible")
-      .type("Escenario post - bookmark");
+    // When: I enter the title, I want to add an element to page, in this case bookmark
+    cy.log({
+      displayName: "When",
+      message:
+        "I enter the title, I want to add an element to page, in this case bookmark",
+    });
+    page.addPageElement("Bookmark");
 
-    cy.get('div[data-koenig-dnd-container="true"]').first().type("Hola mundo");
+    // When: I add an element, I want to select a bookmark
+    cy.log({
+      displayName: "When",
+      message: "I add an element, I want to select a bookmark",
+    });
+    page.addBookmarkContent("Coming soon");
 
-    cy.contains("button", "Publish").click();
-
-    cy.contains("button", "Continue, final review").click();
-
-    cy.contains("button", "Publish post, right now").click();
-
-    cy.get('[data-test-button="close-publish-flow"]').click();
-
-    cy.get('a[href="#/pages/"]').click();
-
-    cy.contains("New page").click();
-
-    cy.get(".gh-editor-title")
-      .should("be.visible")
-      .type("Escenario página - Bookmark");
-
-    cy.get('div[data-koenig-dnd-container="true"]').first().click();
-
-    cy.get('button[aria-label="Add a card"]').click();
-
-    cy.contains("Bookmark").click();
-
-    cy.get('[data-testid="bookmark-url-dropdown"]').should("be.visible");
-
-    cy.contains("Escenario post - bookmark").click();
-
-    cy.get('[data-testid="bookmark-url-error-message"]').should("be.visible");
-
-    cy.contains("button", "Publish").click();
-
-    cy.contains("button", "Continue, final review").click();
-
-    cy.contains("button", "Publish page, right now").click();
+    // Then: I save all changes
+    cy.log({
+      displayName: "Then",
+      message: "I save all changes",
+    });
+    page.publishPage();
   });
 });
