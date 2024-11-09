@@ -10,7 +10,7 @@ class LoginPage {
     });
   }
 
-  async singInPage() {
+  async signInPage() {
     this.cy.fixture('properties').then((data) => {
       this.cy.get('#identification').type(data.username);
       this.cy.get('#password').type(data.password);

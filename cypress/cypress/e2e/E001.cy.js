@@ -7,7 +7,7 @@ describe("Funcionalidad de Creación de un Post", () => {
 
   it("Debe iniciar sesión y crear un post con texto aleatorio", () => {
     loginPage.visitPage();
-    loginPage.singInPage();
+    loginPage.signInPage();
 
     postPage.navigateToPosts();
     postPage.createNewPost();

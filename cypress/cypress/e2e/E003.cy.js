@@ -9,7 +9,7 @@ describe("Funcionalidad de Creación de un Post con HTML", () => {
 
   it("Debe iniciar sesión y crear un post con HTML", () => {
     loginPage.visitPage();
-    loginPage.singInPage();
+    loginPage.signInPage();
     
     postPage.navigateToPosts();
     postPage.createNewPost();
