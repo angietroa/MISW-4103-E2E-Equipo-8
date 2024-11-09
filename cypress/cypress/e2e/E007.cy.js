@@ -1,4 +1,4 @@
-describe("template spec", () => {
+describe("Funcionalidad de crear página con elemento Markdown", () => {
   // Configuración global para manejar excepciones
   before(() => {
     Cypress.on("uncaught:exception", (err, runnable) => {

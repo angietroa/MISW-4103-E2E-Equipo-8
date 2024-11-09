@@ -1,4 +1,4 @@
-describe("template spec", () => {
+describe("Funcionalidad de crear página asociando un Bookmark", () => {
   // Configuración global para manejar excepciones
   before(() => {
     Cypress.on("uncaught:exception", (err, runnable) => {

@@ -1,5 +1,5 @@
 import "cypress-file-upload";
-describe("template spec", () => {
+describe("Funcionalidad de crear página asociando una galeria", () => {
   // Configuración global para manejar excepciones
   before(() => {
     Cypress.on("uncaught:exception", (err, runnable) => {
@@ -10,7 +10,7 @@ describe("template spec", () => {
     });
   });
 
-  it("Crear pagina adjuntando un archivo", () => {
+  it("Crear pagina adjuntando galeria", () => {
     cy.visit("http://localhost:2368/ghost/");
     cy.get("#identification").type("e.herediar@uniandes.edu.co");
 

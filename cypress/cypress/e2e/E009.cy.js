@@ -1,5 +1,5 @@
 import "cypress-file-upload";
-describe("template spec", () => {
+describe("Funcionalidad de crear página insertando un file", () => {
   // Configuración global para manejar excepciones
   before(() => {
     Cypress.on("uncaught:exception", (err, runnable) => {

@@ -1,4 +1,4 @@
-describe("template spec", () => {
+describe("Funcionalidad de crear página, incluyendo un elemento embed(Spotify)", () => {
   before(() => {
     Cypress.on("uncaught:exception", (err, runnable) => {
       if (err.message.includes("The play() request was interrupted")) {
