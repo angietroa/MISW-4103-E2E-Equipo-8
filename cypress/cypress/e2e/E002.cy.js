@@ -1,5 +1,5 @@
 import "cypress-file-upload";
-import LoginPage from "../../pages/loginPage";
+import LoginPage from "../../pages/login";
 import PostPage from "../../pages/postPage";
 
 const numImages = Math.floor(Math.random() * 6) + 1;
@@ -30,12 +30,12 @@ function loadRandomImages() {
 }
 
 describe("Funcionalidad de Creación de un Post con Imágenes", () => {
-  const loginPage = new LoginPage();
+  const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
   it("Debe iniciar sesión y crear un post con imágenes", () => {
-    cy.visit(Cypress.env("url"));
-    loginPage.login(Cypress.env("email"), Cypress.env("password"));
+    loginPage.visitPage();
+    loginPage.singInPage();
 
     postPage.navigateToPosts();
     postPage.createNewPost();
