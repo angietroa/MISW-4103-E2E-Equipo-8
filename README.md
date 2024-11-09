@@ -20,7 +20,7 @@ Debera tener instalado los siguientes paquetes en su entorno:
 |--|--|--|
 | [Node.js](https://nodejs.org/en/download/package-manager) | 20.18.0 | - |
 | [Ghost](https://ghost.org/docs/install/) | 5.96.0 | Puede tenerlo instalado localmente o tenerlo desplegado en algun servidor web al que tenga acceso |
-| [Cypress](https://docs.cypress.io/app/get-started/install-cypress) | 13.15.1 | **Opcional**, si quiere visualizar la ejecución de las pruebas e2e de cypress desde un navegador puede hacer la instalación de lo contrario se pueden ejecutar las pruebas modo "headless". |
+| [Cypress](https://docs.cypress.io/app/get-started/install-cypress) | 13.15.2 | **Opcional**, si quiere visualizar la ejecución de las pruebas e2e de cypress desde un navegador puede hacer la instalación de lo contrario se pueden ejecutar las pruebas modo "headless". |
 
 ## Instalación de dependencias
 Dirijase a la carpeta raiz del proyecto y haga `npm install`.
@@ -43,10 +43,12 @@ Dirijase a la carpeta raiz del proyecto y haga `npm install`.
 | `url` | Dirección URL donde esta alojado GHOST | http://localhost:2368/ghost/ |
 
 ## Ejecución pruebas e2e de Kraken
+**Importante:** antes de hacer la ejecución de las pruebas recomendamos borrar los datos ingresados anteriormente a la aplicación GHOST de Paginas, Posts, Tags y Miembros.
 
 Dirijase a la carpeta raiz del proyecto y ejecute `npm run e2e:kraken`
 
 ## Ejecución pruebas e2e de Cypress
+**Importante:** antes de hacer la ejecución de las pruebas recomendamos borrar los datos ingresados anteriormente a la aplicación GHOST de Paginas, Posts, Tags y Miembros.
 
 Dirijase a la carpeta raiz del proyecto y ejecute `npm run e2e:cypress` o siga esta guia de [como ejecutar tests en cypress](https://docs.cypress.io/app/end-to-end-testing/writing-your-first-end-to-end-test#Add-a-test-file) para ejecutarlos en un navegador (para ello debe añadir el proyecto a cypress ubicado en `cypress/cypress/e2e`.
 
