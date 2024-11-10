@@ -1,3 +1,5 @@
+const { timeout } = require("puppeteer");
+
 class PageObj {
   constructor(driver) {
     this.driver = driver;
@@ -102,7 +104,7 @@ class PageObj {
     const bookmarkElement = await this.driver.$(
       '[data-testid="bookmark-url-error-message"]'
     );
-    await bookmarkElement.waitForDisplayed();
+    await bookmarkElement.waitForDisplayed({ timeout: 6000 });
     await bookmarkElement.isDisplayed();
   }
 
