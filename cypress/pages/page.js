@@ -32,6 +32,7 @@ class PageObj {
   async addBookmarkContent(bookmark) {
     cy.get('[data-testid="bookmark-url-dropdown"]').type(bookmark);
     // The admin triggers an error but is controlled
+    this.cy.wait(3000);
     cy.get('[data-testid="bookmark-url-error-message"]').should("be.visible");
   }
 
