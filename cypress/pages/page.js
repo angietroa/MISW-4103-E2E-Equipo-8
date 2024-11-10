@@ -1,150 +1,67 @@
 class PageObj {
-  constructor(driver) {
-    this.driver = driver;
+  constructor(cy) {
+    this.cy = cy;
   }
 
-  async clickOnPage() {
-    const element = await this.driver.$('a[href="#/pages/"]');
-    return await element.click();
+  async publishPage() {
+    this.cy.contains("button", "Publish").click();
+    this.cy.contains("button", "Continue, final review").click();
+    this.cy.contains("button", "Publish page, right now").click();
   }
 
-  async clickOnNewPage() {
-    const element = await this.driver.$('a[href="#/editor/page/"]');
-    return await element.click();
+  async goToPageAndCreate() {
+    cy.get('a[href="#/pages/"]').click();
+    cy.contains("New page").click();
   }
 
-  async getPageTitle() {
-    const element = await this.driver.$(".gh-editor-title");
-    return element;
+  async pageTitle(titulo) {
+    cy.get(".gh-editor-title").should("be.visible").type(titulo);
   }
 
-  async setTitle(element, title) {
-    return await element.setValue(title);
+  async addPageElement(elemento) {
+    cy.get('.koenig-react-editor .kg-prose[contenteditable="true"]')
+      .should("be.visible")
+      .first()
+      .click();
+
+    cy.get('button[aria-label="Add a card"]').click();
+
+    cy.contains(elemento).click();
   }
 
-  async clickOnTextAreaPage() {
-    const element = await this.driver.$(
-      '.koenig-react-editor .kg-prose[contenteditable="true"]'
-    );
-    await element.click();
+  async addBookmarkContent(bookmark) {
+    cy.get('[data-testid="bookmark-url-dropdown"]').type(bookmark);
+    // The admin triggers an error but is controlled
+    cy.get('[data-testid="bookmark-url-error-message"]').should("be.visible");
   }
 
-  async clickOnAddToolMenu() {
-    const element = await this.driver.$('button[aria-label="Add a card"]');
-    await element.click();
+  async setContentToMarkdown(contenido) {
+    cy.get(".CodeMirror").type(contenido);
   }
 
-  async clickOnElementTool(menuItem) {
-    const button = await this.driver.$(
-      `[data-kg-card-menu-item="${menuItem}"]`
-    );
-    await button.click();
+  async setContentToGallery(archivos) {
+    cy.contains("Click to select up to 9 images").click();
+
+    cy.get('input[name="image-input"]').selectFile(archivos, { force: true });
   }
 
-  async getMarkdownElement() {
-    const element = await this.driver.$(".CodeMirror");
-    return element;
+  async setContentToFile(archivo) {
+    cy.contains("Click to upload a file").click();
+
+    cy.get('input[name="file-input"]').selectFile(archivo, { force: true });
+
+    cy.get('[data-kg-file-card="fileTitle"]')
+      .should("have.value", "image_page")
+      .and("be.visible");
   }
 
-  async setMarkdownText(element, text) {
-    return await element.setValue(text);
-  }
-
-  async clickToSaveImages() {
-    const button = await this.driver.$("button.group");
-    await button.click();
-  }
-
-  async uploadImageFiles(filePaths) {
-    const fileInput = await this.driver.$('input[name="image-input"]');
-
-    for (const filePath of filePaths) {
-      await fileInput.setValue(filePath);
-    }
-  }
-
-  async uploadFiles(filePath) {
-    const fileInput = await this.driver.$('input[name="file-input"]');
-    await fileInput.setValue(filePath);
-  }
-
-  async validateFileIsUploaded() {
-    const fileTitleElement = await this.driver.$(
-      '[data-kg-file-card="fileTitle"]'
-    );
-    await fileTitleElement.waitForDisplayed();
-
-    await fileTitleElement.getValue();
-
-    await fileTitleElement.isDisplayed();
-  }
-
-  async uploadEmbedSpotify(link) {
-    const embedInput = await this.driver.$('input[data-testid="embed-url"]');
-    await embedInput.setValue(link);
-    await embedInput.keys("Enter");
-  }
-
-  async validateEmbed() {
-    const embedElement = await this.driver.$("div.absolute.inset-0.z-50.mt-0");
-    await embedElement.waitForDisplayed();
-    await embedElement.isDisplayed();
-  }
-
-  async selectBookmark() {
-    const bookmarkSelect = await this.driver.$(
-      '[data-testid="bookmark-url-dropdown"]'
-    );
-    await bookmarkSelect.keys("Enter");
-  }
-
-  async validateBookmark() {
-    const bookmarkElement = await this.driver.$(
-      '[data-testid="bookmark-url-error-message"]'
-    );
-    await bookmarkElement.waitForDisplayed();
-    await bookmarkElement.isDisplayed();
-  }
-
-  async publishPageButton() {
-    const button = await this.driver.$('[data-test-button="publish-flow"]');
-    await button.click();
-  }
-
-  async confirmPageButton() {
-    const button = await this.driver.$('[data-test-button="continue"]');
-    await button.click();
-  }
-
-  async confirmPublishButton() {
-    const button = await this.driver.$('[data-test-button="confirm-publish"]');
-    await button.click();
-  }
-
-  async performPublishFlow() {
-    await this.publishPageButton();
-    await this.confirmPageButton();
-    await this.confirmPublishButton();
-  }
-
-  async selectBookmarkToElement() {
-    await this.selectBookmark();
-    await this.validateBookmark();
-  }
-
-  async uploadImagesToGallery(filePaths) {
-    await this.clickToSaveImages();
-    await this.uploadImageFiles(filePaths);
-  }
-
-  async uploadFileToElement(filePath) {
-    await this.uploadFiles(filePath);
-    await this.validateFileIsUploaded();
-  }
-
-  async uploadEmbedSpotifyToElement(link) {
-    await this.uploadEmbedSpotify(link);
-    await this.validateEmbed();
+  async setContentToSpotify(enlace) {
+    cy.get('input[data-testid="embed-url"]')
+      .clear()
+      .type(enlace)
+      .type("{enter}");
+    //Validación
+    cy.get("div.absolute.inset-0.z-50.mt-0").should("be.visible");
   }
 }
 
