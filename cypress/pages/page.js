@@ -29,10 +29,13 @@ class PageObj {
     cy.contains(elemento).click();
   }
 
-  async addBookmarkContent(bookmark) {
-    cy.get('[data-testid="bookmark-url-dropdown"]').type(bookmark);
+  async addBookmarkContent() {
+    cy.get('[data-testid="bookmark-url"]').focus();
+
+    cy.get('[data-testid="bookmark-url"]').type("{downarrow}").type("{enter}");
+
     // The admin triggers an error but is controlled
-    this.cy.wait(10000);
+    this.cy.wait(5000);
     cy.get('[data-testid="bookmark-url-error-message"]').should("be.visible");
   }
 
