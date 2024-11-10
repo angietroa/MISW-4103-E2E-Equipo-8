@@ -18,12 +18,6 @@ describe("Crear tag", () => {
       message: "I enter email, password and I do click on Sign-in",
     });
     loginPage.signInPage();
-    // When: I enter email, password and I do click on Sign-in
-    cy.log({
-      displayName: "When",
-      message: "I enter email, password and I do click on Sign-in",
-    });
-    loginPage.signInPage();
 
     // When: I click on tags menu
     cy.log({ displayName: "When", message: "I click on tags menu" });
