@@ -16,6 +16,7 @@ Scenario: E006 - Crear página con Bookmark
   And I click on text area of page
   And I click on the add tool menu
   And I click on the tool "Bookmark"
+  And I wait for 6 seconds
   And I select a bookmark
   Then I want to publish the changes
   And I wait for 2 seconds

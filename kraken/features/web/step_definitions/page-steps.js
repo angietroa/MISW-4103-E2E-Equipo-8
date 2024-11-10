@@ -1,5 +1,4 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
-const path = require("path");
 const PageObj = require("../../../pages/page");
 
 When("I enter title {kraken-string}", async function (title) {
