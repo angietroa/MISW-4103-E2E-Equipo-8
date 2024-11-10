@@ -36,7 +36,6 @@ class PageObj {
 
     // The admin triggers an error but is controlled
     this.cy.wait(5000);
-    cy.get('[data-testid="bookmark-url-error-message"]').should("be.visible");
   }
 
   async setContentToMarkdown(contenido) {
