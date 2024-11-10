@@ -11,13 +11,7 @@ describe("Crear tag", () => {
     // Given: I navigate to page
     cy.log({ displayName: "Given", message: "I navigate to page" });
     loginPage.visitPage();
-
-    // When: I enter email, password and I do click on Sign-in
-    cy.log({
-      displayName: "When",
-      message: "I enter email, password and I do click on Sign-in",
-    });
-    loginPage.signInPage();
+    
     // When: I enter email, password and I do click on Sign-in
     cy.log({
       displayName: "When",
