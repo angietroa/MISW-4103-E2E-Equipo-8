@@ -67,6 +67,50 @@ When(
   }
 );
 
+When(
+  "I want to close popup",
+  async function () {
+    const page = new PageObj(this.driver);
+    await page.closePopup();
+  }
+);
+
+When(
+  "I want to edit {kraken-string} page",
+  async function (value) {
+    const page = new PageObj(this.driver);
+    await page.clickOnPageItem(value);
+  }
+);
+
+When(
+  "I want to save changes",
+  async function () {
+    const page = new PageObj(this.driver);
+    await page.clickOnUpdateButton();
+  }
+);
+
+When("I want to change publish date {kraken-string}", async function(value) {
+  const page = new PageObj(this.driver);
+  await page.setPublishDate(value);
+});
+
+When("I want to change access type {kraken-string}", async function(value) {
+  const page = new PageObj(this.driver);
+  await page.setPageAccess(value);
+});
+
+When("I want to change url {kraken-string}", async function(value) {
+  const page = new PageObj(this.driver);
+  await page.setURL(value);
+});
+
+Then("I want to check if {kraken-string} exists", async function(value) {
+    const page = new PageObj(this.driver);
+    await page.checkIfPageExists(value);
+});
+
 Then("I want to publish the changes", async function () {
   const page = new PageObj(this.driver);
   return await page.performPublishFlow();
