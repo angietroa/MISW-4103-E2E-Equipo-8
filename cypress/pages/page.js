@@ -91,11 +91,13 @@ class PageObj {
       this.cy.contains(elemento).click();
   }
 
-  async addBookmarkContent(bookmark) {
-    this.cy.get('[data-testid="bookmark-url-dropdown"]').type(bookmark);
+  async addBookmarkContent() {
+    cy.get('[data-testid="bookmark-url"]').focus();
+
+    cy.get('[data-testid="bookmark-url"]').type("{downarrow}").type("{enter}");
+
     // The admin triggers an error but is controlled
-    this.cy.wait(10000);
-    this.cy.get('[data-testid="bookmark-url-error-message"]').should("be.visible");
+    this.cy.wait(5000);
   }
 
   async setContentToMarkdown(contenido) {

@@ -54,7 +54,7 @@ describe("Funcionalidad de crear página asociando un Bookmark", () => {
       displayName: "When",
       message: "I add an element, I want to select a bookmark",
     });
-    page.addBookmarkContent("Coming soon");
+    page.addBookmarkContent();
 
     // Then: I save all changes
     cy.log({
