@@ -145,6 +145,58 @@ class PageObj {
     await this.uploadEmbedSpotify(link);
     await this.validateEmbed();
   }
+
+  async closePopup() {
+    const button = await this.driver.$('button[data-test-button="close-publish-flow"]');
+    await button.waitForExist();
+    await button.click();
+  }
+
+  async clickOnPageItem(value) {
+    const button = await this.driver.$(".gh-content-entry-title");
+    await button.waitForExist();
+    await button.click();
+  }
+
+  async clickOnUpdateButton() {
+    const button = await this.driver.$('button[data-test-button="publish-save"]');
+    await button.waitForClickable({timeout:10000});
+    await button.click();
+    this.clickOnPage();
+  }
+
+  async checkIfPageExists(value) {
+    const h3Element = await this.driver.$("//h3[contains(text(), '" + value + "')]");
+    return true;
+  }
+
+  async setPublishDate(value) {
+    const button = await this.driver.$('button[data-test-psm-trigger]');
+    await button.waitForClickable({timeout:10000});
+    await button.click();
+    const input = await this.driver.$('input[data-test-date-time-picker-date-input]');
+    await input.waitForExist();
+    input.setValue(value);
+  }
+
+  async setPageAccess(value) {
+    const button = await this.driver.$('button[data-test-psm-trigger]');
+    await button.waitForClickable({timeout:10000});
+    await button.click();
+    const select = await this.driver.$('select[data-test-select="post-visibility"]');
+    await select.waitForExist();
+    select.setValue(value);
+  }
+
+  async setURL(value) {
+    const button = await this.driver.$('button[data-test-psm-trigger]');
+    await button.waitForClickable({timeout:10000});
+    await button.click();
+    const input = await this.driver.$('#url');
+    await input.waitForExist();
+    input.setValue(value);
+  }
+
 }
 
 module.exports = PageObj;
