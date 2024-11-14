@@ -3,21 +3,31 @@ class LoginPage {
     this.cy = cy;
   }
 
-  async visitPage() {
+  async visitPage(folder) {
     this.cy.fixture("properties").then((data) => {
       this.cy.visit(data.url);
       this.cy.wait(3000);
+      this.takeScreenshot(folder, "after-visit-page");
     });
   }
 
-  async signInPage() {
+  async signInPage(folder) {
     this.cy.fixture("properties").then((data) => {
-      this.cy.get("#identification").type(data.username);
-      this.cy.get("#password").type(data.password);
+      this.cy
+        .get("#identification,[name='identification']")
+        .type(data.username);
+      this.cy.get("#password, [name='password']").type(data.password);
+      this.takeScreenshot(folder, "before-sign-in-page");
       this.cy.get('button[type="submit"]').click();
     });
 
     this.cy.wait(2000);
+    this.takeScreenshot(folder, "after-sign-in-page");
+  }
+
+  async takeScreenshot(folderName, screenshotName) {
+    this.cy.task("createTestFolder", folderName);
+    this.cy.screenshot(`${folderName}/${screenshotName}`);
   }
 }
 

@@ -23,4 +23,28 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-import 'cypress-file-upload';
+import "cypress-file-upload";
+const fs = require("fs");
+const path = require("path");
+
+// Crear una carpeta para el test si no existe
+Cypress.Commands.add("createTestFolder", (testName) => {
+  const folderPath = path.join(Cypress.config("screenshotsFolder"), testName);
+
+  // Crear carpeta si no existe
+  if (!fs.existsSync(folderPath)) {
+    fs.mkdirSync(folderPath, { recursive: true });
+  }
+
+  return folderPath;
+});
+
+// Tomar screenshot dentro de la carpeta específica del test
+Cypress.Commands.add("screenshotInTestFolder", (testName, screenshotName) => {
+  const folderPath = path.join(Cypress.config("screenshotsFolder"), testName);
+  cy.screenshot(screenshotName, {
+    capture: "viewport",
+    log: true,
+    screenshotFolder: folderPath,
+  });
+});
