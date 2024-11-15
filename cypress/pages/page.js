@@ -129,11 +129,11 @@ class PageObj {
     this.takeScreenshot(folder, "select-tool");
   }
 
-  async addBookmarkContent() {
+  async addBookmarkContent(folder) {
     cy.get('[data-testid="bookmark-url"]').focus();
 
     cy.get('[data-testid="bookmark-url"]').type("{downarrow}").type("{enter}");
-
+    this.takeScreenshot(folder, "add-bookmark-content");
     // The admin triggers an error but is controlled
     this.cy.wait(5000);
   }
@@ -143,15 +143,16 @@ class PageObj {
     this.takeScreenshot(saveFolder, "set-content-to-markdown");
   }
 
-  async setContentToGallery(archivos) {
+  async setContentToGallery(archivos, folder) {
     this.cy.contains("Click to select up to 9 images").click();
 
     this.cy
       .get('input[name="image-input"]')
       .selectFile(archivos, { force: true });
+    this.takeScreenshot(folder, "set-content-to-gallery");
   }
 
-  async setContentToFile(archivo) {
+  async setContentToFile(archivo, folder) {
     this.cy.contains("Click to upload a file").click();
 
     this.cy
@@ -162,9 +163,10 @@ class PageObj {
       .get('[data-kg-file-card="fileTitle"]')
       .should("have.value", "image_page")
       .and("be.visible");
+    this.takeScreenshot(folder, "set-content-to-file");
   }
 
-  async setContentToSpotify(enlace) {
+  async setContentToSpotify(enlace, folder) {
     this.cy
       .get('input[data-testid="embed-url"]')
       .clear()
@@ -172,6 +174,7 @@ class PageObj {
       .type("{enter}");
     //Validación
     this.cy.get("div.absolute.inset-0.z-50.mt-0").should("be.visible");
+    this.takeScreenshot(folder, "set-content-to-spotify");
   }
 
   async clickOnUpdateButton() {
@@ -181,8 +184,8 @@ class PageObj {
   }
 
   async takeScreenshot(folderName, screenshotName) {
-    this.cy.task("createFolder", folderName);
-    this.cy.screenshot(`${folderName}/${screenshotName}`, {
+    cy.task("createFolder", folderName);
+    cy.screenshot(`${folderName}/${screenshotName}`, {
       capture: "fullPage",
     });
   }

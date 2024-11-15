@@ -41,14 +41,14 @@ describe("E010 - Funcionalidad de crear página embebiendo link de Spotify", () 
       displayName: "When",
       message: "I enter admin, I go to page and create a new one",
     });
-    page.goToPageAndCreate();
+    page.goToPageAndCreate(saveFolder);
 
     // When: I enter page, I set a title
     cy.log({
       displayName: "When",
       message: "I enter page, I set a title",
     });
-    page.pageTitle("Escenario página - Spotify");
+    page.pageTitle("Escenario página - Spotify", saveFolder);
 
     // When: I enter the title, I want to add an element to page, in this case file
     cy.log({
@@ -56,7 +56,7 @@ describe("E010 - Funcionalidad de crear página embebiendo link de Spotify", () 
       message:
         "I enter the title, I want to add an element to page, in this case Spotify",
     });
-    page.addPageElement("Spotify");
+    page.addPageElement("Spotify", saveFolder);
     const spotifyLink =
       "https://open.spotify.com/track/71N1Ob14XLnH5JwsmvXhXj?si=d99b678f09b9492b";
 
@@ -65,13 +65,13 @@ describe("E010 - Funcionalidad de crear página embebiendo link de Spotify", () 
       displayName: "When",
       message: "I add the element, I want to add a song",
     });
-    page.setContentToSpotify(spotifyLink);
+    page.setContentToSpotify(spotifyLink, saveFolder);
 
     // Then: I save all changes
     cy.log({
       displayName: "Then",
       message: "I save all changes",
     });
-    page.publishPage();
+    page.publishPage(saveFolder);
   });
 });

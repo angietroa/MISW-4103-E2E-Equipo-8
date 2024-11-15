@@ -43,14 +43,14 @@ describe("E008 - Funcionalidad de crear página asociando una galeria", () => {
       displayName: "When",
       message: "I enter admin, I go to page and create a new one",
     });
-    page.goToPageAndCreate();
+    page.goToPageAndCreate(saveFolder);
 
     // When: I enter page, I set a title
     cy.log({
       displayName: "When",
       message: "I enter page, I set a title",
     });
-    page.pageTitle("Escenario página - Galeria");
+    page.pageTitle("Escenario página - Galeria", saveFolder);
 
     // When: I enter the title, I want to add an element to page, in this case bookmark
     cy.log({
@@ -58,7 +58,7 @@ describe("E008 - Funcionalidad de crear página asociando una galeria", () => {
       message:
         "I enter the title, I want to add an element to page, in this case gallery",
     });
-    page.addPageElement("Gallery");
+    page.addPageElement("Gallery", saveFolder);
 
     const imagePaths = [
       "cypress/fixtures/gallery_1.jpg",
@@ -71,13 +71,13 @@ describe("E008 - Funcionalidad de crear página asociando una galeria", () => {
       displayName: "When",
       message: "I add the gallery, I want to add some files",
     });
-    page.setContentToGallery(imagePaths);
+    page.setContentToGallery(imagePaths, saveFolder);
 
     // Then: I save all changes
     cy.log({
       displayName: "Then",
       message: "I save all changes",
     });
-    page.publishPage();
+    page.publishPage(saveFolder);
   });
 });
