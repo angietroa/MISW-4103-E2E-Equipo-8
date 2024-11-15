@@ -22,17 +22,26 @@ class AddPostContent {
     cy.get('div[data-language="html"]').type(htmlContent);
   }
 
-  embedYouTube(url) {
+  embedYouTube(url, folderName) {
     cy.get(this.addCardButton).click();
     cy.get(this.youtubeButton).click();
     cy.get('[data-testid="embed-url"]').type(url);
     cy.get('[data-testid="embed-url"]').type("{enter}");
+    this.takeScreenshot(folderName, "embed-youtube");
   }
 
-  addButton(buttonText) {
+  addButton(buttonText, folderName) {
     cy.get('[aria-label="Add a card"]').click();
     cy.contains("button", "Button").click();
     cy.get('[data-testid="button-input-text"]').type(buttonText);
+    this.takeScreenshot(folderName, "add-button");
+  }
+
+  takeScreenshot(folderName, screenshotName) {
+    cy.task("createFolder", folderName);
+    cy.screenshot(`${folderName}/${screenshotName}`, {
+      capture: "viewport",
+    });
   }
 }
 

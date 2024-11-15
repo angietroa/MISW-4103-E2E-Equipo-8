@@ -5,11 +5,17 @@ class PageObj {
 
   async publishPage(folder) {
     this.cy.contains("button", "Publish").click();
-    this.takeScreenshot(folder, "publish-page");
+    this.cy.wait(1500);
+    this.takeScreenshot(folder, "publish-page", true);
+    this.cy.wait(1500);
     this.cy.contains("button", "Continue, final review").click();
-    this.takeScreenshot(folder, "continue-review");
+    this.cy.wait(1500);
+    this.takeScreenshot(folder, "final-review", true);
+    this.cy.wait(1500);
     this.cy.contains("button", "Publish page, right now").click();
+    this.cy.wait(1500);
     this.takeScreenshot(folder, "publish-page-now");
+    this.cy.wait(1500);
   }
 
   async clickOnSettingsButton() {
@@ -175,8 +181,10 @@ class PageObj {
   }
 
   async takeScreenshot(folderName, screenshotName) {
-    this.cy.task("createTestFolder", folderName);
-    this.cy.screenshot(`${folderName}/${screenshotName}`);
+    this.cy.task("createFolder", folderName);
+    this.cy.screenshot(`${folderName}/${screenshotName}`, {
+      capture: "fullPage",
+    });
   }
 }
 

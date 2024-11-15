@@ -1,7 +1,7 @@
 import LoginPage from "../../pages/login";
 import PageObj from "../../pages/page";
 
-describe("Funcionalidad de crear página embebiendo link de Spotify", () => {
+describe("E010 - Funcionalidad de crear página embebiendo link de Spotify", () => {
   before(() => {
     Cypress.on("uncaught:exception", (err, runnable) => {
       if (err.message.includes("The play() request was interrupted")) {
@@ -11,20 +11,30 @@ describe("Funcionalidad de crear página embebiendo link de Spotify", () => {
     });
   });
 
+  let saveFolder;
+
+  beforeEach(function () {
+    const scenarioTitle = Cypress.mocha.getRunner().suite.title;
+
+    saveFolder = scenarioTitle.split(" ")[0];
+
+    cy.task("clearScreenshots", saveFolder);
+  });
+
   it("Crear pagina embebiendo link de Spotify", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
 
     // Given: I navigate to page
     cy.log({ displayName: "Given", message: "I navigate to page" });
-    loginPage.visitPage();
+    loginPage.visitPage(saveFolder);
 
     // When: I enter email, password and I do click on Sign-in
     cy.log({
       displayName: "When",
       message: "I enter email, password and I do click on Sign-in",
     });
-    loginPage.signInPage();
+    loginPage.signInPage(saveFolder);
 
     // When: I enter admin, I go to page and create a new one
     cy.log({

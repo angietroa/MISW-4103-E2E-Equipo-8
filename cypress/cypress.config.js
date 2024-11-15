@@ -10,8 +10,8 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       on("task", {
         // Crear la carpeta del test si no existe
-        createTestFolder(testName) {
-          const folderPath = path.join(config.screenshotsFolder, testName);
+        createFolder(folderName) {
+          const folderPath = path.join(config.screenshotsFolder, folderName);
           if (!fs.existsSync(folderPath)) {
             fs.mkdirSync(folderPath, { recursive: true });
           }

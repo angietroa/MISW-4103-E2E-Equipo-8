@@ -26,8 +26,10 @@ class LoginPage {
   }
 
   async takeScreenshot(folderName, screenshotName) {
-    this.cy.task("createTestFolder", folderName);
-    this.cy.screenshot(`${folderName}/${screenshotName}`);
+    this.cy.task("createFolder", folderName);
+    this.cy.screenshot(`${folderName}/${screenshotName}`, {
+      capture: "viewport",
+    });
   }
 }
 

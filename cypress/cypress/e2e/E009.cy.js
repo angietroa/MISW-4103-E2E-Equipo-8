@@ -2,7 +2,7 @@ import "cypress-file-upload";
 import LoginPage from "../../pages/login";
 import PageObj from "../../pages/page";
 
-describe("Funcionalidad de crear página insertando un file", () => {
+describe("E009 - Funcionalidad de crear página insertando un file", () => {
   // Configuración global para manejar excepciones
   before(() => {
     Cypress.on("uncaught:exception", (err, runnable) => {
@@ -13,20 +13,30 @@ describe("Funcionalidad de crear página insertando un file", () => {
     });
   });
 
+  let saveFolder;
+
+  beforeEach(function () {
+    const scenarioTitle = Cypress.mocha.getRunner().suite.title;
+
+    saveFolder = scenarioTitle.split(" ")[0];
+
+    cy.task("clearScreenshots", saveFolder);
+  });
+
   it("E009 - Crear página insertando File", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
 
     // Given: I navigate to page
     cy.log({ displayName: "Given", message: "I navigate to page" });
-    loginPage.visitPage();
+    loginPage.visitPage(saveFolder);
 
     // When: I enter email, password and I do click on Sign-in
     cy.log({
       displayName: "When",
       message: "I enter email, password and I do click on Sign-in",
     });
-    loginPage.signInPage();
+    loginPage.signInPage(saveFolder);
 
     // When: I enter admin, I go to page and create a new one
     cy.log({
