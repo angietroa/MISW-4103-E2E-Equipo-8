@@ -3,17 +3,33 @@ class PageObj {
     this.cy = cy;
   }
 
-  async publishPage(folder) {
-    this.cy.contains("button", "Publish").click();
-    this.cy.wait(1500);
+  async publishPage(folder, legacy = false) {
+    if (legacy) {
+      this.publishPageLegacy(folder);
+    } else {
+      this.cy.contains("button", "Publish").click();
+      this.cy.wait(1500);
+      this.takeScreenshot(folder, "publish-page", true);
+      this.cy.wait(1500);
+      this.cy.contains("button", "Continue, final review").click();
+      this.cy.wait(1500);
+      this.takeScreenshot(folder, "final-review", true);
+      this.cy.wait(1500);
+      this.cy.contains("button", "Publish page, right now").click();
+      this.cy.wait(1500);
+      this.takeScreenshot(folder, "publish-page-now");
+      this.cy.wait(1500);
+    }
+  }
+
+  async publishPageLegacy(folder) {
+    cy.get("span").contains("Publish").find("svg").click();
     this.takeScreenshot(folder, "publish-page", true);
     this.cy.wait(1500);
-    this.cy.contains("button", "Continue, final review").click();
-    this.cy.wait(1500);
+    cy.get("span").contains("Publish").should("be.visible").click();
     this.takeScreenshot(folder, "final-review", true);
     this.cy.wait(1500);
-    this.cy.contains("button", "Publish page, right now").click();
-    this.cy.wait(1500);
+    cy.get("span").contains("Pages").find("svg").click();
     this.takeScreenshot(folder, "publish-page-now");
     this.cy.wait(1500);
   }
@@ -120,12 +136,30 @@ class PageObj {
     this.takeScreenshot(folder, "set-title-and-tab");
   }
 
-  async addPageElement(elemento, folder) {
-    this.cy
-      .get('.koenig-react-editor .kg-prose[contenteditable="true"]')
-      .should("be.visible")
-      .first()
-      .click();
+  async addPageElement(elemento, folder, legacy = false) {
+    if (legacy) {
+      this.addPageElementLegacy(elemento, folder);
+    } else {
+      this.cy
+        .get('.koenig-react-editor .kg-prose[contenteditable="true"]')
+        .should("be.visible")
+        .first()
+        .click();
+
+      this.takeScreenshot(folder, "select-editable-area");
+
+      this.cy.get('button[aria-label="Add a card"]').click();
+
+      this.takeScreenshot(folder, "select-toolbox");
+
+      this.cy.contains(elemento).click();
+
+      this.takeScreenshot(folder, "select-tool");
+    }
+  }
+
+  async addPageElementLegacy(elemento, folder) {
+    this.cy.get("textarea").should("be.visible").first().click();
 
     this.takeScreenshot(folder, "select-editable-area");
 
