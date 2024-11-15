@@ -1,27 +1,37 @@
 import LoginPage from "../../pages/login";
 import PostPage from "../../pages/postPage";
 
-describe("Funcionalidad de Creación de un Post", () => {
+describe("E001 - Funcionalidad de Creación de un Post", () => {
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
-  it("Debe iniciar sesión y crear un post con texto aleatorio", () => {
-    loginPage.visitPage();
-    loginPage.signInPage();
+  let saveFolder;
 
-    postPage.navigateToPosts();
-    postPage.createNewPost();
+  beforeEach(function () {
+    const scenarioTitle = Cypress.mocha.getRunner().suite.title;
+
+    saveFolder = scenarioTitle.split(" ")[0];
+
+    cy.task("clearScreenshots", saveFolder);
+  });
+
+  it("Debe iniciar sesión y crear un post con texto aleatorio", () => {
+    loginPage.visitPage(saveFolder);
+    loginPage.signInPage(saveFolder);
+
+    postPage.navigateToPosts(saveFolder);
+    postPage.createNewPost(saveFolder);
 
     const postTitle = postPage.generateTitlePost("Pagina con solo texto");
-    postPage.createTitlePost(postTitle);
+    postPage.createTitlePost(postTitle, saveFolder);
 
     const paragraphCount = postPage.addRandomParagraphs();
 
-    postPage.publishPost();
-    postPage.verifyPostExists(postTitle);
+    postPage.publishPost(saveFolder);
+    postPage.verifyPostExists(postTitle, saveFolder);
 
-    postPage.openPost(postTitle);
+    postPage.openPost(postTitle, saveFolder);
 
-    postPage.verifyParagraphCount(paragraphCount);
+    postPage.verifyParagraphCount(paragraphCount, saveFolder);
   });
 });

@@ -29,27 +29,37 @@ function loadRandomImages() {
   }
 }
 
-describe("Funcionalidad de Creación de un Post con Imágenes", () => {
+describe("E002 - Funcionalidad de Creación de un Post con Imágenes", () => {
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
-  it("Debe iniciar sesión y crear un post con imágenes", () => {
-    loginPage.visitPage();
-    loginPage.signInPage();
+  let saveFolder;
 
-    postPage.navigateToPosts();
-    postPage.createNewPost();
+  beforeEach(function () {
+    const scenarioTitle = Cypress.mocha.getRunner().suite.title;
+
+    saveFolder = scenarioTitle.split(" ")[0];
+
+    cy.task("clearScreenshots", saveFolder);
+  });
+
+  it("Debe iniciar sesión y crear un post con imágenes", () => {
+    loginPage.visitPage(saveFolder);
+    loginPage.signInPage(saveFolder);
+
+    postPage.navigateToPosts(saveFolder);
+    postPage.createNewPost(saveFolder);
 
     const postTitle = postPage.generateTitlePost("Pagina con imagenes");
-    postPage.createTitlePost(postTitle);
+    postPage.createTitlePost(postTitle, saveFolder);
 
     loadRandomImages();
 
-    postPage.publishPost();
-    postPage.verifyPostExists(postTitle);
+    postPage.publishPost(saveFolder);
+    postPage.verifyPostExists(postTitle, saveFolder);
 
-    postPage.openPost(postTitle);
+    postPage.openPost(postTitle, saveFolder);
 
-    postPage.verifyImageCount(numImages);
+    postPage.verifyImageCount(numImages, saveFolder);
   });
 });
