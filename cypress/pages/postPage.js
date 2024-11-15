@@ -104,7 +104,6 @@ class PostPage {
   }
 
   takeScreenshot(folderName, screenshotName) {
-    cy.task("createFolder", folderName);
     cy.screenshot(`${folderName}/${screenshotName}`, {
       capture: "fullPage",
     });

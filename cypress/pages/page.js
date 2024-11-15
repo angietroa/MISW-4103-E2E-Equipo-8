@@ -48,7 +48,7 @@ class PageObj {
       .should("be.visible")
       .select(value);
     this.clickOnSettingsButton();
-    this.clickOnUpdateButton();
+    this.clickOnUpdateButton(folder);
     this.takeScreenshot(folder, "set-access-type");
   }
 
@@ -68,7 +68,7 @@ class PageObj {
       .should("be.visible")
       .clear()
       .type(value, { force: true });
-    this.clickOnUpdateButton();
+    this.clickOnUpdateButton(folder);
     this.takeScreenshot(folder, "set-url");
   }
 
@@ -82,7 +82,7 @@ class PageObj {
     cy.fixture("properties").then((data) => {
       this.cy.visit(data.url + "#/pages");
       this.cy.wait(3000);
-      this.findPageByTitleAndClick(title, click);
+      this.findPageByTitleAndClick(title, click, folder);
     });
     this.takeScreenshot(folder, "visit-pages-and-find-page-by-title");
   }
@@ -194,7 +194,6 @@ class PageObj {
   }
 
   async takeScreenshot(folderName, screenshotName) {
-    cy.task("createFolder", folderName);
     cy.screenshot(`${folderName}/${screenshotName}`, {
       capture: "fullPage",
     });
