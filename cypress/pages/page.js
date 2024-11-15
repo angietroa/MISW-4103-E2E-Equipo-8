@@ -167,7 +167,11 @@ class PageObj {
 
     this.takeScreenshot(folder, "select-toolbox");
 
-    this.cy.contains(elemento).click();
+    if (elemento === "File") {
+      this.takeScreenshot(folder, "select-tool");
+    } else {
+      this.cy.contains(elemento).click();
+    }
 
     this.takeScreenshot(folder, "select-tool");
   }
@@ -195,18 +199,22 @@ class PageObj {
     this.takeScreenshot(folder, "set-content-to-gallery");
   }
 
-  async setContentToFile(archivo, folder) {
-    this.cy.contains("Click to upload a file").click();
+  async setContentToFile(archivo, folder, legacy = false) {
+    if (legacy) {
+      this.takeScreenshot(folder, "set-content-to-file");
+    } else {
+      this.cy.contains("Click to upload a file").click();
 
-    this.cy
-      .get('input[name="file-input"]')
-      .selectFile(archivo, { force: true });
+      this.cy
+        .get('input[name="file-input"]')
+        .selectFile(archivo, { force: true });
 
-    this.cy
-      .get('[data-kg-file-card="fileTitle"]')
-      .should("have.value", "image_page")
-      .and("be.visible");
-    this.takeScreenshot(folder, "set-content-to-file");
+      this.cy
+        .get('[data-kg-file-card="fileTitle"]')
+        .should("have.value", "image_page")
+        .and("be.visible");
+      this.takeScreenshot(folder, "set-content-to-file");
+    }
   }
 
   async setContentToSpotify(enlace, folder) {

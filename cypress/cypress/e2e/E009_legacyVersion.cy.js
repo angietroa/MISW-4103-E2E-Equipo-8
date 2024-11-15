@@ -1,7 +1,8 @@
+import "cypress-file-upload";
 import LoginPage from "../../pages/login";
 import PageObj from "../../pages/page";
 
-describe("E007 - Funcionalidad de crear página con elemento Markdown", () => {
+describe("E009 - Funcionalidad de crear página insertando un file", () => {
   // Configuración global para manejar excepciones
   before(() => {
     Cypress.on("uncaught:exception", (err, runnable) => {
@@ -22,7 +23,7 @@ describe("E007 - Funcionalidad de crear página con elemento Markdown", () => {
     cy.task("clearScreenshots", saveFolder);
   });
 
-  it("E007 - Crear página con Markdown", () => {
+  it("E009 - Crear página insertando File", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
 
@@ -60,30 +61,28 @@ describe("E007 - Funcionalidad de crear página con elemento Markdown", () => {
     });
     page.goToPageAndCreate(saveFolder);
 
-    // When: I enter the page, I want to add an element to page, in this case bookmark
+    // When: I enter page, I set a title
+    cy.log({
+      displayName: "When",
+      message: "I enter page, I set a title",
+    });
+    page.pageTitle("Escenario página - Archivo", saveFolder);
+
+    // When: I enter the title, I want to add an element to page, in this case file
     cy.log({
       displayName: "When",
       message:
-        "I enter the page, I want to add an element to page, in this case bookmark",
+        "I enter the title, I want to add an element to page, in this case file",
     });
-    page.addPageElement("Markdown", saveFolder, true);
+    page.addPageElement("File", saveFolder, true);
 
+    const file = "cypress/fixtures/image_page.png";
+    // When: I add the element, I want to add a file to the element
     cy.log({
       displayName: "When",
-      message:
-        "I enter the page, I want to add an element to page, in this case bookmark",
+      message: "I add the element, I want to add a file to the element",
     });
-    page.setContentToMarkdown(
-      "Markdown para pruebas automatizadas de software",
-      saveFolder
-    );
-
-    // When: I set the content on bookmark, I set a title
-    cy.log({
-      displayName: "When",
-      message: "I set the content on bookmark, I set a title",
-    });
-    page.pageTitle("Escenario página - Markdown", saveFolder);
+    page.setContentToFile(file, saveFolder, true);
 
     // Then: I save all changes
     cy.log({
