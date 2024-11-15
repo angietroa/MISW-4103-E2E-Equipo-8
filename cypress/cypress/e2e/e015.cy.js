@@ -31,20 +31,20 @@ describe("E015 - Crear tag", () => {
 
     // When: I click on tags menu
     cy.log({ displayName: "When", message: "I click on tags menu" });
-    tagPage.clickOnTagMenu();
+    tagPage.clickOnTagMenu(saveFolder);
 
     // When: I click on new menu
     cy.log({ displayName: "When", message: "I click on new menu" });
-    tagPage.clickOnNewTag();
+    tagPage.clickOnNewTag(saveFolder);
 
     // When: I enter a tag name
     const tagName = faker.lorem.word();
     cy.log({ displayName: "When", message: `I enter a tag name "${tagName}"` });
-    tagPage.setTagName(tagName);
+    tagPage.setTagName(tagName, saveFolder);
 
     //When: I click on expand Facebook form
     cy.log({ displayName: "When", message: "I click on expand Facebook form" });
-    tagPage.clickOnExpandFacebookCardForm();
+    tagPage.clickOnExpandFacebookCardForm(saveFolder);
 
     // When: I enter facebook card values with an image, a title and a description
     cy.log({
@@ -55,22 +55,23 @@ describe("E015 - Crear tag", () => {
     tagPage.setFacebookCardValues(
       "rocket-icon.png",
       faker.lorem.word(),
-      faker.lorem.sentence()
+      faker.lorem.sentence(),
+      saveFolder
     );
 
     // When: I click on save tag
     cy.log({ displayName: "When", message: "I click on save tag" });
-    tagPage.clickOnSaveTag();
+    tagPage.clickOnSaveTag(saveFolder);
 
     // When: I click on tags menu
     cy.log({ displayName: "When", message: "I click on tags menu" });
-    tagPage.clickOnTagMenu();
+    tagPage.clickOnTagMenu(saveFolder);
 
     // Then: I see tag name on list
     cy.log({
       displayName: "Then",
       message: `I see tag name "${tagName}" on list`,
     });
-    tagPage.findTagNameCreated(tagName);
+    tagPage.findTagNameCreated(tagName, saveFolder);
   });
 });
