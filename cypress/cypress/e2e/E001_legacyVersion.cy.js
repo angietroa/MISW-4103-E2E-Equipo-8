@@ -17,6 +17,8 @@ describe("E001 - Funcionalidad de Creación de un Post", () => {
   it("Debe iniciar sesión y crear un post con texto aleatorio", () => {
     loginPage.visitPage(saveFolder, true, "legacy");
     loginPage.signInPage(saveFolder);
+
+    //Alert
     cy.window().then((win) => {
       const observer = new win.MutationObserver(() => {
         const alertElement = win.document.querySelector("article.gh-alert");
@@ -31,6 +33,7 @@ describe("E001 - Funcionalidad de Creación de un Post", () => {
         subtree: true,
       });
     });
+
     postPage.navigateToPosts(saveFolder);
     postPage.createNewPost(saveFolder);
 

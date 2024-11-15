@@ -87,7 +87,6 @@ class PostPage {
   }
 
   verifyParagraphCount(expectedCount, folderName) {
-    this.takeScreenshot(folderName, "verify-paragraph-count");
     cy.get("body").then(($body) => {
       // Si el selector 'p[dir="ltr"]' está presente, estamos en la versión "current"
       if ($body.find('p[dir="ltr"]').length > 0) {
@@ -104,13 +103,24 @@ class PostPage {
         });
       }
     });
+    this.takeScreenshot(folderName, "verify-paragraph-count");
   }
 
   verifyImageCount(expectedCount, folderName) {
-    cy.get(this.imageSelector).then(($images) => {
-      const totalImages = $images.length / 2;
-      expect(totalImages).to.equal(expectedCount);
+    cy.get("body").then(($body) => {
+      if ($body.find(".koenig-editor__editor img").length > 0) {
+        cy.get(".koenig-editor__editor img").then(($images) => {
+          const totalImages = $images.length;
+          expect(totalImages).to.equal(expectedCount);
+        });
+      } else {
+        cy.get(this.imageSelector).then(($images) => {
+          const totalImages = $images.length / 2;
+          expect(totalImages).to.equal(expectedCount);
+        });
+      }
     });
+
     this.takeScreenshot(folderName, "verify-image-count");
   }
 
