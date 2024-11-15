@@ -29,8 +29,8 @@ class PostPage {
   }
 
   createTitlePost(title, folderName) {
-    cy.get(this.textarea).first().type(title);
-    cy.get(this.textarea).type("{enter}");
+    cy.get(this.textarea).eq(0).type(title);
+    cy.get(this.textarea).eq(0).type("{enter}");
     this.takeScreenshot(folderName, "create-title-post");
   }
 
@@ -40,24 +40,40 @@ class PostPage {
     let paragraphCount = 0;
 
     for (let i = 0; i < times; i++) {
-      cy.get(this.textarea).type(`{enter}${randomParagraph()}`);
+      cy.get(this.textarea).eq(0).type(`{enter}${randomParagraph()}`);
       paragraphCount++;
     }
 
     return paragraphCount;
   }
 
-  publishPost(folderName) {
-    cy.contains("button", "Publish").click();
+  publishPost(folderName, version = "current") {
+    if (version === "legacy") {
+      this.publishPostLegacy(folderName);
+    } else {
+      cy.contains("button", "Publish").click();
+      cy.wait(1500);
+      this.takeScreenshot(folderName, "publish");
+      cy.contains("button", "Continue, final review →").click();
+      cy.wait(1500);
+      this.takeScreenshot(folderName, "final-review");
+      cy.contains("button", "Publish post, right now").click();
+      cy.wait(1500);
+      this.takeScreenshot(folderName, "publish-post-now");
+      cy.get(this.closeButton).click();
+    }
+  }
+
+  publishPostLegacy(folderName) {
+    cy.get("span").contains("Publish").find("svg").click();
     cy.wait(1500);
     this.takeScreenshot(folderName, "publish");
-    cy.contains("button", "Continue, final review →").click();
+    cy.get("span").contains("Publish").should("be.visible").click();
     cy.wait(1500);
     this.takeScreenshot(folderName, "final-review");
-    cy.contains("button", "Publish post, right now").click();
+    cy.get("span").contains("Posts").find("svg").click();
     cy.wait(1500);
     this.takeScreenshot(folderName, "publish-post-now");
-    cy.get(this.closeButton).click();
   }
 
   verifyPostExists(title, folderName) {
@@ -72,9 +88,21 @@ class PostPage {
 
   verifyParagraphCount(expectedCount, folderName) {
     this.takeScreenshot(folderName, "verify-paragraph-count");
-    cy.get(this.paragraphSelector).then(($paragraphs) => {
-      const totalParagraphs = $paragraphs.length / 2;
-      expect(totalParagraphs).to.equal(expectedCount);
+    cy.get("body").then(($body) => {
+      // Si el selector 'p[dir="ltr"]' está presente, estamos en la versión "current"
+      if ($body.find('p[dir="ltr"]').length > 0) {
+        // Si estamos en la versión current
+        cy.get('p[dir="ltr"]').then(($paragraphs) => {
+          const totalParagraphs = $paragraphs.length / 2;
+          expect(totalParagraphs).to.equal(expectedCount);
+        });
+      } else {
+        // Si estamos en la versión legacy
+        cy.get(".koenig-editor__editor p").then(($paragraphs) => {
+          const totalParagraphs = $paragraphs.length;
+          expect(totalParagraphs).to.equal(expectedCount);
+        });
+      }
     });
   }
 
