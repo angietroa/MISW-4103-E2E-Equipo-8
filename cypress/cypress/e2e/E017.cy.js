@@ -26,28 +26,28 @@ describe("E017 - Editar página", () => {
     loginPage.signInPage(saveFolder);
 
     cy.log("Hacer clic en el menú 'Pages' y crear página");
-    page.goToPageAndCreate();
+    page.goToPageAndCreate(saveFolder);
 
     cy.log("Digitar título");
     const title = faker.string.alphanumeric(10);
     page.setTitleAndTab(title);
 
     cy.log("Publicar página");
-    page.publishPage();
+    page.publishPage(saveFolder);
 
     cy.log("Cerrar popup");
-    page.closePublishPopup();
+    page.closePublishPopup(saveFolder);
 
     cy.log("Buscar la página creada y hacer clic");
-    page.findPageByTitleAndClick(title, true);
+    page.findPageByTitleAndClick(title, true, saveFolder);
 
     cy.log("Agregar el texto 'edit' al título");
-    page.pageTitle(" (edit)");
+    page.pageTitle(" (edit)", saveFolder);
 
     cy.log("Hacer clic sobre el botón 'Update'");
-    page.clickOnUpdateButton();
+    page.clickOnUpdateButton(saveFolder);
 
     cy.log("Ir al listado de páginas y buscar la página editada");
-    page.visitPagesAndFindPageByTitle(title + " (edit)", false);
+    page.visitPagesAndFindPageByTitle(title + " (edit)", false, saveFolder);
   });
 });

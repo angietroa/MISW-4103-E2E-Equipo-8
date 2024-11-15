@@ -22,7 +22,7 @@ class PageObj {
     this.cy.get('button[title="Settings"]').should("be.visible").click();
   }
 
-  async setPublishDate(value) {
+  async setPublishDate(value, folder) {
     this.clickOnSettingsButton();
     this.cy
       .get("input[data-test-date-time-picker-date-input]")
@@ -30,6 +30,7 @@ class PageObj {
       .clear()
       .type(value, { force: true });
     this.cy.focused().type("{enter}", { force: true });
+    this.takeScreenshot(folder, "set-publish-date");
   }
 
   async validatePublishDate(value) {
@@ -40,7 +41,7 @@ class PageObj {
     );
   }
 
-  async setAccessType(value) {
+  async setAccessType(value, folder) {
     this.clickOnSettingsButton();
     this.cy
       .get('select[data-test-select="post-visibility"]')
@@ -48,17 +49,19 @@ class PageObj {
       .select(value);
     this.clickOnSettingsButton();
     this.clickOnUpdateButton();
+    this.takeScreenshot(folder, "set-access-type");
   }
 
-  async validateAccessType(value) {
+  async validateAccessType(value, folder) {
     this.clickOnSettingsButton();
     cy.get('select[data-test-select="post-visibility"]').should(
       "have.value",
       value
     );
+    this.takeScreenshot(folder, "validate-access-type");
   }
 
-  async setURL(value) {
+  async setURL(value, folder) {
     this.clickOnSettingsButton();
     this.cy
       .get("#url")
@@ -66,33 +69,38 @@ class PageObj {
       .clear()
       .type(value, { force: true });
     this.clickOnUpdateButton();
+    this.takeScreenshot(folder, "set-url");
   }
 
-  async validateURL(value) {
+  async validateURL(value, folder) {
     this.clickOnSettingsButton();
     cy.get("#url").should("have.value", value.toLowerCase());
+    this.takeScreenshot(folder, "validate-url");
   }
 
-  async visitPagesAndFindPageByTitle(title, click) {
+  async visitPagesAndFindPageByTitle(title, click, folder) {
     cy.fixture("properties").then((data) => {
       this.cy.visit(data.url + "#/pages");
       this.cy.wait(3000);
       this.findPageByTitleAndClick(title, click);
     });
+    this.takeScreenshot(folder, "visit-pages-and-find-page-by-title");
   }
 
-  async findPageByTitleAndClick(title, click) {
+  async findPageByTitleAndClick(title, click, folder) {
     const element = this.cy.contains("h3", title).should("exist");
     if (click === true) {
       element.click();
     }
+    this.takeScreenshot(folder, "find-page-by-title");
   }
 
-  async closePublishPopup() {
+  async closePublishPopup(folder) {
     this.cy
       .get('button[data-test-button="close-publish-flow"]')
       .should("be.visible")
       .click();
+    this.takeScreenshot(folder, "close-publish-popup");
   }
 
   async goToPageAndCreate(folder) {
@@ -106,9 +114,10 @@ class PageObj {
     this.takeScreenshot(folder, "set-title-to-page");
   }
 
-  async setTitleAndTab(title) {
+  async setTitleAndTab(title, folder) {
     this.cy.get(".gh-editor-title").should("be.visible").type(title);
     this.cy.get("body").click();
+    this.takeScreenshot(folder, "set-title-and-tab");
   }
 
   async addPageElement(elemento, folder) {
@@ -177,10 +186,11 @@ class PageObj {
     this.takeScreenshot(folder, "set-content-to-spotify");
   }
 
-  async clickOnUpdateButton() {
+  async clickOnUpdateButton(folder) {
     this.cy
       .get('button[data-test-button="publish-save"]')
       .click({ multiple: true, force: true });
+    this.takeScreenshot(folder, "click-on-update-button");
   }
 
   async takeScreenshot(folderName, screenshotName) {

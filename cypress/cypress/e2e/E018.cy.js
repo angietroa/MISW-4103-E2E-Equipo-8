@@ -26,22 +26,22 @@ describe("E018 - Editar página", () => {
     loginPage.signInPage(saveFolder);
 
     cy.log("Hacer clic en el menú 'Pages' y crear página");
-    page.goToPageAndCreate();
+    page.goToPageAndCreate(saveFolder);
 
     cy.log("Digitar título");
     const title = faker.string.alphanumeric(10);
-    page.setTitleAndTab(title);
+    page.setTitleAndTab(title, saveFolder);
 
     cy.log("Publicar página");
-    page.publishPage();
+    page.publishPage(saveFolder);
 
     cy.log("Cerrar popup");
-    page.closePublishPopup();
+    page.closePublishPopup(saveFolder);
 
     cy.log("Buscar la página creada y hacer clic");
-    page.findPageByTitleAndClick(title, true);
+    page.findPageByTitleAndClick(title, true, saveFolder);
 
     cy.log("Asignar una nueva fecha de publicación");
-    page.setPublishDate("1999-01-01");
+    page.setPublishDate("1999-01-01", saveFolder);
   });
 });

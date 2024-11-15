@@ -25,28 +25,28 @@ describe("E016 - Crear miembro", () => {
     loginPage.signInPage(saveFolder);
 
     cy.log("Hacer clic en el menú 'Members'");
-    membersPage.clickOnMembersMenu();
+    membersPage.clickOnMembersMenu(saveFolder);
 
     cy.log("Hacer clic en el botón 'New member'");
-    membersPage.clickOnNewMemberButton();
+    membersPage.clickOnNewMemberButton(saveFolder);
 
     const memberName = faker.person.fullName();
     const memberEmail = faker.internet.email();
     const memberNote = faker.string.alphanumeric(1, 500);
 
     cy.log("Digitar el nombre del miembro");
-    membersPage.enterMemberName(memberName);
+    membersPage.enterMemberName(memberName, saveFolder);
 
     cy.log("Digitar el email del miembro");
-    membersPage.enterMemberEmail(memberEmail);
+    membersPage.enterMemberEmail(memberEmail, saveFolder);
 
     cy.log("Digitar una nota para el miembro");
-    membersPage.enterMemberNote(memberNote);
+    membersPage.enterMemberNote(memberNote, saveFolder);
 
     cy.log("Hacer clic en el botón 'Save'");
-    membersPage.clickOnSaveButton();
+    membersPage.clickOnSaveButton(saveFolder);
 
     cy.log("Verificar si se agregó el nuevo miembro");
-    membersPage.checkIfMemberCreated(memberName);
+    membersPage.checkIfMemberCreated(memberName, saveFolder);
   });
 });
