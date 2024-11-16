@@ -2,7 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const resemble = require("resemblejs");
 
-// Lista de escenarios a procesar
 const scenarios = [
   "E001",
   "E002",
@@ -16,7 +15,6 @@ const scenarios = [
   "E020",
 ];
 
-// Configuración de carpetas
 const config = {
   baseResultsFolder: path.join(__dirname, "../cypress/results/"),
 
@@ -30,7 +28,6 @@ const config = {
   },
 };
 
-// Crear la carpeta de resultados principal si no existe
 if (!fs.existsSync(config.baseResultsFolder)) {
   fs.mkdirSync(config.baseResultsFolder, { recursive: true });
 }
@@ -40,7 +37,6 @@ const getImageFiles = (folder) => {
   return fs.readdirSync(folder).filter((file) => file.endsWith(".png"));
 };
 
-// Función para comparar dos imágenes
 const compareImages = (imagePath1, imagePath2, scenario) => {
   return new Promise((resolve, reject) => {
     resemble(imagePath1)
@@ -48,7 +44,6 @@ const compareImages = (imagePath1, imagePath2, scenario) => {
       .ignoreAntialiasing()
       .onComplete((data) => {
         if (data.misMatchPercentage > 0) {
-          // Crear una carpeta de diferencias dentro de la carpeta del escenario
           const diffFolder = path.join(
             config.baseResultsFolder,
             scenario,
@@ -72,13 +67,12 @@ const compareImages = (imagePath1, imagePath2, scenario) => {
             dimensionDifference: data.dimensionDifference,
           });
         } else {
-          resolve(null); // No hay diferencias
+          resolve(null);
         }
       });
   });
 };
 
-// Función para generar el HTML con las imágenes y la configuración
 const generateReportHTML = (datetime, comparisonResults, scenario) => {
   const browserHTML = (imageName, result) => {
     return `
@@ -115,7 +109,6 @@ const generateReportHTML = (datetime, comparisonResults, scenario) => {
       `;
   };
 
-  // Agregar la configuración de la comparación en el HTML
   const compareOptionsHTML = `
       <h2>Configuración utilizada para la comparación</h2>
       <table>
@@ -232,12 +225,10 @@ const generateReportHTML = (datetime, comparisonResults, scenario) => {
     `;
 };
 
-// Ejecutar la comparación y generar el reporte
 const executeComparison = async (scenario) => {
   const comparisonResults = {};
 
   try {
-    // Crear la carpeta de resultados para este escenario
     const scenarioResultsFolder = path.join(config.baseResultsFolder, scenario);
     const scenarioDiffFolder = path.join(scenarioResultsFolder, "diffs");
     if (!fs.existsSync(scenarioResultsFolder)) {
@@ -247,7 +238,6 @@ const executeComparison = async (scenario) => {
       fs.mkdirSync(scenarioDiffFolder, { recursive: true });
     }
 
-    // Rutas de las carpetas legacy y nueva versión, dinámicamente usando template literals
     const legacyImagesFolder = path.join(
       __dirname,
       `../cypress/screenshots/${scenario}_legacyversion.cy.js/${scenario}/`
@@ -257,7 +247,6 @@ const executeComparison = async (scenario) => {
       `../cypress/screenshots/${scenario}.cy.js/${scenario}/`
     );
 
-    // Verificar si las rutas existen
     console.log(
       `Verificando existencia de la ruta legacy: ${legacyImagesFolder}`
     );
@@ -275,7 +264,6 @@ const executeComparison = async (scenario) => {
     const legacyImages = getImageFiles(legacyImagesFolder);
     const newImages = getImageFiles(newImagesFolder);
 
-    // Comprobar si se han encontrado imágenes en ambas carpetas
     if (legacyImages.length === 0 || newImages.length === 0) {
       console.error(
         `No se encontraron imágenes en alguna de las carpetas: ${scenario}`
@@ -314,7 +302,6 @@ const executeComparison = async (scenario) => {
       }
     }
 
-    // Generar el reporte HTML
     const datetime = new Date().toISOString().replace(/:/g, ".");
     const reportHTML = generateReportHTML(
       datetime,
@@ -335,7 +322,6 @@ const executeComparison = async (scenario) => {
   }
 };
 
-// Ejecutar las comparaciones para cada escenario
 const runComparisons = async () => {
   for (const scenario of scenarios) {
     await executeComparison(scenario);
