@@ -38,14 +38,23 @@ class PageObj {
     this.cy.get('button[title="Settings"]').should("be.visible").click();
   }
 
-  async setPublishDate(value, folder) {
+  async setPublishDate(value, folder, legacy) {
     this.clickOnSettingsButton();
-    this.cy
-      .get("input[data-test-date-time-picker-date-input]")
-      .should("be.visible")
-      .clear()
-      .type(value, { force: true });
-    this.cy.focused().type("{enter}", { force: true });
+    if (legacy) {
+      this.cy
+        .get("input[placeholder='YYYY-MM-DD']")
+        .should("be.visible")
+        .clear()
+        .type(value, { force: true });
+      this.cy.focused().type("{enter}", { force: true });
+    } else {
+      this.cy
+        .get("input[data-test-date-time-picker-date-input]")
+        .should("be.visible")
+        .clear()
+        .type(value, { force: true });
+      this.cy.focused().type("{enter}", { force: true });
+    }
     this.takeScreenshot(folder, "set-publish-date");
   }
 
@@ -77,14 +86,14 @@ class PageObj {
     this.takeScreenshot(folder, "validate-access-type");
   }
 
-  async setURL(value, folder) {
+  async setURL(value, folder, legacy = false) {
     this.clickOnSettingsButton();
     this.cy
       .get("#url")
       .should("be.visible")
       .clear()
       .type(value, { force: true });
-    this.clickOnUpdateButton(folder);
+    this.clickOnUpdateButton(folder, legacy);
     this.takeScreenshot(folder, "set-url");
   }
 
@@ -94,12 +103,19 @@ class PageObj {
     this.takeScreenshot(folder, "validate-url");
   }
 
-  async visitPagesAndFindPageByTitle(title, click, folder) {
-    cy.fixture("properties").then((data) => {
-      this.cy.visit(data.url + "#/pages");
+  async visitPagesAndFindPageByTitle(title, click, folder, legacy = false) {
+    if (legacy) {
+      this.cy.get('a[href="#/pages/"]').click();
       this.cy.wait(3000);
       this.findPageByTitleAndClick(title, click, folder);
-    });
+    } else {
+      cy.fixture("properties").then((data) => {
+        this.cy.visit(data.url + "#/pages");
+        this.cy.wait(3000);
+        this.findPageByTitleAndClick(title, click, folder);
+      });
+    }
+
     this.takeScreenshot(folder, "visit-pages-and-find-page-by-title");
   }
 
@@ -111,12 +127,16 @@ class PageObj {
     this.takeScreenshot(folder, "find-page-by-title");
   }
 
-  async closePublishPopup(folder) {
-    this.cy
-      .get('button[data-test-button="close-publish-flow"]')
-      .should("be.visible")
-      .click();
-    this.takeScreenshot(folder, "close-publish-popup");
+  async closePublishPopup(folder, legacy) {
+    if (legacy) {
+      this.takeScreenshot(folder, "close-publish-popup");
+    } else {
+      this.cy
+        .get('button[data-test-button="close-publish-flow"]')
+        .should("be.visible")
+        .click();
+      this.takeScreenshot(folder, "close-publish-popup");
+    }
   }
 
   async goToPageAndCreate(folder) {
@@ -228,11 +248,18 @@ class PageObj {
     this.takeScreenshot(folder, "set-content-to-spotify");
   }
 
-  async clickOnUpdateButton(folder) {
-    this.cy
-      .get('button[data-test-button="publish-save"]')
-      .click({ multiple: true, force: true });
-    this.takeScreenshot(folder, "click-on-update-button");
+  async clickOnUpdateButton(folder, legacy) {
+    if (legacy) {
+      this.cy.get("button[aria-label='Close']").click();
+      this.cy.get("span").contains("Update").find("svg").click();
+      this.cy.get("span").contains("Update");
+      this.takeScreenshot(folder, "click-on-update-button");
+    } else {
+      this.cy
+        .get('button[data-test-button="publish-save"]')
+        .click({ multiple: true, force: true });
+      this.takeScreenshot(folder, "click-on-update-button");
+    }
   }
 
   async takeScreenshot(folderName, screenshotName) {
