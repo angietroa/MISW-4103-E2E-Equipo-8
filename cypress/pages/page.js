@@ -146,7 +146,11 @@ class PageObj {
   }
 
   async pageTitle(titulo, folder) {
-    this.cy.get(".gh-editor-title").should("be.visible").type(titulo);
+    this.cy
+      .get(".gh-editor-title")
+      .should("be.visible")
+      .type(titulo)
+      .type("{enter}");
     this.takeScreenshot(folder, "set-title-to-page");
   }
 
@@ -179,11 +183,9 @@ class PageObj {
   }
 
   async addPageElementLegacy(elemento, folder) {
-    this.cy.get("textarea").should("be.visible").first().click();
-
     this.takeScreenshot(folder, "select-editable-area");
 
-    this.cy.get('button[aria-label="Add a card"]').click();
+    this.cy.get("button.koenig-plus-menu-button").click();
 
     this.takeScreenshot(folder, "select-toolbox");
 
