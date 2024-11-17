@@ -47,6 +47,6 @@ describe("E001 - Funcionalidad de Creación de un Post", () => {
 
     postPage.openPost(postTitle, saveFolder);
 
-    postPage.verifyParagraphCount(paragraphCount, saveFolder);
+    postPage.verifyParagraphCount(paragraphCount, saveFolder, true);
   });
 });
