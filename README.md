@@ -25,6 +25,8 @@ Debera tener instalado los siguientes paquetes en su entorno:
 
 **Importante**: Las dos versiones de GHOST (4.5.0 y 5.96.0) deben estar ejecutandose al tiempo (recomendamos instalarlo con [Docker](https://hub.docker.com/_/ghost/), para hacer la ejecución de los respectivos escenarios de extremo a extremo.
 
+**Importante**: Junto con las dos versiones de GHOST, se debe tener un mismo usuario para las dos, ya que se manejara este para la ejecución de las pruebas.
+
 ## Instalación de dependencias
 Dirijase a la carpeta raiz del proyecto y haga `npm install`.
 
