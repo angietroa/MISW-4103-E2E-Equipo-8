@@ -66,7 +66,7 @@ Poner aqui como ver los resultados del reporte
 Dirijase a la carpeta raiz del proyecto y ejecute `npm run e2e:cypress` o siga esta guia de [como ejecutar tests en cypress](https://docs.cypress.io/app/end-to-end-testing/writing-your-first-end-to-end-test#Add-a-test-file) para ejecutarlos en un navegador (para ello debe añadir el proyecto a cypress ubicado en `cypress/cypress/e2e`.
 
 ### Ejecución de script de comparación de imagenes con ResembleJs
-Para la ejecución del script de comparación dirijase a la carpeta raiz del proyecto y ejecute `npm run-script vrt:cypress`, esto tomara los screenshots tomados en el paso anterior "Ejecución pruebas e2e de Cypress" (IMPORTANTE: para correr este script y que pueda generar los reportes de forma adecuada, el paso anterior debe estar completo, de lo contrario no se podra ver cada uno de los reportes generados para cada uno de los escenarios).
+Para la ejecución del script de comparación dirijase a la carpeta raiz del proyecto y ejecute `npm run vrt:cypress`, esto tomara los screenshots tomados en el paso anterior "Ejecución pruebas e2e de Cypress" (IMPORTANTE: para correr este script y que pueda generar los reportes de forma adecuada, el paso anterior debe estar completo, de lo contrario no se podra ver cada uno de los reportes generados para cada uno de los escenarios).
 
 ### Cómo ver los resultados del reporte
 Una vez el script ha sido ejecutado y ha terminado su proceso, puede dirigirse a la carpeta `cypress/cypress/results`, en esta encontrara relacionados cada uno de los escenarios para los cuales se hizo VRT separados en carpetas, cada carpeta contiene una carpeta con las imagenes de diferencia generadas por ResembleJS y un reporte en HTML que podrá visualizar desde un navegador.
