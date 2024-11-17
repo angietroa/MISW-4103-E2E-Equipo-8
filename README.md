@@ -23,7 +23,7 @@ Debera tener instalado los siguientes paquetes en su entorno:
 | [Ghost](https://ghost.org/docs/install/) | 4.5.0 | (Versión base) Puede tenerlo instalado localmente (recomendamos instalarlo con [Docker](https://hub.docker.com/_/ghost/)) o tenerlo desplegado en algun servidor web al que tenga acceso |
 | [Cypress](https://docs.cypress.io/app/get-started/install-cypress) | 13.15.2 | **Opcional**, si quiere visualizar la ejecución de las pruebas e2e de cypress desde un navegador puede hacer la instalación de lo contrario se pueden ejecutar las pruebas modo "headless". |
 
-**Importante**: Las dos versiones de GHOST (4.5.0 y 5.96.0) deben estar ejecutandose al tiempo (recomendamos instalarlo con [Docker](https://hub.docker.com/_/ghost/), para hacer la ejecución de los respectivos escenarios de extremo a extremo.
+**Importante**: Las dos versiones de GHOST (4.5.0 y 5.96.0) deben estar ejecutandose al tiempo (recomendamos instalarlo con [Docker](https://hub.docker.com/_/ghost/)), para hacer la ejecución de los respectivos escenarios de extremo a extremo.
 
 ## Instalación de dependencias
 Dirijase a la carpeta raiz del proyecto y haga `npm install`.
