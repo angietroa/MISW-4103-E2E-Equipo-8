@@ -16,10 +16,17 @@ class AddPostContent {
     cy.get("textarea").type("{enter}");
   }
 
-  addHTML(htmlContent) {
-    cy.get(this.addCardButton).click();
-    cy.get(this.htmlButton).click();
-    cy.get('div[data-language="html"]').type(htmlContent);
+  addHTML(htmlContent, legacy = false) {
+    if (legacy) {
+      cy.get('[aria-label="Add a card"]').click();
+      cy.get('div[role="menuitem"]').contains("HTML").click();
+      cy.get(".CodeMirror-scroll").type(htmlContent);
+      cy.get("textarea").first().click();
+    } else {
+      cy.get(this.addCardButton).click();
+      cy.get(this.htmlButton).click();
+      cy.get('div[data-language="html"]').type(htmlContent);
+    }
   }
 
   embedYouTube(url, folderName) {

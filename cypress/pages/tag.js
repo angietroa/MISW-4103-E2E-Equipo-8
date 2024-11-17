@@ -3,24 +3,39 @@ class TagPage {
     this.cy = cy;
   }
 
-  async clickOnTagMenu(folderName) {
-    this.cy.get('a[href="#/tags/"][data-test-nav="tags"]').click();
-    this.takeScreenshot(folderName, "click-on-tag-menu");
-    this.cy.wait(2000);
+  async clickOnTagMenu(folderName, legacy = false) {
+    if (legacy) {
+      this.cy.get('a[href="#/tags/"]').first().click();
+      this.takeScreenshot(folderName, "click-on-tag-menu");
+      this.cy.wait(2000);
+    } else {
+      this.cy.get('a[href="#/tags/"][data-test-nav="tags"]').click();
+      this.takeScreenshot(folderName, "click-on-tag-menu");
+      this.cy.wait(2000);
+    }
   }
 
-  async clickOnNewTag(folderName) {
-    this.cy.get('a[href="#/tags/new/"].gh-btn-primary').click();
-    this.takeScreenshot(folderName, "click-on-new-tag");
-    this.cy.wait(2000);
+  async clickOnNewTag(folderName, legacy = false) {
+    if (legacy) {
+      this.cy.get("span").contains("New tag").click();
+    } else {
+      this.cy.get('a[href="#/tags/new/"].gh-btn-primary').click();
+      this.takeScreenshot(folderName, "click-on-new-tag");
+      this.cy.wait(2000);
+    }
   }
 
-  async clickOnSaveTag(folderName) {
-    this.cy
-      .get('button[type="button"][data-test-button="save"].gh-btn-primary')
-      .click();
-    this.takeScreenshot(folderName, "click-on-save-tag-1");
-    this.cy.wait(4000);
+  async clickOnSaveTag(folderName, legacy = false) {
+    if (legacy) {
+      this.cy.get("span").contains("Save").click();
+      this.cy.wait(2000);
+    } else {
+      this.cy
+        .get('button[type="button"][data-test-button="save"].gh-btn-primary')
+        .click();
+      this.takeScreenshot(folderName, "click-on-save-tag-1");
+      this.cy.wait(4000);
+    }
 
     this.cy.get("body").then((body) => {
       if (
@@ -57,10 +72,18 @@ class TagPage {
     this.cy.wait(2000);
   }
 
-  async setTagColor(tagColor, folderName) {
-    this.cy.get('input[data-test-input="accentColor"]').type(tagColor);
-    this.takeScreenshot(folderName, "set-tag-color");
-    this.cy.wait(2000);
+  async setTagColor(tagColor, folderName, legacy = false) {
+    if (legacy) {
+      this.cy.get('input[name="accent-color"]').eq(1).type(tagColor);
+
+      this.takeScreenshot(folderName, "set-tag-color");
+      this.cy.wait(2000);
+    } else {
+      this.cy.get('input[data-test-input="accentColor"]').type(tagColor);
+
+      this.takeScreenshot(folderName, "set-tag-color");
+      this.cy.wait(2000);
+    }
   }
 
   async setTagDescription(tagDescription, folderName) {
@@ -116,7 +139,9 @@ class TagPage {
   }
 
   async findTagNameCreated(tagName, folderName) {
-    this.cy.get("h3[data-test-tag-name]").contains(tagName);
+    this.cy
+      .get("h3[data-test-tag-name], h3.gh-tag-list-name")
+      .contains(tagName);
     this.takeScreenshot(folderName, "find-tag-name-created");
     this.cy.wait(3000);
   }

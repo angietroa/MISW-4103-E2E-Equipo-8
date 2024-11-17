@@ -1,5 +1,6 @@
 {
   "url": "http://localhost:2368/ghost/",
+  "url_base": "http://localhost:3001/ghost/", 
   "username": "johndoe@mail.com",
   "password": "1234567890123456"
 }

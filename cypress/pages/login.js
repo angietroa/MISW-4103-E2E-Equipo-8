@@ -3,9 +3,11 @@ class LoginPage {
     this.cy = cy;
   }
 
-  async visitPage(folder) {
-    this.cy.fixture("properties").then((data) => {
-      this.cy.visit(data.url);
+  async visitPage(folder, dynamic = false, version = "current") {
+    const urlKey = dynamic && version === "legacy" ? "url_legacy" : "url";
+    cy.fixture("properties").then((data) => {
+      const url = data[urlKey];
+      this.cy.visit(url);
       this.cy.wait(3000);
       this.takeScreenshot(folder, "after-visit-page");
     });
@@ -14,7 +16,7 @@ class LoginPage {
   async signInPage(folder) {
     this.cy.fixture("properties").then((data) => {
       this.cy
-        .get("#identification,[name='identification']")
+        .get("#identification, [name='identification']")
         .type(data.username);
       this.cy.get("#password, [name='password']").type(data.password);
       this.takeScreenshot(folder, "before-sign-in-page");

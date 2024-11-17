@@ -6,7 +6,8 @@
   "scripts": {
     "install:clean": "rm -rf node_modules package-lock.json && npm install",
     "e2e:kraken": "cd kraken && ../node_modules/kraken-node/bin/kraken-node run",
-    "e2e:cypress": "cd cypress && ../node_modules/.bin/cypress run --headless"
+    "e2e:cypress": "cd cypress && ../node_modules/.bin/cypress run --headless",
+    "vrt:cypress": "node cypress/scripts/compareScreenshots.js"
   },
   "author": "Pruebas automatizadas: Equipo 8",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "@faker-js/faker": "9.2.0",
     "cypress": "13.15.2",
     "cypress-file-upload": "5.0.8",
-    "kraken-node": "1.0.24"
+    "kraken-node": "1.0.24",
+    "resemblejs": "^5.0.0"
   }
 }

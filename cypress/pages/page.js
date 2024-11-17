@@ -3,17 +3,33 @@ class PageObj {
     this.cy = cy;
   }
 
-  async publishPage(folder) {
-    this.cy.contains("button", "Publish").click();
-    this.cy.wait(1500);
+  async publishPage(folder, legacy = false) {
+    if (legacy) {
+      this.publishPageLegacy(folder);
+    } else {
+      this.cy.contains("button", "Publish").click();
+      this.cy.wait(1500);
+      this.takeScreenshot(folder, "publish-page", true);
+      this.cy.wait(1500);
+      this.cy.contains("button", "Continue, final review").click();
+      this.cy.wait(1500);
+      this.takeScreenshot(folder, "final-review", true);
+      this.cy.wait(1500);
+      this.cy.contains("button", "Publish page, right now").click();
+      this.cy.wait(1500);
+      this.takeScreenshot(folder, "publish-page-now");
+      this.cy.wait(1500);
+    }
+  }
+
+  async publishPageLegacy(folder) {
+    cy.get("span").contains("Publish").find("svg").click();
     this.takeScreenshot(folder, "publish-page", true);
     this.cy.wait(1500);
-    this.cy.contains("button", "Continue, final review").click();
-    this.cy.wait(1500);
+    cy.get("span").contains("Publish").should("be.visible").click();
     this.takeScreenshot(folder, "final-review", true);
     this.cy.wait(1500);
-    this.cy.contains("button", "Publish page, right now").click();
-    this.cy.wait(1500);
+    cy.get("span").contains("Pages").find("svg").click();
     this.takeScreenshot(folder, "publish-page-now");
     this.cy.wait(1500);
   }
@@ -22,14 +38,23 @@ class PageObj {
     this.cy.get('button[title="Settings"]').should("be.visible").click();
   }
 
-  async setPublishDate(value, folder) {
+  async setPublishDate(value, folder, legacy) {
     this.clickOnSettingsButton();
-    this.cy
-      .get("input[data-test-date-time-picker-date-input]")
-      .should("be.visible")
-      .clear()
-      .type(value, { force: true });
-    this.cy.focused().type("{enter}", { force: true });
+    if (legacy) {
+      this.cy
+        .get("input[placeholder='YYYY-MM-DD']")
+        .should("be.visible")
+        .clear()
+        .type(value, { force: true });
+      this.cy.focused().type("{enter}", { force: true });
+    } else {
+      this.cy
+        .get("input[data-test-date-time-picker-date-input]")
+        .should("be.visible")
+        .clear()
+        .type(value, { force: true });
+      this.cy.focused().type("{enter}", { force: true });
+    }
     this.takeScreenshot(folder, "set-publish-date");
   }
 
@@ -61,14 +86,14 @@ class PageObj {
     this.takeScreenshot(folder, "validate-access-type");
   }
 
-  async setURL(value, folder) {
+  async setURL(value, folder, legacy = false) {
     this.clickOnSettingsButton();
     this.cy
       .get("#url")
       .should("be.visible")
       .clear()
       .type(value, { force: true });
-    this.clickOnUpdateButton(folder);
+    this.clickOnUpdateButton(folder, legacy);
     this.takeScreenshot(folder, "set-url");
   }
 
@@ -78,12 +103,19 @@ class PageObj {
     this.takeScreenshot(folder, "validate-url");
   }
 
-  async visitPagesAndFindPageByTitle(title, click, folder) {
-    cy.fixture("properties").then((data) => {
-      this.cy.visit(data.url + "#/pages");
+  async visitPagesAndFindPageByTitle(title, click, folder, legacy = false) {
+    if (legacy) {
+      this.cy.get('a[href="#/pages/"]').click();
       this.cy.wait(3000);
       this.findPageByTitleAndClick(title, click, folder);
-    });
+    } else {
+      cy.fixture("properties").then((data) => {
+        this.cy.visit(data.url + "#/pages");
+        this.cy.wait(3000);
+        this.findPageByTitleAndClick(title, click, folder);
+      });
+    }
+
     this.takeScreenshot(folder, "visit-pages-and-find-page-by-title");
   }
 
@@ -95,12 +127,16 @@ class PageObj {
     this.takeScreenshot(folder, "find-page-by-title");
   }
 
-  async closePublishPopup(folder) {
-    this.cy
-      .get('button[data-test-button="close-publish-flow"]')
-      .should("be.visible")
-      .click();
-    this.takeScreenshot(folder, "close-publish-popup");
+  async closePublishPopup(folder, legacy) {
+    if (legacy) {
+      this.takeScreenshot(folder, "close-publish-popup");
+    } else {
+      this.cy
+        .get('button[data-test-button="close-publish-flow"]')
+        .should("be.visible")
+        .click();
+      this.takeScreenshot(folder, "close-publish-popup");
+    }
   }
 
   async goToPageAndCreate(folder) {
@@ -110,7 +146,11 @@ class PageObj {
   }
 
   async pageTitle(titulo, folder) {
-    this.cy.get(".gh-editor-title").should("be.visible").type(titulo);
+    this.cy
+      .get(".gh-editor-title")
+      .should("be.visible")
+      .type(titulo)
+      .type("{enter}");
     this.takeScreenshot(folder, "set-title-to-page");
   }
 
@@ -120,20 +160,40 @@ class PageObj {
     this.takeScreenshot(folder, "set-title-and-tab");
   }
 
-  async addPageElement(elemento, folder) {
-    this.cy
-      .get('.koenig-react-editor .kg-prose[contenteditable="true"]')
-      .should("be.visible")
-      .first()
-      .click();
+  async addPageElement(elemento, folder, legacy = false) {
+    if (legacy) {
+      this.addPageElementLegacy(elemento, folder);
+    } else {
+      this.cy
+        .get('.koenig-react-editor .kg-prose[contenteditable="true"]')
+        .should("be.visible")
+        .first()
+        .click();
 
+      this.takeScreenshot(folder, "select-editable-area");
+
+      this.cy.get('button[aria-label="Add a card"]').click();
+
+      this.takeScreenshot(folder, "select-toolbox");
+
+      this.cy.contains(elemento).click();
+
+      this.takeScreenshot(folder, "select-tool");
+    }
+  }
+
+  async addPageElementLegacy(elemento, folder) {
     this.takeScreenshot(folder, "select-editable-area");
 
-    this.cy.get('button[aria-label="Add a card"]').click();
+    this.cy.get("button.koenig-plus-menu-button").click();
 
     this.takeScreenshot(folder, "select-toolbox");
 
-    this.cy.contains(elemento).click();
+    if (elemento === "File") {
+      this.takeScreenshot(folder, "select-tool");
+    } else {
+      this.cy.contains(elemento).click();
+    }
 
     this.takeScreenshot(folder, "select-tool");
   }
@@ -161,18 +221,22 @@ class PageObj {
     this.takeScreenshot(folder, "set-content-to-gallery");
   }
 
-  async setContentToFile(archivo, folder) {
-    this.cy.contains("Click to upload a file").click();
+  async setContentToFile(archivo, folder, legacy = false) {
+    if (legacy) {
+      this.takeScreenshot(folder, "set-content-to-file");
+    } else {
+      this.cy.contains("Click to upload a file").click();
 
-    this.cy
-      .get('input[name="file-input"]')
-      .selectFile(archivo, { force: true });
+      this.cy
+        .get('input[name="file-input"]')
+        .selectFile(archivo, { force: true });
 
-    this.cy
-      .get('[data-kg-file-card="fileTitle"]')
-      .should("have.value", "image_page")
-      .and("be.visible");
-    this.takeScreenshot(folder, "set-content-to-file");
+      this.cy
+        .get('[data-kg-file-card="fileTitle"]')
+        .should("have.value", "image_page")
+        .and("be.visible");
+      this.takeScreenshot(folder, "set-content-to-file");
+    }
   }
 
   async setContentToSpotify(enlace, folder) {
@@ -186,11 +250,18 @@ class PageObj {
     this.takeScreenshot(folder, "set-content-to-spotify");
   }
 
-  async clickOnUpdateButton(folder) {
-    this.cy
-      .get('button[data-test-button="publish-save"]')
-      .click({ multiple: true, force: true });
-    this.takeScreenshot(folder, "click-on-update-button");
+  async clickOnUpdateButton(folder, legacy) {
+    if (legacy) {
+      this.cy.get("button[aria-label='Close']").click();
+      this.cy.get("span").contains("Update").find("svg").click();
+      this.cy.get("span").contains("Update");
+      this.takeScreenshot(folder, "click-on-update-button");
+    } else {
+      this.cy
+        .get('button[data-test-button="publish-save"]')
+        .click({ multiple: true, force: true });
+      this.takeScreenshot(folder, "click-on-update-button");
+    }
   }
 
   async takeScreenshot(folderName, screenshotName) {
