@@ -48,15 +48,15 @@ Dirijase a la carpeta raiz del proyecto y haga `npm install`.
 | `url_base` | Dirección URL donde esta alojado GHOST en la versión base (4.5.0) | http://localhost:3001/ghost/ |
 
 ## Ejecución pruebas e2e de Kraken y script de comparación de imagenes con PixelMatch
-### Ejecución pruebas e2e de Kraken
+### 1. Ejecución pruebas e2e de Kraken
 **Importante:** antes de hacer la ejecución de las pruebas recomendamos borrar los datos ingresados anteriormente a la aplicación GHOST de Paginas, Posts, Tags y Miembros.
 
 Dirijase a la carpeta raiz del proyecto y ejecute `npm run e2e:kraken`
 
-### 1. Ejecución de script de comparación de imagenes con PixelMatch
+### 2. Ejecución de script de comparación de imagenes con PixelMatch
 Por aqui proceso de ejecución
 
-### 2. Cómo ver los resultados del reporte
+### 3. Cómo ver los resultados del reporte
 Poner aqui como ver los resultados del reporte
 
 ## Ejecución pruebas e2e de Cypress y script de comparación de imagenes con ResembleJs
@@ -70,5 +70,5 @@ Para la ejecución del script de comparación dirijase a la carpeta raiz del pro
 
 **Importante:** para correr este script y que pueda generar los reportes de forma adecuada, el paso anterior debe estar completo, de lo contrario no se podra ver cada uno de los reportes generados para cada uno de los escenarios
 
-### Cómo ver los resultados del reporte
+### 3. Cómo ver los resultados del reporte
 Una vez el script ha sido ejecutado y ha terminado su proceso, puede dirigirse a la carpeta `cypress/cypress/results`, en esta encontrara relacionados cada uno de los escenarios para los cuales se hizo VRT separados en carpetas, cada carpeta contiene una carpeta con las imagenes de diferencia generadas por ResembleJS y un reporte en HTML que podrá visualizar desde un navegador.
