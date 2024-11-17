@@ -4,7 +4,7 @@ class LoginPage {
   }
 
   async visitPage(folder, dynamic = false, version = "current") {
-    const urlKey = dynamic && version === "legacy" ? "url_legacy" : "url";
+    const urlKey = dynamic && version === "legacy" ? "url_base" : "url";
     cy.fixture("properties").then((data) => {
       const url = data[urlKey];
       this.cy.visit(url);

@@ -86,23 +86,22 @@ class PostPage {
     cy.contains("a", title).click();
   }
 
-  verifyParagraphCount(expectedCount, folderName) {
-    cy.get("body").then(($body) => {
-      // Si el selector 'p[dir="ltr"]' está presente, estamos en la versión "current"
-      if ($body.find('p[dir="ltr"]').length > 0) {
-        // Si estamos en la versión current
-        cy.get('p[dir="ltr"]').then(($paragraphs) => {
-          const totalParagraphs = $paragraphs.length / 2;
-          expect(totalParagraphs).to.equal(expectedCount);
-        });
-      } else {
-        // Si estamos en la versión legacy
+  verifyParagraphCount(expectedCount, folderName, legacy = false) {
+    cy.get("body").then(() => {
+      if (legacy) {
         cy.get(".koenig-editor__editor p").then(($paragraphs) => {
           const totalParagraphs = $paragraphs.length;
           expect(totalParagraphs).to.equal(expectedCount);
         });
+      } else {
+        cy.get('p[dir="ltr"]').then(($paragraphs) => {
+          const totalParagraphs = $paragraphs.length / 2;
+          expect(totalParagraphs).to.equal(expectedCount);
+        });
       }
     });
+
+    // Toma la captura de pantalla después de la verificación
     this.takeScreenshot(folderName, "verify-paragraph-count");
   }
 
