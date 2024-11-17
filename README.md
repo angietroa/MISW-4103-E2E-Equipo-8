@@ -23,7 +23,7 @@ Debera tener instalado los siguientes paquetes en su entorno:
 | [Ghost](https://ghost.org/docs/install/) | 4.5.0 | (Versión base) Puede tenerlo instalado localmente (recomendamos instalarlo con [Docker](https://hub.docker.com/_/ghost/)) o tenerlo desplegado en algun servidor web al que tenga acceso |
 | [Cypress](https://docs.cypress.io/app/get-started/install-cypress) | 13.15.2 | **Opcional**, si quiere visualizar la ejecución de las pruebas e2e de cypress desde un navegador puede hacer la instalación de lo contrario se pueden ejecutar las pruebas modo "headless". |
 
-**Importante**: Las dos versiones de GHOST (4.5.0 y 5.96.0) deben estar ejecutandose al tiempo (recomendamos instalarlo con [Docker](https://hub.docker.com/_/ghost/)), para hacer la ejecución de los respectivos escenarios de extremo a extremo.
+**Importante**: Las dos versiones de GHOST (4.5.0 y 5.96.0) deben estar ejecutandose al tiempo (recomendamos instalarlo con [Docker](https://hub.docker.com/_/ghost/), para hacer la ejecución de los respectivos escenarios de extremo a extremo.
 
 ## Instalación de dependencias
 Dirijase a la carpeta raiz del proyecto y haga `npm install`.
@@ -60,13 +60,13 @@ Por aqui proceso de ejecución
 Poner aqui como ver los resultados del reporte
 
 ## Ejecución pruebas e2e de Cypress y script de comparación de imagenes con ResembleJs
-### Ejecución pruebas e2e de Kraken
+### Ejecución pruebas e2e de Cypress
 **Importante:** antes de hacer la ejecución de las pruebas recomendamos borrar los datos ingresados anteriormente a la aplicación GHOST de Paginas, Posts, Tags y Miembros.
 
 Dirijase a la carpeta raiz del proyecto y ejecute `npm run e2e:cypress` o siga esta guia de [como ejecutar tests en cypress](https://docs.cypress.io/app/end-to-end-testing/writing-your-first-end-to-end-test#Add-a-test-file) para ejecutarlos en un navegador (para ello debe añadir el proyecto a cypress ubicado en `cypress/cypress/e2e`.
 
 ### Ejecución de script de comparación de imagenes con ResembleJs
-Por aqui proceso de ejecución
+Para la ejecución del script de comparación dirijase a la carpeta raiz del proyecto y ejecute `npm run-script vrt:cypress`, esto tomara los screenshots tomados en el paso anterior "Ejecución pruebas e2e de Cypress" (IMPORTANTE: para correr este script y que pueda generar los reportes de forma adecuada, el paso anterior debe estar completo, de lo contrario no se podra ver cada uno de los reportes generados para cada uno de los escenarios).
 
 ### Cómo ver los resultados del reporte
-Poner aqui como ver los resultados del reporte
+Una vez el script ha sido ejecutado y ha terminado su proceso, puede dirigirse a la carpeta `cypress/cypress/results`, en esta encontrara relacionados cada uno de los escenarios para los cuales se hizo VRT separados en carpetas, cada carpeta contiene una carpeta con las imagenes de diferencia generadas por ResembleJS y un reporte en HTML que podrá visualizar desde un navegador.
