@@ -5,8 +5,10 @@ class PostPage {
     this.postsLink = 'a[href="#/posts/"]';
     this.textarea = "textarea";
     this.publishButton = '//button[@data-test-button="publish-flow"]';
+    this.publishButtonGhost45 = '.gh-publishmenu-trigger';
     this.continueButton = '//button[@data-test-button="continue"]';
     this.finalPublishButton = '//button[@data-test-button="confirm-publish"]';
+    this.finalPublishButtonGhost45 = '.gh-publishmenu-button';
     this.closeButton = '//button[@data-test-button="close-publish-flow"]';
     this.paragraphSelector = '//p[dir="ltr"]';
     this.imageSelector = 'img[data-testid="image-card-populated"]';
@@ -49,6 +51,24 @@ class PostPage {
       const element = await this.driver.$(this.textarea);
       await element.setValue(`\n${this.randomParagraph()}`);
     }
+  }
+
+  async publishPostGhost45() {
+    const publish = await this.driver.$(this.publishButtonGhost45);
+    await publish.waitForDisplayed({ timeout: 5000 });
+    await publish.click();
+
+    /*const continueBtn = await this.driver.$(this.continueButton);
+    await continueBtn.waitForDisplayed({ timeout: 5000 });
+    await continueBtn.click();*/
+
+    const finalPublish = await this.driver.$(this.finalPublishButtonGhost45);
+    await finalPublish.waitForDisplayed({ timeout: 5000 });
+    await finalPublish.click();
+
+    /*const closeBtn = await this.driver.$(this.closeButton);
+    await closeBtn.waitForDisplayed({ timeout: 5000 });
+    await closeBtn.click();*/
   }
 
   async publishPost() {

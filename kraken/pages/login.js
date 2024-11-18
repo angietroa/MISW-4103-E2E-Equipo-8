@@ -4,7 +4,7 @@ class LoginPage {
   }
 
   async getEmailElement() {
-    const element = await this.driver.$('#identification');
+    const element = await this.driver.$('input[name="identification"]');
     return element;
   }
 
@@ -13,7 +13,7 @@ class LoginPage {
   }
 
   async getPasswordElement() {
-    const element = await this.driver.$('#password');
+    const element = await this.driver.$('input[name="password"]');
     return element;
   }
 
@@ -22,7 +22,7 @@ class LoginPage {
   }
 
   async clickOnSignInElement() {
-    let element = await this.driver.$('button[type=submit]');
+    let element = await this.driver.$('button[type="submit"]');
     return await element.click();
   }
 }

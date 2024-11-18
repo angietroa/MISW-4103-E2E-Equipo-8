@@ -1,0 +1,6 @@
+{
+    "type": "module",
+    "dependencies": {
+      "pixelmatch": "^6.0.0"
+    }
+}

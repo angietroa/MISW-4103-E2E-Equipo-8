@@ -23,9 +23,7 @@ class PageObj {
   }
 
   async clickOnTextAreaPage() {
-    const element = await this.driver.$(
-      '.koenig-react-editor .kg-prose[contenteditable="true"]'
-    );
+    const element = await this.driver.$('div[data-koenig-dnd-container="true"]');
     await element.click();
   }
 
@@ -35,10 +33,13 @@ class PageObj {
   }
 
   async clickOnElementTool(menuItem) {
-    const button = await this.driver.$(
-      `[data-kg-card-menu-item="${menuItem}"]`
-    );
-    await button.click();
+    const button = await this.driver.$(`button[data-kg-card-menu-item="${menuItem}"]`);
+    if (await button.isExisting()) {
+      await button.click({force:true});
+    } else {
+      const buttonGhost45 = await this.driver.$(`div[title="${menuItem}"]`);
+      await buttonGhost45.click({force:true});
+    }
   }
 
   async getMarkdownElement() {
@@ -65,6 +66,7 @@ class PageObj {
 
   async uploadFiles(filePath) {
     const fileInput = await this.driver.$('input[name="file-input"]');
+    await fileInput.waitForExist({timeout:30000});
     await fileInput.setValue(filePath);
   }
 
@@ -110,6 +112,15 @@ class PageObj {
     await button.click();
   }
 
+  async publishPageButtonGhost45() {
+    const buttonMenu = await this.driver.$(".gh-publishmenu");
+    await buttonMenu.click();
+    const button = await this.driver.$('.gh-publishmenu-button');
+    await button.waitForDisplayed();
+    await button.click();
+    await this.clickOnPage();
+  }
+
   async confirmPageButton() {
     const button = await this.driver.$('[data-test-button="continue"]');
     await button.click();
@@ -124,6 +135,10 @@ class PageObj {
     await this.publishPageButton();
     await this.confirmPageButton();
     await this.confirmPublishButton();
+  }
+
+  async performPublishFlowGhost45() {
+    await this.publishPageButtonGhost45();
   }
 
   async selectBookmarkToElement() {
@@ -153,7 +168,7 @@ class PageObj {
   }
 
   async clickOnPageItem(value) {
-    const button = await this.driver.$(".gh-content-entry-title");
+    const button = await this.driver.$('h3='+value);
     await button.waitForExist();
     await button.click();
   }
@@ -172,11 +187,20 @@ class PageObj {
 
   async setPublishDate(value) {
     const button = await this.driver.$('button[data-test-psm-trigger]');
-    await button.waitForClickable({timeout:10000});
-    await button.click();
-    const input = await this.driver.$('input[data-test-date-time-picker-date-input]');
-    await input.waitForExist();
-    input.setValue(value);
+    if (await button.isExisting()) {
+      await button.waitForClickable({timeout:10000});
+      await button.click();
+      const input = await this.driver.$('input[data-test-date-time-picker-date-input]');
+      await input.waitForExist();
+      input.setValue(value);
+    } else {
+      const buttonGhost45 = await this.driver.$('button[title="Settings"]');
+      await buttonGhost45.waitForClickable({timeout:10000});
+      await buttonGhost45.click();
+      const input = await this.driver.$('input[placeholder="YYYY-MM-DD"]');
+      await input.waitForExist();
+      input.setValue(value);
+    }
   }
 
   async setPageAccess(value) {
@@ -190,11 +214,20 @@ class PageObj {
 
   async setURL(value) {
     const button = await this.driver.$('button[data-test-psm-trigger]');
-    await button.waitForClickable({timeout:10000});
-    await button.click();
-    const input = await this.driver.$('#url');
-    await input.waitForExist();
-    input.setValue(value);
+    if (await button.isExisting()) {
+      await button.waitForClickable({timeout:10000});
+      await button.click();
+      const input = await this.driver.$('#url');
+      await input.waitForExist();
+      input.setValue(value);
+    } else {
+      const buttonGhost45 = await this.driver.$('button[title="Settings"]');
+      await buttonGhost45.waitForClickable({timeout:10000});
+      await buttonGhost45.click();
+      const input = await this.driver.$('#url');
+      await input.waitForExist();
+      input.setValue(value);
+    }
   }
 
 }

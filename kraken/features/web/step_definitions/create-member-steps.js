@@ -6,6 +6,7 @@ const MembersPage = require("../../../pages/membersPage");
 Given(
     "El usuario está en la página de inicio de sesión {kraken-string}",
     async function (url) {
+        //await this.driver.setWindowSize(1280, 720);
         this.url = url;
         this.loginPage = new LoginPage(this.driver);
         await this.driver.url(url);

@@ -30,7 +30,11 @@ class TagPage {
 
   async clickOnSaveTag() {
     const element = await this.driver.$('button[type="button"][data-test-button="save"]');
-    return await element.click();
+    if (await element.isExisting()) {
+      return await element.click();
+    } else {
+      return await this.driver.$("button=Save").click();
+    }
   }
 
   async setTagName(tagName) {
@@ -40,7 +44,11 @@ class TagPage {
 
   async setTagColor(tagColor) {
     const element = await this.driver.$('input[data-test-input="accentColor"]');
-    return await element.setValue(tagColor);
+    if (await element.isExisting()) {
+      return await element.setValue(tagColor);
+    } else {
+      return await this.driver.$('input[name="accent-color"]');
+    }
   }
 
   async setTagDescription(tagDescription) {
@@ -87,7 +95,7 @@ class TagPage {
   }
 
   async findTagNameCreated(tagName) {
-    const tagNameExists = (await this.driver.$$('h3[data-test-tag-name]'))
+    const tagNameExists = (await this.driver.$$('h3'))
       .some(async (element) => await element.getText() === tagName);
 
     if (!tagNameExists) throw new Error(`Tag ${tagName} was not found`);
