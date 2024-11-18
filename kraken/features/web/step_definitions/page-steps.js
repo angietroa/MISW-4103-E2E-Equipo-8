@@ -115,3 +115,8 @@ Then("I want to publish the changes", async function () {
   const page = new PageObj(this.driver);
   return await page.performPublishFlow();
 });
+
+Then("I want to publish the changes ghost45", async function () {
+  const page = new PageObj(this.driver);
+  return await page.performPublishFlowGhost45();
+});

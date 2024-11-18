@@ -6,6 +6,7 @@ const AddPostContent = require("../../../pages/addPostContent");
 Given(
   "el usuario está en la página de inicio de sesión {kraken-string}",
   async function (url) {
+    //await this.driver.setWindowSize(1280, 720);
     this.loginPage = new LoginPage(this.driver);
     await this.driver.url(url);
   }
@@ -27,6 +28,14 @@ When(
   }
 );
 
+When(
+  "el usuario navega a la sección de posts",
+  async function () {
+    this.postPage = new PostPage(this.driver);
+    await this.postPage.navigateToPosts();
+  }
+);
+
 When("el usuario agrega un título al post {string}", async function (key) {
   const postTitle = await this.postPage.generateTitlePost(`Pagina con ${key}`);
   await this.postPage.createTitlePost(postTitle);
@@ -38,6 +47,10 @@ When("el usuario agrega párrafos aleatorios al post", async function () {
 
 When("el usuario publica el post", async function () {
   await this.postPage.publishPost();
+});
+
+When("el usuario publica el post ghost45", async function () {
+  await this.postPage.publishPostGhost45();
 });
 
 const path = require("path");
@@ -71,10 +84,45 @@ When("el usuario carga imágenes en el post", async function () {
   }
 });
 
+When("el usuario carga imágenes en el post ghost45", async function () {
+  this.addPostContent = new AddPostContent(this.driver);
+
+  const precargadas = [
+    "image_1.jpg",
+    "image_2.jpg",
+    "image_3.jpg",
+    "image_4.jpg",
+    "image_5.jpg",
+    "image_6.jpg",
+  ];
+
+  const cantidadImagenes = Math.floor(Math.random() * 6) + 1;
+
+  const imagenesSeleccionadas = [];
+  while (imagenesSeleccionadas.length < cantidadImagenes) {
+    const randomIndex = Math.floor(Math.random() * precargadas.length);
+    const imagenSeleccionada = precargadas[randomIndex];
+    if (!imagenesSeleccionadas.includes(imagenSeleccionada)) {
+      imagenesSeleccionadas.push(imagenSeleccionada);
+    }
+  }
+
+  for (let imageName of imagenesSeleccionadas) {
+    const imagePath = path.resolve(__dirname, "../../../assets", imageName);
+    await this.addPostContent.addImageGhost45(imagePath);
+  }
+});
+
 When("el usuario crea un nuevo post con contenido HTML", async function () {
   this.addPostContent = new AddPostContent(this.driver);
   const htmlContent = "<p>¡Hola, Mundo!</p>";
   await this.addPostContent.addHTML(htmlContent);
+});
+
+When("el usuario crea un nuevo post con contenido HTML ghost45", async function () {
+  this.addPostContent = new AddPostContent(this.driver);
+  const htmlContent = "<p>¡Hola, Mundo!</p>";
+  await this.addPostContent.addHTMLGhost45(htmlContent);
 });
 
 When(

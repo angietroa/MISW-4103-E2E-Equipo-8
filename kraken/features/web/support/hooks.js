@@ -1,4 +1,4 @@
-const { After, Before } = require('@cucumber/cucumber');
+const { After, Before, BeforeAll } = require('@cucumber/cucumber');
 const { WebClient } = require('kraken-node');
 
 Before(async function() {
