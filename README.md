@@ -56,10 +56,12 @@ Dirijase a la carpeta raiz del proyecto y haga `npm install`.
 Dirijase a la carpeta raiz del proyecto y ejecute `npm run e2e:kraken`
 
 ### 2. Ejecución de script de comparación de imagenes con PixelMatch
-Por aqui proceso de ejecución
+2.1 Dirijase al directorio kraken/make_report/
+2.2 Instale las dependencias necesarias ejecutando el comando `npm install`
+2.3 Ejecute el programa con el siguiente comando `node index.js`
 
 ### 3. Cómo ver los resultados del reporte
-Poner aqui como ver los resultados del reporte
+Dirijase al directorio kraken/make_reports/reports/ aquí encontrará varios directorios de reportes, ingrese al reporte de su interés, va a encontrar varias carpetas con los escenarios probados, abra la carpeta e001, y posteriormente abra el archivo index.html. Podrá navegar los diferentes escenarios desde el reporte Web.
 
 ## Ejecución pruebas e2e de Cypress y script de comparación de imagenes con ResembleJs
 ### 1. Ejecución pruebas e2e de Cypress
