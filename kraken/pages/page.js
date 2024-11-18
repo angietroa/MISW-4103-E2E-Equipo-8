@@ -168,6 +168,13 @@ class PageObj {
   }
 
   async clickOnPageItem(value) {
+    const leaveBtn = await this.driver.$('.gh-btn-red');
+    const leaveBtnExists = await leaveBtn.isExisting();
+
+    if (leaveBtnExists) {
+      await leaveBtn.click();
+    }
+
     const button = await this.driver.$('h3='+value);
     await button.waitForExist();
     await button.click();
@@ -195,11 +202,14 @@ class PageObj {
       input.setValue(value);
     } else {
       const buttonGhost45 = await this.driver.$('button[title="Settings"]');
-      await buttonGhost45.waitForClickable({timeout:10000});
-      await buttonGhost45.click();
-      const input = await this.driver.$('input[placeholder="YYYY-MM-DD"]');
-      await input.waitForExist();
-      input.setValue(value);
+      const buttonGhost45Exists = await buttonGhost45.isExisting();
+      
+      if (buttonGhost45Exists) {
+        await buttonGhost45.click();
+        const input = await this.driver.$('input[placeholder="YYYY-MM-DD"]');
+        await input.waitForExist();
+        await input.setValue(value);
+      }
     }
   }
 
