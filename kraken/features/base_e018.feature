@@ -30,4 +30,5 @@ Scenario: E018 - Editar fecha de publicación página
     And I wait for 2 seconds
     And I want to change publish date "1999-01-01"
     And I want to take screenshot "ghost_base" "e018" "11. ingresar_nueva_fecha"
+    And I wait for 2 seconds
     

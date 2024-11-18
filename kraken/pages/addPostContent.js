@@ -14,15 +14,22 @@ class AddPostContent {
   async addImageGhost45(imagePath) {
     await this.driver.keys("Enter");
     const addCardButton = await this.driver.$(this.addCardButtonGhost45);
-    await addCardButton.waitForDisplayed();
-    await addCardButton.click({force:true});
-    const imageButton = await this.driver.$(this.imageButtonGhost45);
-    await imageButton.waitForDisplayed();
-    await imageButton.click({force:true});
-    const fileInput = await this.driver.$('input[type="file"]');
-    await fileInput.waitForExist({timeout:10000});
-    await fileInput.setValue(imagePath);
-    await this.driver.keys("Enter");
+    const addCardBtnExists = await addCardButton.isExisting();
+
+    if (addCardBtnExists) {
+      await addCardButton.click({force:true});
+      const imageButton = await this.driver.$(this.imageButtonGhost45);
+      const imageButtonExists = await imageButton.isExisting();
+
+      if (imageButtonExists) {
+        await imageButton.click({force:true});
+        const fileInput = await this.driver.$('input[type="file"]');
+        await fileInput.waitForExist({timeout:10000});
+        await fileInput.setValue(imagePath);
+        await this.driver.keys("Enter");
+      }
+    }
+    
   }
 
   async addImage(imagePath) {

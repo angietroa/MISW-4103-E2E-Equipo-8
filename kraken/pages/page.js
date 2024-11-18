@@ -33,12 +33,22 @@ class PageObj {
   }
 
   async clickOnElementTool(menuItem) {
+    const menu = await this.driver.$('ul[role="menu"]');
+    await menu.waitForExist({timeout:10000});
+    await this.driver.execute((element) => {
+      element.style.overflow = "auto";
+      element.scrollBy(0, 100);
+    }, menu);
+
     const button = await this.driver.$(`button[data-kg-card-menu-item="${menuItem}"]`);
     if (await button.isExisting()) {
       await button.click({force:true});
+      await this.driver.pause(500);
     } else {
       const buttonGhost45 = await this.driver.$(`div[title="${menuItem}"]`);
+      await buttonGhost45.waitForExist({timeout:10000});
       await buttonGhost45.click({force:true});
+      await this.driver.pause(500);
     }
   }
 
@@ -169,7 +179,7 @@ class PageObj {
 
   async clickOnPageItem(value) {
     const button = await this.driver.$('h3='+value);
-    await button.waitForExist();
+    await button.waitForExist({timeout:10000});
     await button.click();
   }
 
@@ -228,6 +238,14 @@ class PageObj {
       await input.waitForExist();
       input.setValue(value);
     }
+  }
+
+  async putText(value) {
+    const element = this.driver.$('div[contenteditable="true"]');
+    await element.waitForExist();
+    element.setValue(value);
+    await this.driver.pause(100);
+    element.setValue('\uE007'); // enter
   }
 
 }
