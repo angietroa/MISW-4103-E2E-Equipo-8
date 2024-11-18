@@ -17,19 +17,18 @@ class AddPostContent {
     const addCardBtnExists = await addCardButton.isExisting();
 
     if (addCardBtnExists) {
-      await addCardButton.click({force:true});
+      await addCardButton.click({ force: true });
       const imageButton = await this.driver.$(this.imageButtonGhost45);
-      const imageButtonExists = await imageButton.isExisting();
+      const imageBtnExists = await imageButton.isExisting();
 
-      if (imageButtonExists) {
-        await imageButton.click({force:true});
+      if (imageBtnExists) {
+        await imageButton.click({ force: true });
         const fileInput = await this.driver.$('input[type="file"]');
-        await fileInput.waitForExist({timeout:10000});
+        await fileInput.waitForExist({ timeout: 10000 });
         await fileInput.setValue(imagePath);
         await this.driver.keys("Enter");
       }
     }
-    
   }
 
   async addImage(imagePath) {
@@ -58,10 +57,10 @@ class AddPostContent {
     await this.driver.keys("Enter");
     const addCardButton = await this.driver.$(this.addCardButtonGhost45);
     await addCardButton.waitForDisplayed();
-    await addCardButton.click({force:true});
+    await addCardButton.click({ force: true });
     const htmlButton = await this.driver.$(this.htmlButtonGhost45);
     await htmlButton.waitForDisplayed();
-    await htmlButton.click({force:true});
+    await htmlButton.click({ force: true });
     const htmlInput = await this.driver.$('.CodeMirror-scroll');
     await htmlInput.waitForExist();
     await htmlInput.setValue(htmlContent);
