@@ -22,11 +22,8 @@ Scenario: E009 - Crear página con subiendo file
   And I want to take screenshot "ghost_rc" "e009" "7. digitar_titulo"
   And I click on text area of page
   And I want to take screenshot "ghost_rc" "e009" "8. click_textarea"
-  And I click on the add tool menu
+  And I want to put "/file"
   And I want to take screenshot "ghost_rc" "e009" "9. click_add_tool_menu"
-  And I wait for 3 seconds
-  And I click on the tool "File"
-  And I want to take screenshot "ghost_rc" "e009" "10. click_tool_file"
   And I wait for 3 seconds
   And I upload a file to the element
   And I want to take screenshot "ghost_rc" "e009" "11. cargar_archivo"

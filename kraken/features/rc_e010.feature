@@ -22,9 +22,9 @@ Scenario: E010 - Crear página con Link de spotify
   And I want to take screenshot "ghost_rc" "e010" "7. digitar_titulo"
   And I click on text area of page
   And I want to take screenshot "ghost_rc" "e010" "8. click_textarea"
-  And I click on the add tool menu
-  And I want to take screenshot "ghost_rc" "e010" "9. click_add_tool_menu"
-  And I click on the tool "Spotify"
+  And I want to put "/spotify"
+  And I want to take screenshot "ghost_rc" "e009" "9. click_add_tool_menu"
+  And I wait for 3 seconds
   And I want to take screenshot "ghost_rc" "e010" "10. click_tool_spotify"
   And I want to upload a song to the page "https://open.spotify.com/track/71N1Ob14XLnH5JwsmvXhXj?si=d99b678f09b9492b"
   And I want to take screenshot "ghost_rc" "e010" "11. cargar_cancion"

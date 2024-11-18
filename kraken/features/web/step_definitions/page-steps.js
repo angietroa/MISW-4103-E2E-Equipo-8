@@ -106,6 +106,11 @@ When("I want to change url {kraken-string}", async function(value) {
   await page.setURL(value);
 });
 
+When("I want to put {kraken-string}", async function(value) {
+  const page = new PageObj(this.driver);
+  await page.putText(value);
+});
+
 Then("I want to check if {kraken-string} exists", async function(value) {
     const page = new PageObj(this.driver);
     await page.checkIfPageExists(value);
