@@ -3,11 +3,11 @@ const { faker } = require("@faker-js/faker");
 const LoginPage = require("../pages/login");
 const TagPage = require("../pages/tag");
 
-describe("E062 - Crear tag con nombre entre 1 caracter y 191 caracteres (pseudo-aleatorio)", () => {
+describe("E062 - Crear tag con nombre entre 1 caracter y 191 caracteres (aleatorio)", () => {
   const loginPage = new LoginPage(cy);
   const tagPage = new TagPage(cy);
 
-  it("Crear tag con nombre entre 1 caracter y 191 caracteres (pseudo-aleatorio)", async () => {
+  it("Crear tag con nombre entre 1 caracter y 191 caracteres (aleatorio)", async () => {
     //Ingresar a la página
     loginPage.visitPage();
     loginPage.signInPage();
@@ -18,9 +18,14 @@ describe("E062 - Crear tag con nombre entre 1 caracter y 191 caracteres (pseudo-
     //Dar click en nuevo tag
     tagPage.clickOnNewTag();
 
-    //Obtener los datos pseudo-aleatorio
+    //Obtener los datos aleatorio
     const options = { length: { min: 1, max: 191 } };
-    const tagName = faker.lorem.word(options);
+    const tagName = faker.helpers.arrayElement([
+      faker.string.alphanumeric(options),
+      faker.string.alpha(options),
+      faker.string.numeric(options),
+      faker.string.symbol(1, { min: options.length.min, max: options.length.max }),
+    ]);
 
     //Ingresar el nombre del tag
     tagPage.setTagName(tagName);
