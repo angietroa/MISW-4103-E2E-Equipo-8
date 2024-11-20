@@ -16,38 +16,23 @@ class AddPostContent {
     cy.get("textarea").type("{enter}");
   }
 
-  addHTML(htmlContent, legacy = false) {
-    if (legacy) {
-      cy.get('[aria-label="Add a card"]').click();
-      cy.get('div[role="menuitem"]').contains("HTML").click();
-      cy.get(".CodeMirror-scroll").type(htmlContent);
-      cy.get("textarea").first().click();
-    } else {
-      cy.get(this.addCardButton).click();
-      cy.get(this.htmlButton).click();
-      cy.get('div[data-language="html"]').type(htmlContent);
-    }
+  addHTML(htmlContent) {
+    cy.get(this.addCardButton).click();
+    cy.get(this.htmlButton).click();
+    cy.get('div[data-language="html"]').type(htmlContent);
   }
 
-  embedYouTube(url, folderName) {
+  embedYouTube(url) {
     cy.get(this.addCardButton).click();
     cy.get(this.youtubeButton).click();
     cy.get('[data-testid="embed-url"]').type(url);
     cy.get('[data-testid="embed-url"]').type("{enter}");
-    this.takeScreenshot(folderName, "embed-youtube");
   }
 
-  addButton(buttonText, folderName) {
+  addButton(buttonText) {
     cy.get('[aria-label="Add a card"]').click();
     cy.contains("button", "Button").click();
     cy.get('[data-testid="button-input-text"]').type(buttonText);
-    this.takeScreenshot(folderName, "add-button");
-  }
-
-  takeScreenshot(folderName, screenshotName) {
-    cy.screenshot(`${folderName}/${screenshotName}`, {
-      capture: "viewport",
-    });
   }
 }
 
