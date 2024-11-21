@@ -20,11 +20,7 @@ describe("E062 - Crear tag con nombre entre 1 caracter y 191 caracteres (aleator
 
     //Obtener los datos aleatorio
     const options = { length: { min: 1, max: 191 } };
-    const tagName = faker.helpers.arrayElement([
-      faker.string.alphanumeric(options),
-      faker.string.alpha(options),
-      faker.string.numeric(options),
-    ]);
+    const tagName = faker.lorem.word(options);
 
     //Ingresar el nombre del tag
     tagPage.setTagName(tagName);
