@@ -103,7 +103,7 @@ class TagPage {
 
   async findTagNameCreated(tagName) {
     this.cy.get("h3[data-test-tag-name]").contains(tagName);
-    this.cy.wait(3000);
+    this.cy.wait(500);
   }
 }
 

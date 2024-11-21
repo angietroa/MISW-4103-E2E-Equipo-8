@@ -1,5 +1,6 @@
 const LoginPage = require("../pages/login");
 const TagPage = require("../pages/tag");
+const TAG_DATA_POOL_PRIORI = require('../data-priori/tag.json');
 
 describe("E061 - Crear tag con nombre entre 1 caracter y 191 caracteres (a priori)", () => {
   const loginPage = new LoginPage(cy);
@@ -17,18 +18,18 @@ describe("E061 - Crear tag con nombre entre 1 caracter y 191 caracteres (a prior
     tagPage.clickOnNewTag();
 
     //Obtener los datos a priori
-    cy.fixture("data-priori").then(data => {
-      //Ingresar el nombre del tag
-      tagPage.setTagName(data.tagName);
+    const data = TAG_DATA_POOL_PRIORI[0];
 
-      //Guardar tag
-      tagPage.clickOnSaveTag();
+    //Ingresar el nombre del tag
+    tagPage.setTagName(data.name);
 
-      //Ir al modulo de tags
-      tagPage.clickOnTagMenu();
+    //Guardar tag
+    tagPage.clickOnSaveTag();
 
-      //Encontrar tag creado
-      tagPage.findTagNameCreated(data.tagName);
-    });
+    //Ir al modulo de tags
+    tagPage.clickOnTagMenu();
+
+    //Encontrar tag creado
+    tagPage.findTagNameCreated(data.name);
   });
 });

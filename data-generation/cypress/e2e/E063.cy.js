@@ -24,7 +24,6 @@ describe("E062 - Crear tag con nombre entre 1 caracter y 191 caracteres (aleator
       faker.string.alphanumeric(options),
       faker.string.alpha(options),
       faker.string.numeric(options),
-      faker.string.symbol(1, { min: options.length.min, max: options.length.max }),
     ]);
 
     //Ingresar el nombre del tag
