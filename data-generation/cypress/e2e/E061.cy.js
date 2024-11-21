@@ -1,12 +1,12 @@
 const LoginPage = require("../pages/login");
 const TagPage = require("../pages/tag");
-const TAG_DATA_POOL_A_PRIORI = require('../data-priori/tag.json');
+const TAG_DATA_POOL_A_PRIORI = require('../data-a-priori/tag.json');
 
-describe("E061 - Crear tag con nombre entre 1 caracter y 191 caracteres (a priori)", () => {
+describe("E061 - Crear tag con nombre de 191 caracteres (a priori)", () => {
   const loginPage = new LoginPage(cy);
   const tagPage = new TagPage(cy);
 
-  it("Crear tag con nombre entre 1 caracter y 191 caracteres (a priori)", async () => {
+  it("Crear tag con nombre de 191 caracteres (a priori)", async () => {
     //Ingresar a la página
     loginPage.visitPage();
     loginPage.signInPage();
