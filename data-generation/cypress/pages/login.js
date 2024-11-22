@@ -1,23 +1,16 @@
 class LoginPage {
-  constructor(cy) {
-    this.cy = cy;
-  }
-
   async visitPage() {
-    this.cy.fixture("properties").then((data) => {
-      this.cy.visit(data.url);
-      this.cy.wait(3000);
+    cy.fixture("properties").then((data) => {
+      cy.visit(data.url);
     });
   }
 
   async signInPage() {
-    this.cy.fixture("properties").then((data) => {
-      this.cy.get("#identification").type(data.username);
-      this.cy.get("#password").type(data.password);
-      this.cy.get('button[type="submit"]').click();
+    cy.fixture("properties").then((data) => {
+      cy.get("#identification").type(data.username);
+      cy.get("#password").type(data.password);
+      cy.get('button[type="submit"]').click();
     });
-
-    this.cy.wait(2000);
   }
 }
 
