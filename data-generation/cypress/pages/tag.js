@@ -88,17 +88,12 @@ class TagPage {
     });
   }
 
-  async setFacebookCardValues(pathImg, title, description) {
-    this.cy.get(".gh-og-settings").within(() => {
-      this.cy.get('input[type="file"]').attachFile({ filePath: pathImg });
-      this.cy.wait(500);
+  async setFacebookCardValues(title, description) {
+    this.cy.get("#og-title").type(title);
+    this.cy.wait(500);
 
-      this.cy.get("#og-title").type(title);
-      this.cy.wait(500);
-
-      this.cy.get("#og-description").type(description);
-      this.cy.wait(500);
-    });
+    this.cy.get("#og-description").type(description);
+    this.cy.wait(500);
   }
 
   async findTagNameCreated(tagName) {
