@@ -2,11 +2,11 @@ import LoginPage from "../pages/login";
 import PostPage from "../pages/postPage";
 import dataAPriori from "../data-a-priori/post.json";
 
-describe("E001 - Funcionalidad de creación de un post", () => {
+describe("E016 -Funcionalidad de creación de un post con Twitter embebido aleatorio invalido", () => {
   const loginPage = new LoginPage();
   const postPage = new PostPage();
 
-  it("Debe iniciar sesión y crear un post con texto", () => {
+  it("Debe iniciar sesión y crear un post con Twitter embebido aleatorio invalido", () => {
     loginPage.visitPage();
     loginPage.signInPage();
 
@@ -14,17 +14,23 @@ describe("E001 - Funcionalidad de creación de un post", () => {
     postPage.createNewPost();
 
     const postTitle = postPage.generateTitlePost(
-      `${dataAPriori[0].postTitle} con texto`
+      `${dataAPriori[15].postTitle} con Twitter`
     );
     postPage.createTitlePost(postTitle);
 
-    postPage.addParagraph(dataAPriori[0].paragraph);
+    const twitterUrl = postPage.generateRandomURL();
+    postPage.embedContent(
+      'button:contains("X (formerly Twitter)")',
+      twitterUrl
+    );
+    cy.wait(4000);
+
+    postPage.verifyErrorMessage();
 
     postPage.publishPost();
     postPage.verifyPostExists(postTitle);
 
     postPage.openPost(postTitle);
-
-    postPage.verifyTextExists(dataAPriori[0].paragraph);
+    postPage.verifyEmbedDoesNotExist();
   });
 });

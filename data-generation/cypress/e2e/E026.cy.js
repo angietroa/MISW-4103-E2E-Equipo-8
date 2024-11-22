@@ -2,11 +2,11 @@ import LoginPage from "../pages/login";
 import PostPage from "../pages/postPage";
 import dataAPriori from "../data-a-priori/post.json";
 
-describe("E001 - Funcionalidad de creación de un post", () => {
+describe("E026 - Funcionalidad de creación de un post con botón con un texto de 500 caracteres", () => {
   const loginPage = new LoginPage();
   const postPage = new PostPage();
 
-  it("Debe iniciar sesión y crear un post con texto", () => {
+  it("Debe crear un post con un botón con un texto de 500 caracteres y validarlo", () => {
     loginPage.visitPage();
     loginPage.signInPage();
 
@@ -14,17 +14,16 @@ describe("E001 - Funcionalidad de creación de un post", () => {
     postPage.createNewPost();
 
     const postTitle = postPage.generateTitlePost(
-      `${dataAPriori[0].postTitle} con texto`
+      `${dataAPriori[25].postTitle} con botón`
     );
     postPage.createTitlePost(postTitle);
 
-    postPage.addParagraph(dataAPriori[0].paragraph);
+    postPage.addButton(dataAPriori[25].bigButton);
 
     postPage.publishPost();
     postPage.verifyPostExists(postTitle);
 
     postPage.openPost(postTitle);
-
-    postPage.verifyTextExists(dataAPriori[0].paragraph);
+    postPage.verifyButtonExists(dataAPriori[25].bigButton);
   });
 });
