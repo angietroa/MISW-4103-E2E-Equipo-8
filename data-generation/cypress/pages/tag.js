@@ -105,6 +105,11 @@ class TagPage {
     this.cy.get("h3[data-test-tag-name]").contains(tagName);
     this.cy.wait(500);
   }
+
+  async findInputError() {
+    this.cy.get("span.error").should('exist');
+    this.cy.wait(500);
+  }
 }
 
 module.exports = TagPage;

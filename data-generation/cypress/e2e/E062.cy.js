@@ -1,17 +1,12 @@
 const LoginPage = require("../pages/login");
 const TagPage = require("../pages/tag");
+const TAG_DATA_POOL_A_PRIORI = require('../data-a-priori/tag.json');
 
-const TAG_DATA_POOL_PSEUDO_RANDOM_ENDPOINT = "https://my.api.mockaroo.com/tags.json?key=3ef4d1a0";
-
-describe("E062 - Crear tag con nombre entre 1 caracter y 191 caracteres (pseudo-aleatorio)", () => {
+describe("E062 - Crear tag con nombre con 0 caracteres (a priori)", () => {
   const loginPage = new LoginPage(cy);
   const tagPage = new TagPage(cy);
 
-  beforeEach(() => {
-    cy.request(TAG_DATA_POOL_PSEUDO_RANDOM_ENDPOINT).as('tagData');
-  });
-
-  it("Crear tag con nombre entre 1 caracter y 191 caracteres (pseudo-aleatorio)", async () => {
+  it("Crear tag con nombre con solo espacio en blanco (a priori)", async () => {
     //Ingresar a la página
     loginPage.visitPage();
     loginPage.signInPage();
@@ -22,19 +17,16 @@ describe("E062 - Crear tag con nombre entre 1 caracter y 191 caracteres (pseudo-
     //Dar click en nuevo tag
     tagPage.clickOnNewTag();
 
-    //Obtener los datos pseudo-aleatorio
-    cy.get('@tagData').then(res => {
-      //Ingresar el nombre del tag
-      tagPage.setTagName(res.body.name);
+    //Obtener los datos a priori
+    const data = TAG_DATA_POOL_A_PRIORI[1];
 
-      //Guardar tag
-      tagPage.clickOnSaveTag();
+    //Ingresar el nombre del tag
+    tagPage.setTagName(data.name);
 
-      //Ir al modulo de tags
-      tagPage.clickOnTagMenu();
+    //Guardar tag
+    tagPage.clickOnSaveTag();
 
-      //Encontrar tag creado
-      tagPage.findTagNameCreated(res.body.name);
-    });
+    //Encontrar error en input
+    tagPage.findInputError();
   });
 });
