@@ -3,7 +3,7 @@ import PostPage from "../pages/postPage";
 import dataAPriori from "../data-a-priori/post.json";
 
 describe(" E003 - Funcionalidad de creación de un post con un único carácter invisible en pantalla en titulo y contenido", () => {
-  const loginPage = new LoginPage();
+  const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
   it("Funcionalidad de creación de un post con un único carácter invisible en pantalla en titulo y contenido", () => {

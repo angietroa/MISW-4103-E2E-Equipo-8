@@ -2,7 +2,7 @@ import LoginPage from "../pages/login";
 import PostPage from "../pages/postPage";
 
 describe("E027 - Funcionalidad de creación de un post con botón con un texto de 500 caracteres pseudo aleatorios", () => {
-  const loginPage = new LoginPage();
+  const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
   it("Debe crear un post con un botón con un texto de 500 caracteres y validarlo", () => {

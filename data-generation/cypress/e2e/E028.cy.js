@@ -3,7 +3,7 @@ import PostPage from "../pages/postPage";
 import dataAPriori from "../data-a-priori/post.json";
 
 describe("E028 - Funcionalidad de creación de un post con botón con un texto de 500 caracteres aleatorios", () => {
-  const loginPage = new LoginPage();
+  const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
   it("Debe crear un post con un botón con un texto de 500 caracteres aleatorios", () => {

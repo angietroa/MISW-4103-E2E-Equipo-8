@@ -2,7 +2,7 @@ import LoginPage from "../pages/login";
 import PostPage from "../pages/postPage";
 
 describe("E015 -Funcionalidad de creación de un post con Twitter embebido pseudo aleatorio invalido", () => {
-  const loginPage = new LoginPage();
+  const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
   it("Debe iniciar sesión y crear un post con Twitter embebido pseudo aleatorio invalido", () => {
