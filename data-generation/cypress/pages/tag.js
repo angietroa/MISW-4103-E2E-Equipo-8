@@ -75,11 +75,8 @@ class TagPage {
     this.cy.wait(500);
   }
 
-  async setXCardValues(pathImg, title, description) {
+  async setXCardValues(title, description) {
     this.cy.get(".gh-twitter-settings").within(() => {
-      this.cy.get('input[type="file"]').attachFile({ filePath: pathImg });
-      this.cy.wait(500);
-
       this.cy.get("#twitter-title").type(title);
       this.cy.wait(500);
 
