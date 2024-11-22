@@ -110,6 +110,11 @@ class TagPage {
     this.cy.get("span.error").should('exist');
     this.cy.wait(500);
   }
+
+  async findButtonError() {
+    this.cy.get('span[data-test-task-button-state="failure"]').should('exist');
+    this.cy.wait(500);
+  }
 }
 
 module.exports = TagPage;
