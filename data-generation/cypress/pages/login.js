@@ -6,7 +6,6 @@ class LoginPage {
   async visitPage() {
     this.cy.fixture("properties").then((data) => {
       this.cy.visit(data.url);
-      this.cy.wait(3000);
     });
   }
 
@@ -16,8 +15,6 @@ class LoginPage {
       this.cy.get("#password").type(data.password);
       this.cy.get('button[type="submit"]').click();
     });
-
-    this.cy.wait(2000);
   }
 }
 

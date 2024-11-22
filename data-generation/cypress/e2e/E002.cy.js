@@ -1,12 +1,13 @@
 import LoginPage from "../pages/login";
 import PostPage from "../pages/postPage";
-import dataAPriori from "../data-a-priori/post.json";
 
-describe("E001 - Funcionalidad de creación de un post", () => {
+describe("E002 - Funcionalidad de creación de un post pseudo aleatorio", () => {
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
   it("Debe iniciar sesión y crear un post con texto", () => {
+    const mockDataPost = Cypress.env("mockDataPost");
+
     loginPage.visitPage();
     loginPage.signInPage();
 
@@ -14,17 +15,18 @@ describe("E001 - Funcionalidad de creación de un post", () => {
     postPage.createNewPost();
 
     const postTitle = postPage.generateTitlePost(
-      `${dataAPriori[0].postTitle} con texto`
+      `${mockDataPost[1].postTitle} con texto`
     );
     postPage.createTitlePost(postTitle);
 
-    postPage.addParagraph(dataAPriori[0].paragraph);
+    const paragraph = mockDataPost[1].paragraph;
+    postPage.addParagraph(paragraph);
 
     postPage.publishPost();
     postPage.verifyPostExists(postTitle);
 
     postPage.openPost(postTitle);
 
-    postPage.verifyTextExists(dataAPriori[0].paragraph);
+    postPage.verifyTextExists(paragraph);
   });
 });

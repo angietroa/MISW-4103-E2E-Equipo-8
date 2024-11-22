@@ -14,7 +14,16 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import "./commands";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+const apiUrlPost = "https://my.api.mockaroo.com/post.json?key=9403fac0";
+
+before(() => {
+  cy.request("GET", apiUrlPost).then((response) => {
+    expect(response.status).to.eq(200);
+    Cypress.env("mockDataPost", response.body);
+  });
+});
