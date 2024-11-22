@@ -1,12 +1,12 @@
-const { faker } = require("@faker-js/faker");
 const LoginPage = require("../pages/login");
 const TagPage = require("../pages/tag");
+const TAG_DATA_POOL_A_PRIORI = require('../data-a-priori/tag.json');
 
-describe("E081 - Crear un tag con titulo de metadata de 71 caracteres (aleatorio)", () => {
+describe("E082 - Crear un tag con descripción de metadata de 156 caracteres (a priori)", () => {
   const loginPage = new LoginPage(cy);
   const tagPage = new TagPage(cy);
 
-  it("Crear un tag con titulo de metadata de 71 caracteres (aleatorio)", async () => {
+  it("Crear un tag con descripción de metadata de 156 caracteres (a priori)", async () => {
     //Ingresar a la página
     loginPage.visitPage();
     loginPage.signInPage();
@@ -17,20 +17,17 @@ describe("E081 - Crear un tag con titulo de metadata de 71 caracteres (aleatorio
     //Dar click en nuevo tag
     tagPage.clickOnNewTag();
 
-    //Obtener los datos aleatorios
-    const tagName = faker.lorem.word({ length: { min: 1, max: 191 } });
-    const tagMetadataTitle = faker.string.alpha(71);
-    const tagMetadataDesc = faker.lorem.paragraph();
-    const tagMetadataUrl = faker.image.url();
+    //Obtener los datos a priori
+    const data = TAG_DATA_POOL_A_PRIORI[10];
 
     //Ingresar el nombre del tag
-    tagPage.setTagName(tagName);
+    tagPage.setTagName(data.name);
 
     //Dar click en boton de metadata
     tagPage.clickOnExpandMetadataForm();
 
     //Ingresar la información de metadata
-    tagPage.setTagMetadataValues(tagMetadataTitle, tagMetadataDesc, tagMetadataUrl);
+    tagPage.setTagMetadataValues(data.metadata_title, data.metadata_description, data.metadata_url);
 
     //Guardar tag
     tagPage.clickOnSaveTag();
@@ -39,6 +36,6 @@ describe("E081 - Crear un tag con titulo de metadata de 71 caracteres (aleatorio
     tagPage.clickOnTagMenu();
 
     //Encontrar tag creado
-    tagPage.findTagNameCreated(tagName);
+    tagPage.findTagNameCreated(data.name);
   });
 });

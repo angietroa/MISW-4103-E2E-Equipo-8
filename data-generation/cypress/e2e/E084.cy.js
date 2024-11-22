@@ -2,11 +2,11 @@ const { faker } = require("@faker-js/faker");
 const LoginPage = require("../pages/login");
 const TagPage = require("../pages/tag");
 
-describe("E081 - Crear un tag con titulo de metadata de 71 caracteres (aleatorio)", () => {
+describe("E084 - Crear un tag con descripción de metadata de 157 caracteres (aleatorio)", () => {
   const loginPage = new LoginPage(cy);
   const tagPage = new TagPage(cy);
 
-  it("Crear un tag con titulo de metadata de 71 caracteres (aleatorio)", async () => {
+  it("Crear un tag con descripción de metadata de 157 caracteres (aleatorio)", async () => {
     //Ingresar a la página
     loginPage.visitPage();
     loginPage.signInPage();
@@ -19,8 +19,8 @@ describe("E081 - Crear un tag con titulo de metadata de 71 caracteres (aleatorio
 
     //Obtener los datos aleatorios
     const tagName = faker.lorem.word({ length: { min: 1, max: 191 } });
-    const tagMetadataTitle = faker.string.alpha(71);
-    const tagMetadataDesc = faker.lorem.paragraph();
+    const tagMetadataTitle = faker.lorem.words(2);
+    const tagMetadataDesc = faker.string.alpha(157);
     const tagMetadataUrl = faker.image.url();
 
     //Ingresar el nombre del tag
