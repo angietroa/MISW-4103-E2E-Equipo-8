@@ -1,9 +1,10 @@
 import LoginPage from "../pages/login";
 import PageObj from "../pages/page";
-const { faker } = require("@faker-js/faker");
+const PAGE_DATAPOOL_APRIORI = require("../data-a-priori/page.json");
 
-describe("E040 - Crear página embebiendo link en YouTube con link valido aleatorio", () => {
-  it("E040 - Crear página embebiendo link en YouTube con link valido aleatorio", () => {
+describe("E047 - Crear página embebiendo link de Vimeo con link valido a-priori", () => {
+  const data = PAGE_DATAPOOL_APRIORI[17];
+  it("E047 - Crear página embebiendo link de Vimeo con link valido a-priori", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
 
@@ -30,7 +31,7 @@ describe("E040 - Crear página embebiendo link en YouTube con link valido aleato
       displayName: "When",
       message: "I enter page, I set a title",
     });
-    page.pageTitle(faker.lorem.word());
+    page.pageTitle(data.title);
 
     // When: I enter the title, I want to add an element to page, in this case file
     cy.log({
@@ -38,13 +39,21 @@ describe("E040 - Crear página embebiendo link en YouTube con link valido aleato
       message:
         "I enter the title, I want to add an element to page, in this case Spotify",
     });
-    page.addPageElement("YouTube");
+    page.addPageElement("Vimeo");
 
-    // Then: I add the link and validate the message
+    // When: I enter the title, I want to add an element to page, in this case file
     cy.log({
       displayName: "When",
       message: "I add the element, I want to add a song",
     });
-    page.setContentToInvalidLink(faker.internet.url());
+    page.setContentToLink(data.vimeo_link);
+
+    // Then: I save all changes
+    cy.log({
+      displayName: "Then",
+      message: "I save all changes",
+    });
+    page.publishPage();
+    page.closePublishPopup();
   });
 });

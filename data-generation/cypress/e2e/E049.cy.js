@@ -2,8 +2,8 @@ import LoginPage from "../pages/login";
 import PageObj from "../pages/page";
 const { faker } = require("@faker-js/faker");
 
-describe("E040 - Crear página embebiendo link en YouTube con link valido aleatorio", () => {
-  it("E040 - Crear página embebiendo link en YouTube con link valido aleatorio", () => {
+describe("E049 - Crear página embebiendo link de Vimeo con link invalido aleatorio", () => {
+  it("E049 - Crear página embebiendo link de Vimeo con link invalido aleatorio", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
 
@@ -38,7 +38,7 @@ describe("E040 - Crear página embebiendo link en YouTube con link valido aleato
       message:
         "I enter the title, I want to add an element to page, in this case Spotify",
     });
-    page.addPageElement("YouTube");
+    page.addPageElement("Vimeo");
 
     // Then: I add the link and validate the message
     cy.log({
