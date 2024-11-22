@@ -1,6 +1,7 @@
 import LoginPage from "../pages/login";
 import PostPage from "../pages/postPage";
-import dataAPriori from "../data-a-priori/post.json";
+
+const { faker } = require("@faker-js/faker");
 
 describe("E022 - Funcionalidad de creación de un post con Sound Cloud embebido aleatorio invalido", () => {
   const loginPage = new LoginPage(cy);
@@ -13,9 +14,7 @@ describe("E022 - Funcionalidad de creación de un post con Sound Cloud embebido 
     postPage.navigateToPosts();
     postPage.createNewPost();
 
-    const postTitle = postPage.generateTitlePost(
-      `${dataAPriori[21].postTitle} con Sound Cloud`
-    );
+    const postTitle = postPage.generateTitlePost(faker.lorem.sentences(1));
     postPage.createTitlePost(postTitle);
 
     const soundCloudUrl = postPage.generateRandomURL();

@@ -1,6 +1,7 @@
 import LoginPage from "../pages/login";
 import PostPage from "../pages/postPage";
-import dataAPriori from "../data-a-priori/post.json";
+
+const { faker } = require("@faker-js/faker");
 
 describe("E019 -Funcionalidad de creación de un post con Vimeo embebido aleatorio invalido", () => {
   const loginPage = new LoginPage(cy);
@@ -13,9 +14,7 @@ describe("E019 -Funcionalidad de creación de un post con Vimeo embebido aleator
     postPage.navigateToPosts();
     postPage.createNewPost();
 
-    const postTitle = postPage.generateTitlePost(
-      `${dataAPriori[18].postTitle} con Vimeo`
-    );
+    const postTitle = postPage.generateTitlePost(faker.lorem.sentences(1));
     postPage.createTitlePost(postTitle);
 
     const vimeoUrl = postPage.generateRandomURL();

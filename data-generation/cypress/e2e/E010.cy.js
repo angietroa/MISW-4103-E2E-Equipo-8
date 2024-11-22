@@ -1,6 +1,7 @@
 import LoginPage from "../pages/login";
 import PostPage from "../pages/postPage";
-import dataAPriori from "../data-a-priori/post.json";
+
+const { faker } = require("@faker-js/faker");
 
 describe("E010 - Funcionalidad de creación de un post con Youtube embebido aleatorio invalido", () => {
   const loginPage = new LoginPage(cy);
@@ -13,9 +14,7 @@ describe("E010 - Funcionalidad de creación de un post con Youtube embebido alea
     postPage.navigateToPosts();
     postPage.createNewPost();
 
-    const postTitle = postPage.generateTitlePost(
-      `${dataAPriori[9].postTitle} con Youtube`
-    );
+    const postTitle = postPage.generateTitlePost(faker.lorem.sentences(1));
     postPage.createTitlePost(postTitle);
 
     const youtubeUrl = postPage.generateRandomURL();

@@ -1,6 +1,7 @@
 import LoginPage from "../pages/login";
 import PostPage from "../pages/postPage";
-import dataAPriori from "../data-a-priori/post.json";
+
+const { faker } = require("@faker-js/faker");
 
 describe("E028 - Funcionalidad de creación de un post con botón con un texto de 500 caracteres aleatorios", () => {
   const loginPage = new LoginPage(cy);
@@ -13,9 +14,7 @@ describe("E028 - Funcionalidad de creación de un post con botón con un texto d
     postPage.navigateToPosts();
     postPage.createNewPost();
 
-    const postTitle = postPage.generateTitlePost(
-      `${dataAPriori[27].postTitle} con boton`
-    );
+    const postTitle = postPage.generateTitlePost(faker.lorem.sentences(1));
     postPage.createTitlePost(postTitle);
 
     const buttonText = postPage.generateRandomText(500, 500);

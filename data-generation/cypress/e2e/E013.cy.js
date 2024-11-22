@@ -1,6 +1,7 @@
 import LoginPage from "../pages/login";
 import PostPage from "../pages/postPage";
-import dataAPriori from "../data-a-priori/post.json";
+
+const { faker } = require("@faker-js/faker");
 
 describe("E013 - Funcionalidad de creación de un post con Spotify embebido aleatorio invalido", () => {
   const loginPage = new LoginPage(cy);
@@ -13,9 +14,7 @@ describe("E013 - Funcionalidad de creación de un post con Spotify embebido alea
     postPage.navigateToPosts();
     postPage.createNewPost();
 
-    const postTitle = postPage.generateTitlePost(
-      `${dataAPriori[12].postTitle} con Spotify`
-    );
+    const postTitle = postPage.generateTitlePost(faker.lorem.sentences(1));
     postPage.createTitlePost(postTitle);
 
     const spotifyUrl = postPage.generateRandomURL();
