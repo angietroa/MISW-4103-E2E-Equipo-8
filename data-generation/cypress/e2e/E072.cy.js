@@ -1,0 +1,36 @@
+const { faker, fa } = require("@faker-js/faker");
+const LoginPage = require("../pages/login");
+const TagPage = require("../pages/tag");
+
+describe("E072 - Crear un tag con color invalido (aleatorio)", () => {
+  const loginPage = new LoginPage(cy);
+  const tagPage = new TagPage(cy);
+
+  it("Crear un tag con color invalido (aleatorio)", async () => {
+    //Ingresar a la página
+    loginPage.visitPage();
+    loginPage.signInPage();
+
+    //Ir al modulo de tags
+    tagPage.clickOnTagMenu();
+
+    //Dar click en nuevo tag
+    tagPage.clickOnNewTag();
+
+    //Obtener los datos a priori
+    const tagName = faker.lorem.word({ length: { min: 1, max: 191 } });
+    const tagColor = faker.string.symbol(3);
+
+    //Ingresar el nombre del tag
+    tagPage.setTagName(tagName);
+
+    //Ingresar el color del tag
+    tagPage.setTagColor(tagColor);
+
+    //Guardar tag
+    tagPage.clickOnSaveTag();
+
+    //Encontrar error en input
+    tagPage.findInputError();
+  });
+});

@@ -66,7 +66,7 @@
   {
     "id": 65,
     "name": "maecenas rhoncus",
-    "color": "99aaa1",
+    "color": "$1%",
     "description": "Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.",
     "image": "http://dummyimage.com/223x100.png/ff4444/ffffff",
     "metadata_title": "erat",
