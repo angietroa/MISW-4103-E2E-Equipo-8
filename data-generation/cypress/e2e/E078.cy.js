@@ -2,7 +2,7 @@ const { faker, fa } = require("@faker-js/faker");
 const LoginPage = require("../pages/login");
 const TagPage = require("../pages/tag");
 
-describe("E075 - Crear un tag con descripcion de 501 caracteres (aleatorio)", () => {
+describe("E078 - Crear un tag con descripcion de 501 caracteres (aleatorio)", () => {
   const loginPage = new LoginPage(cy);
   const tagPage = new TagPage(cy);
 
