@@ -144,6 +144,10 @@ class PageObj {
     this.cy.get('div[data-language="html"]').type(contenido);
   }
 
+  async setContentToButton(contenido) {
+    cy.get('[data-testid="button-input-text"]').type(contenido);
+  }
+
   async setContentToFile(archivo) {
     this.cy.contains("Click to upload a file").click();
 
