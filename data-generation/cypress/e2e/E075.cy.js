@@ -1,12 +1,12 @@
+const { faker, fa } = require("@faker-js/faker");
 const LoginPage = require("../pages/login");
 const TagPage = require("../pages/tag");
-const TAG_DATA_POOL_A_PRIORI = require('../data-a-priori/tag.json');
 
-describe("E061 - Crear tag con nombre de 191 caracteres (a priori)", () => {
+describe("E075 - Crear un tag con una descripción entre 1 y 500 caracteres (aleatorio)", () => {
   const loginPage = new LoginPage(cy);
   const tagPage = new TagPage(cy);
 
-  it("Crear tag con nombre de 191 caracteres (a priori)", async () => {
+  it("Crear un tag con una descripción entre 1 y 500 caracteres (aleatorio)", async () => {
     //Ingresar a la página
     loginPage.visitPage();
     loginPage.signInPage();
@@ -18,10 +18,14 @@ describe("E061 - Crear tag con nombre de 191 caracteres (a priori)", () => {
     tagPage.clickOnNewTag();
 
     //Obtener los datos a priori
-    const data = TAG_DATA_POOL_A_PRIORI[0];
+    const tagName = faker.lorem.word({ length: { min: 1, max: 191 } });
+    const tagDescription = faker.string.alpha({ length: { min: 1, max: 500 } });
 
     //Ingresar el nombre del tag
-    tagPage.setTagName(data.name);
+    tagPage.setTagName(tagName);
+
+    //Ingresar la descripción del tag
+    tagPage.setTagDescription(tagDescription);
 
     //Guardar tag
     tagPage.clickOnSaveTag();
@@ -30,6 +34,6 @@ describe("E061 - Crear tag con nombre de 191 caracteres (a priori)", () => {
     tagPage.clickOnTagMenu();
 
     //Encontrar tag creado
-    tagPage.findTagNameCreated(data.name);
+    tagPage.findTagNameCreated(tagName);
   });
 });

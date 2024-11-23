@@ -75,11 +75,8 @@ class TagPage {
     this.cy.wait(500);
   }
 
-  async setXCardValues(pathImg, title, description) {
+  async setXCardValues(title, description) {
     this.cy.get(".gh-twitter-settings").within(() => {
-      this.cy.get('input[type="file"]').attachFile({ filePath: pathImg });
-      this.cy.wait(500);
-
       this.cy.get("#twitter-title").type(title);
       this.cy.wait(500);
 
@@ -88,21 +85,26 @@ class TagPage {
     });
   }
 
-  async setFacebookCardValues(pathImg, title, description) {
-    this.cy.get(".gh-og-settings").within(() => {
-      this.cy.get('input[type="file"]').attachFile({ filePath: pathImg });
-      this.cy.wait(500);
+  async setFacebookCardValues(title, description) {
+    this.cy.get("#og-title").type(title);
+    this.cy.wait(500);
 
-      this.cy.get("#og-title").type(title);
-      this.cy.wait(500);
-
-      this.cy.get("#og-description").type(description);
-      this.cy.wait(500);
-    });
+    this.cy.get("#og-description").type(description);
+    this.cy.wait(500);
   }
 
   async findTagNameCreated(tagName) {
     this.cy.get("h3[data-test-tag-name]").contains(tagName);
+    this.cy.wait(500);
+  }
+
+  async findInputError() {
+    this.cy.get("span.error").should('exist');
+    this.cy.wait(500);
+  }
+
+  async findButtonError() {
+    this.cy.get('span[data-test-task-button-state="failure"]').should('exist');
     this.cy.wait(500);
   }
 }

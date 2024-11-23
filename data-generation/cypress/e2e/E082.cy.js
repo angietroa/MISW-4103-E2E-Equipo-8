@@ -2,11 +2,11 @@ const LoginPage = require("../pages/login");
 const TagPage = require("../pages/tag");
 const TAG_DATA_POOL_A_PRIORI = require('../data-a-priori/tag.json');
 
-describe("E061 - Crear tag con nombre de 191 caracteres (a priori)", () => {
+describe("E082 - Crear un tag con descripción de metadata de 156 caracteres (a priori)", () => {
   const loginPage = new LoginPage(cy);
   const tagPage = new TagPage(cy);
 
-  it("Crear tag con nombre de 191 caracteres (a priori)", async () => {
+  it("Crear un tag con descripción de metadata de 156 caracteres (a priori)", async () => {
     //Ingresar a la página
     loginPage.visitPage();
     loginPage.signInPage();
@@ -18,10 +18,16 @@ describe("E061 - Crear tag con nombre de 191 caracteres (a priori)", () => {
     tagPage.clickOnNewTag();
 
     //Obtener los datos a priori
-    const data = TAG_DATA_POOL_A_PRIORI[0];
+    const data = TAG_DATA_POOL_A_PRIORI[10];
 
     //Ingresar el nombre del tag
     tagPage.setTagName(data.name);
+
+    //Dar click en boton de metadata
+    tagPage.clickOnExpandMetadataForm();
+
+    //Ingresar la información de metadata
+    tagPage.setTagMetadataValues(data.metadata_title, data.metadata_description, data.metadata_url);
 
     //Guardar tag
     tagPage.clickOnSaveTag();
