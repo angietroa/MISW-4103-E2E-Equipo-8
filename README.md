@@ -1,6 +1,4 @@
 # MISW-4103-E2E-Equipo-8
-## Pruebas e2e en kraken y cypress para GHOST.
-
 |Integrante| Correo |
 |--|--|
 | Angie Roa | a.roap@uniandes.edu.co |
@@ -8,7 +6,37 @@
 | Andres Folleco | oa.folleco41@uniandes.edu.co |
 | Daniela Suárez |  cd.suarez@uniandes.edu.co |
 
-Este README pretende describir como hacer la ejecución de las pruebas "end to end" de las [funcionalidades y escenarios escogidos](https://github.com/angietroa/MISW-4103-E2E-Equipo-8/wiki/Funcionalidades-y-escenarios-escogidos) y de los scripts para ver el reporte de regresión visual comparando GHOST en la versión 4.5.0 (versión base) con GHOST en la versión 5.96.0 (versión release candidate).
+# *Semana 7: Pruebas e2e en Cypress con generación de datos para GHOST*
+Este apartado del README pretende describir como hacer la ejecución de las pruebas "end to end" con generación de datos de las [funcionalidades y escenarios escogidos](https://github.com/angietroa/MISW-4103-E2E-Equipo-8/wiki/semana7-escenarios) para GHOST en la versión 5.96.0.
+
+# Cómo ejecutar
+## Prerequisitos
+Debera tener instalado los siguientes paquetes en su entorno:
+| Prerequisito | Versión  | Obsevación
+|--|--|--|
+| [Node.js](https://nodejs.org/en/download/package-manager) | 20.18.0 | - |
+| [Ghost](https://ghost.org/docs/install/) | 5.96.0 | Puede tenerlo instalado localmente (recomendamos instalarlo con [Docker](https://hub.docker.com/_/ghost/)) o tenerlo desplegado en algun servidor web al que tenga acceso |
+| [Cypress](https://docs.cypress.io/app/get-started/install-cypress) | 13.15.2 | **Opcional**, si quiere visualizar la ejecución de las pruebas e2e de cypress desde un navegador puede hacer la instalación de lo contrario se pueden ejecutar las pruebas modo "headless". |
+
+## Instalación de dependencias
+Dirijase a la carpeta raiz del proyecto y haga `npm install`.
+
+## Archivos de configuración
+Dirijase al archivo `data-generation/cypress/fixtures/properties.json` y modifique las variables de ser necesario:
+
+| Variable | Descripción  | Default |
+|--|--|--|
+| `username` | Correo de usuario que ingresara a la aplicación | johndoe@mail.com |
+| `password` | Contraseña de usuario que ingresara a a la aplicación | 1234567890123456 |
+| `url` | Dirección URL donde esta alojado GHOST en la versión 5.96.0 | http://localhost:2368/ghost/ |
+
+## Ejecución pruebas e2e de Cypress
+Dirijase a la carpeta raiz del proyecto y ejecute `npm run e2e:data` o ejecute abra la aplicación de Cypress y ejecute cada una de las pruebas ubicadas en `/data-generation/cypress/e2e` por separado.
+
+---
+
+# *Semana 5 y Semana 6: Pruebas e2e en Kraken y Cypress para GHOST*
+Este apartado del README pretende describir como hacer la ejecución de las pruebas "end to end" de las [funcionalidades y escenarios escogidos](https://github.com/angietroa/MISW-4103-E2E-Equipo-8/wiki/Funcionalidades-y-escenarios-escogidos) y de los scripts para ver el reporte de regresión visual comparando GHOST en la versión 4.5.0 (versión base) con GHOST en la versión 5.96.0 (versión release candidate).
 
 # Cómo ejecutar
 A continuación el paso a paso para hacer la ejecución:
