@@ -101,7 +101,9 @@ class PostPage {
   }
 
   verifyErrorMessage() {
-    cy.get('[data-testid="embed-url-error-container"]').should("exist");
+    cy.get('[data-testid="embed-url-error-container"]', {
+      timeout: 10000,
+    }).should("exist");
   }
 
   verifyButtonExists(buttonText) {

@@ -112,6 +112,13 @@ class PageObj {
     this.cy.contains(elemento).click();
   }
 
+  async addTextToPage(texto) {
+    cy.get('p[data-koenig-dnd-droppable="true"]')
+      .eq(0)
+      .type(texto)
+      .type("{enter}");
+  }
+
   async addBookmarkContent() {
     cy.get('[data-testid="bookmark-url"]').focus();
 
@@ -133,6 +140,14 @@ class PageObj {
       .selectFile(archivos, { force: true });
   }
 
+  async setContentToHTML(contenido) {
+    this.cy.get('div[data-language="html"]').type(contenido);
+  }
+
+  async setContentToButton(contenido) {
+    cy.get('[data-testid="button-input-text"]').type(contenido);
+  }
+
   async setContentToFile(archivo) {
     this.cy.contains("Click to upload a file").click();
 
@@ -146,7 +161,7 @@ class PageObj {
       .and("be.visible");
   }
 
-  async setContentToSpotify(enlace) {
+  async setContentToLink(enlace) {
     this.cy
       .get('input[data-testid="embed-url"]')
       .clear()
@@ -154,6 +169,18 @@ class PageObj {
       .type("{enter}");
     //Validación
     this.cy.get("div.absolute.inset-0.z-50.mt-0").should("be.visible");
+  }
+
+  async setContentToInvalidLink(enlace) {
+    this.cy
+      .get('input[data-testid="embed-url"]')
+      .clear()
+      .type(enlace)
+      .type("{enter}");
+    //Validación
+    cy.get('[data-testid="embed-url-error-message"]', {
+      timeout: 10000,
+    }).should("contain", "Oops, that link didn't work.");
   }
 
   async clickOnUpdateButton() {
