@@ -7,18 +7,18 @@ describe("E036 - Crear página con markdown valido a-priori", () => {
   it("E036 - Crear página con markdown valido", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
-
+    // Visitar página e iniciar sesión
     loginPage.visitPage();
     loginPage.signInPage();
-
+    // ir a página y crear
     page.goToPageAndCreate();
-
+    // Agregar elemento Markdown
     page.addPageElement("Markdown");
-
+    // Agregar contenido a Markdown
     page.setContentToMarkdown(data.markdown);
-
+    // Agregar titulo
     page.pageTitle(data.title);
-
+    // Publicar página
     page.publishPage();
     page.closePublishPopup();
   });

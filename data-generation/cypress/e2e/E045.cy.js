@@ -12,13 +12,13 @@ describe("E045 - Crear página embebiendo link de Twitter con link invalido pseu
   it("E045 - Crear página embebiendo link de Twitter con link invalido pseudo-aleatorio", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
-
+    // Visitar página e iniciar sesión
     loginPage.visitPage();
 
     loginPage.signInPage();
-
+    // I a página y crear
     page.goToPageAndCreate();
-
+    // Cargar título, agregar elemento y cargar contenido
     cy.get("@page_data").then((res) => {
       page.pageTitle(res.body[15].title);
 

@@ -7,17 +7,17 @@ describe("E034 - Crear página con HTML a-priori", () => {
   it("E034 - Crear página con HTML a-priori", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
-
+    // Visitar página e iniciar sesión
     loginPage.visitPage();
     loginPage.signInPage();
-
+    // Ir a página y crear titulo
     page.goToPageAndCreate();
     page.pageTitle(data.title);
-
+    // Agregar elemento HTML
     page.addPageElement("HTML");
-
+    // Agregar contenido HTML
     page.setContentToHTML(data.html);
-
+    // Publicar página
     page.publishPage();
     page.closePublishPopup();
   });

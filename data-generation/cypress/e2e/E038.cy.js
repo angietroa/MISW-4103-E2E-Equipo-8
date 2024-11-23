@@ -7,18 +7,18 @@ describe("E038 - Crear página embebiendo link en YouTube con link valido a-prio
   it("E038 - Crear página embebiendo link en YouTube con link valido a-priori", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
-
+    // Visitar página e iniciar sesión
     loginPage.visitPage();
     loginPage.signInPage();
-
+    // Ir a página y crear
     page.goToPageAndCreate();
-
+    // Crear título
     page.pageTitle(data.title);
-
+    // Cargar elemento Youtube
     page.addPageElement("YouTube");
-
+    // Cargar datos a elemento
     page.setContentToLink(data.youtube_link);
-
+    // Publicar página
     page.publishPage();
     page.closePublishPopup();
   });

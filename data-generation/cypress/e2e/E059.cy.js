@@ -7,18 +7,18 @@ describe("E059 - Crear página con botón con caracter vacio a-priori", () => {
   it("E059 - Crear página con botón con caracter vacio a-priori", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
-
+    // Visitar página e iniciar sesión
     loginPage.visitPage();
     loginPage.signInPage();
-
+    // Crear página
     page.goToPageAndCreate();
-
+    // Cargar título
     page.pageTitle(data.title);
-
+    // Agrear elemento
     page.addPageElement("Button");
-
+    // Cargar contenido a botón
     page.setContentToButton(data.empty_strings);
-
+    // Publicar página
     page.publishPage();
     page.closePublishPopup();
   });

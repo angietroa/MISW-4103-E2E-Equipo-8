@@ -12,12 +12,12 @@ describe("E051 - Crear página embebiendo link de Soundcloud con link invalido p
   it("E051 - Crear página embebiendo link de Soundcloud con link invalido pseudo-aleatorio", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
-
+    // Visitar página e iniciar sesión
     loginPage.visitPage();
     loginPage.signInPage();
-
+    // Crear página
     page.goToPageAndCreate();
-
+    // Cargar título, elemento y cargar contenido para validar
     cy.get("@page_data").then((res) => {
       page.pageTitle(res.body[21].title);
 

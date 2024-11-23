@@ -7,18 +7,18 @@ describe("E053 - Crear página con botón y texto de 10 caracteres a-priori", ()
   it("E053 - Crear página con botón y texto de 10 caracteres a-priori", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
-
+    // Visitar página e iniciar sesión
     loginPage.visitPage();
     loginPage.signInPage();
-
+    // Cargar página y crear
     page.goToPageAndCreate();
-
+    // Crear título
     page.pageTitle(data.title);
-
+    // Agregar elemento
     page.addPageElement("Button");
-
+    // Cargar contenido a botón
     page.setContentToButton(data.button);
-
+    // Publicar página
     page.publishPage();
     page.closePublishPopup();
   });

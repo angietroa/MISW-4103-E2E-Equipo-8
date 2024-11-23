@@ -12,12 +12,12 @@ describe("E057 - Crear página con botón y texto de 500 caracteres pseudo-aleat
   it("E057 - Crear página con botón y texto de 500 caracteres pseudo-aleatorio", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
-
+    // Visitar página e iniciar sesión
     loginPage.visitPage();
     loginPage.signInPage();
-
+    // Crear página
     page.goToPageAndCreate();
-
+    // Cargar elementos, título, y elemento al botón
     cy.get("@page_data").then((res) => {
       page.pageTitle(res.body[26].title);
 

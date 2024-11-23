@@ -7,16 +7,16 @@ describe("E033 - Crear página con cero caracteres en título y contenido a-prio
   it("E033 - Crear página con cero caracteres en título y contenido a-priori", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
-
+    // Visitar página e iniciar sesión
     loginPage.visitPage();
     loginPage.signInPage();
-
+    // ir a página y crear elemento
     page.goToPageAndCreate();
-
+    // Agregar título
     page.pageTitle(data.empty_strings);
-
+    // Agregar texto
     page.addTextToPage(data.empty_strings);
-
+    // Publicar página
     page.publishPage();
     page.closePublishPopup();
   });

@@ -7,18 +7,18 @@ describe("E056 - Crear página con botón y texto de 500 caracteres a-priori", (
   it("E056 - Crear página con botón y texto de 500 caracteres a-priori", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
-
+    // Visitar página e iniciar sesión
     loginPage.visitPage();
     loginPage.signInPage();
-
+    // Crear página
     page.goToPageAndCreate();
-
+    // Cargar título
     page.pageTitle(data.title);
-
+    // Cargar elemento
     page.addPageElement("Button");
-
+    // Cargar contenido a botón
     page.setContentToButton(data.big_text);
-
+    // Publicar página
     page.publishPage();
     page.closePublishPopup();
   });

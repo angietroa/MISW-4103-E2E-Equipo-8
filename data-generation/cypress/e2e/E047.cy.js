@@ -7,18 +7,18 @@ describe("E047 - Crear página embebiendo link de Vimeo con link valido a-priori
   it("E047 - Crear página embebiendo link de Vimeo con link valido a-priori", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
-
+    // Visitar página e iniciar sesión
     loginPage.visitPage();
     loginPage.signInPage();
-
+    // Ir a página y crear
     page.goToPageAndCreate();
-
+    // Cargar título
     page.pageTitle(data.title);
-
+    // Agregar elemento
     page.addPageElement("Vimeo");
-
+    // Cargar contenido al link
     page.setContentToLink(data.vimeo_link);
-
+    // Publicar página
     page.publishPage();
     page.closePublishPopup();
   });

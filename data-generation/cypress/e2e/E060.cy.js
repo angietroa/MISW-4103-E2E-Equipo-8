@@ -12,12 +12,12 @@ describe("E060 - Crear página con embebido pseudo-aleatorio", () => {
   it("E060 - Crear página con embebido pseudo-aleatorio", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
-
+    // Visitar página e iniciar sesión
     loginPage.visitPage();
     loginPage.signInPage();
-
+    // Ir a página y crear
     page.goToPageAndCreate();
-
+    // Crear título, agregar elemento y cargar contenido
     cy.get("@page_data").then((res) => {
       page.pageTitle(res.body[29].title);
 

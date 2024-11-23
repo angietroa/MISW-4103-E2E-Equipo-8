@@ -7,18 +7,18 @@ describe("E050 - Crear página embebiendo link de Soundcloud con link valido a-p
   it("E050 - Crear página embebiendo link de Soundcloud con link valido a-priori", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
-
+    // Visitar página e iniciar sesión
     loginPage.visitPage();
     loginPage.signInPage();
-
+    // Ir a página y crear
     page.goToPageAndCreate();
-
+    // Agregar título
     page.pageTitle(data.title);
-
+    // Agregar elemento
     page.addPageElement("SoundCloud");
-
+    // Cargar información a elemento
     page.setContentToLink(data.soundcloud_link);
-
+    // Publicar página
     page.publishPage();
     page.closePublishPopup();
   });

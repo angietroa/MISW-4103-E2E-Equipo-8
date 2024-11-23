@@ -12,12 +12,12 @@ describe("E039 - Crear página embebiendo link en YouTube con link valido pseudo
   it("E039 - Crear página embebiendo link en YouTube con link valido pseudo-aleatorio", () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
-
+    // Visitar página e iniciar sesión
     loginPage.visitPage();
     loginPage.signInPage();
-
+    // Ir a página y crear
     page.goToPageAndCreate();
-
+    // Cargar título, elemento de Youtube y validar que el elemento sea invalido
     cy.get("@page_data").then((res) => {
       page.pageTitle(res.body[9].title);
 
