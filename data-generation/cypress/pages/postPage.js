@@ -1,25 +1,19 @@
+const { faker } = require("@faker-js/faker");
+
 class PostPage {
   constructor() {
-    this.newPostButton = 'a:contains("New post")';
     this.textarea = "textarea";
-    this.publishButton = 'button:contains("Publish")';
-    this.continueButton = 'button:contains("Continue, final review →")';
-    this.finalPublishButton = 'button:contains("Publish post, right now")';
-    this.closeButton = 'button[data-test-button="close-publish-flow"]';
-    this.postsLink = 'a:contains("Posts")';
-    this.paragraphSelector = 'p[dir="ltr"]';
-    this.imageSelector = 'img[data-testid="image-card-populated"]';
-    this.iframeSelector = 'iframe[data-testid="embed-iframe"]';
+    this.addCardButton = '[aria-label="Add a card"]';
   }
 
   navigateToPosts() {
-    cy.wait(2000);
+    cy.wait(100);
     cy.contains("a", "Posts").click();
   }
 
   createNewPost() {
-    cy.wait(2000);
-    cy.get(this.newPostButton).should("be.visible").click();
+    cy.wait(1000);
+    cy.get('a:contains("New post")').should("be.visible").click();
   }
 
   generateTitlePost(baseText) {
@@ -31,24 +25,15 @@ class PostPage {
     cy.get(this.textarea).type("{enter}");
   }
 
-  addRandomParagraphs() {
-    const randomParagraph = () => Math.random().toString(36).substring(2, 50);
-    const times = Math.floor(Math.random() * 6) + 1;
-    let paragraphCount = 0;
-
-    for (let i = 0; i < times; i++) {
-      cy.get(this.textarea).type(`{enter}${randomParagraph()}`);
-      paragraphCount++;
-    }
-
-    return paragraphCount;
+  addParagraph(text) {
+    cy.get(this.textarea).type(`{enter}${text}`);
   }
 
   publishPost() {
     cy.contains("button", "Publish").click();
     cy.contains("button", "Continue, final review →").click();
     cy.contains("button", "Publish post, right now").click();
-    cy.get(this.closeButton).click();
+    cy.get('button[data-test-button="close-publish-flow"]').click();
   }
 
   verifyPostExists(title) {
@@ -59,32 +44,143 @@ class PostPage {
     cy.contains("a", title).click();
   }
 
-  verifyParagraphCount(expectedCount) {
-    cy.get(this.paragraphSelector).then(($paragraphs) => {
-      const totalParagraphs = $paragraphs.length / 2;
-      expect(totalParagraphs).to.equal(expectedCount);
+  addHTML(htmlContent) {
+    cy.get(this.addCardButton).click();
+    cy.get('button:contains("HTML")').click();
+    cy.get('div[data-language="html"]').type(htmlContent);
+  }
+
+  addMarkdown(markdownContent) {
+    cy.get(this.addCardButton).click();
+    cy.get('button:contains("Markdown")').click();
+    cy.get('div[class="markdown-editor"]').type(markdownContent);
+
+    cy.wait(1000);
+
+    cy.window().then((win) => {
+      const x = 50;
+      const y = win.document.documentElement.scrollHeight - 50;
+      cy.wrap(win.document).trigger("click", { clientX: x, clientY: y });
     });
   }
 
-  verifyImageCount(expectedCount) {
-    cy.get(this.imageSelector).then(($images) => {
-      const totalImages = $images.length / 2;
-      expect(totalImages).to.equal(expectedCount);
+  embedContent(type, url) {
+    cy.get(this.addCardButton).click();
+    cy.get(type).click();
+    cy.get('[data-testid="embed-url"]').type(url);
+    cy.get('[data-testid="embed-url"]').type("{enter}");
+  }
+
+  addButton(buttonText) {
+    cy.get('[aria-label="Add a card"]').click();
+    cy.contains("button", "Button").click();
+    cy.get('[data-testid="button-input-text"]').type(buttonText);
+  }
+
+  verifyTextExists(text) {
+    const paragraphs = text.split("\n").filter(Boolean);
+    paragraphs.forEach((paragraph) => {
+      cy.contains(paragraph).should("exist");
     });
   }
 
-  verifyHTMLContent(content) {
-    cy.contains("p", content).should("exist");
+  verifyContent(tag, rawContent) {
+    const content = rawContent
+      .replace(/<\/?[^>]+(>|$)/g, "")
+      .replace(/(^[#*]+|[*_~`]+)/g, "")
+      .trim();
+    cy.get(tag).contains(content).should("exist");
   }
 
-  verifyYouTubeEmbed(url) {
-    cy.get(this.iframeSelector)
-      .should("have.attr", "srcdoc")
-      .and("include", url);
+  verifyEmbed() {
+    cy.get('iframe[data-testid="embed-iframe"]').should("have.attr", "srcdoc");
+  }
+
+  verifyEmbedDoesNotExist() {
+    cy.get('iframe[data-testid="embed-iframe"]').should("not.exist");
+  }
+
+  verifyErrorMessage() {
+    cy.get('[data-testid="embed-url-error-container"]').should("exist");
   }
 
   verifyButtonExists(buttonText) {
     cy.get("button").contains("span", buttonText).should("exist");
+  }
+
+  verifyButtonNoText() {
+    cy.get('[data-testid="button-card-btn"]').should("exist");
+  }
+
+  generateRandomURL() {
+    const protocol = faker.internet.protocol();
+    const domain = faker.internet.domainName();
+    const path = faker.word.noun();
+    return `${protocol}://${domain}/${path}`;
+  }
+
+  generateRandomText(minChars = null, maxChars = null) {
+    const min = minChars ?? faker.number.int({ min: 50, max: 100 });
+    const max = maxChars ?? faker.number.int({ min: min, max: min + 50 });
+    let randomText = faker.lorem.paragraphs(1);
+
+    const specialChars = [
+      "!",
+      "@",
+      "#",
+      "$",
+      "%",
+      "^",
+      "&",
+      "*",
+      "(",
+      ")",
+      "-",
+      "=",
+      "+",
+      "[",
+      "]",
+      "{",
+      "}",
+      "\\",
+      "|",
+      ";",
+      ":",
+      '"',
+      "'",
+      "<",
+      ">",
+      ",",
+      ".",
+      "/",
+      "?",
+    ];
+
+    while (randomText.length < min) {
+      randomText +=
+        " " + faker.lorem.words(faker.number.int({ min: 5, max: 10 }));
+    }
+
+    const charCount = faker.number.int({ min: 3, max: 10 });
+    const words = randomText.split(" ");
+
+    for (let i = 0; i < charCount; i++) {
+      const randomChar =
+        specialChars[
+          faker.number.int({ min: 0, max: specialChars.length - 1 })
+        ];
+      const randomNumber = faker.number.int({ min: 0, max: 9999 });
+      const insertPos = faker.number.int({ min: 0, max: words.length - 1 });
+      words.splice(insertPos, 0, `${randomChar}${randomNumber}`);
+    }
+
+    randomText = words.join(" ");
+
+    if (randomText.length > max) {
+      randomText = randomText.substring(0, max);
+    }
+
+    return randomText;
   }
 }
 
