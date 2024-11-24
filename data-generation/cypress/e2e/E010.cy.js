@@ -7,7 +7,7 @@ describe("E010 - Funcionalidad de creación de un post con Youtube embebido alea
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
-  it("Debe iniciar sesión y crear un post con Youtube embebido aleatorio invalido", () => {
+  it("Debe iniciar sesión y crear un post con Youtube embebido aleatorio invalido", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

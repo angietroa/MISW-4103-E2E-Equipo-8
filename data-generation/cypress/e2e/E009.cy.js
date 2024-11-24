@@ -12,7 +12,7 @@ describe("E009 - Funcionalidad de creación de un post con Youtube embebido pseu
     cy.request(POST_DATA_POOL_PSEUDO_RANDOM_ENDPOINT).as("post_data");
   });
 
-  it("Debe iniciar sesión y crear un post con Youtube embebido pseudo aleatorio invalido", () => {
+  it("Debe iniciar sesión y crear un post con Youtube embebido pseudo aleatorio invalido", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

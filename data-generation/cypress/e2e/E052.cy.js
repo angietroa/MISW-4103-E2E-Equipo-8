@@ -3,7 +3,7 @@ import PageObj from "../pages/page";
 const { faker } = require("@faker-js/faker");
 
 describe("E052 - Crear página embebiendo link de Soundcloud con link invalido aleatorio", () => {
-  it("E052 - Crear página embebiendo link de Soundcloud con link invalido aleatorio", () => {
+  it("E052 - Crear página embebiendo link de Soundcloud con link invalido aleatorio", async () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
     //Visitar página e iniciar sesión

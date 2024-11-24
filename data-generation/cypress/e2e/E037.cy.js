@@ -3,7 +3,7 @@ import PageObj from "../pages/page";
 const { faker } = require("@faker-js/faker");
 
 describe("E037 - Crear página con markdown valido", () => {
-  it("E037 - Crear página con markdown valido", () => {
+  it("E037 - Crear página con markdown valido", async () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
     // Visitar página e iniciar sesión

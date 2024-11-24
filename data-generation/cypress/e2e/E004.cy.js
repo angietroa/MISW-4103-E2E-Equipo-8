@@ -6,7 +6,7 @@ describe("E004 - Funcionalidad de creación de un post con HTML", () => {
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
-  it("Debe iniciar sesión y crear un post con HTML", () => {
+  it("Debe iniciar sesión y crear un post con HTML", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

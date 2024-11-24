@@ -10,7 +10,7 @@ describe("E024 - Funcionalidad de creación de un post con botón con texto de 1
     cy.request(POST_DATA_POOL_PSEUDO_RANDOM_ENDPOINT).as("post_data");
   });
 
-  it("Debe crear un post con un botón con texto de 10 caracteres validarlo", () => {
+  it("Debe crear un post con un botón con texto de 10 caracteres validarlo", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

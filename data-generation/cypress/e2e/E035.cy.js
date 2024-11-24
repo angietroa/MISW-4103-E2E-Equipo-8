@@ -3,7 +3,7 @@ const PageObj = require("../pages/page");
 const { faker } = require("@faker-js/faker");
 
 describe("E035 - Crear página con HTML aleatorio", () => {
-  it("E035 - Crear página con HTML aleatorio", () => {
+  it("E035 - Crear página con HTML aleatorio", async () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
     // Visitar página e iniciar sesión

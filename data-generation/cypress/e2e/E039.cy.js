@@ -9,7 +9,7 @@ describe("E039 - Crear página embebiendo link en YouTube con link valido pseudo
     cy.request(PAGE_DATA_POOL_PSEUDO_RANDOM_ENDPOINT).as("page_data");
   });
 
-  it("E039 - Crear página embebiendo link en YouTube con link valido pseudo-aleatorio", () => {
+  it("E039 - Crear página embebiendo link en YouTube con link valido pseudo-aleatorio", async () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
     // Visitar página e iniciar sesión

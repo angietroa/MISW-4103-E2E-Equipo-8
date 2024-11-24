@@ -2,7 +2,7 @@ import LoginPage from "../pages/login";
 import PostPage from "../pages/postPage";
 import dataAPriori from "../data-a-priori/post.json";
 
-describe("E030 - Funcionalidad de creación de un post con embebido", () => {
+describe("E030 - Funcionalidad de creación de un post con embebido", async () => {
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 

@@ -6,7 +6,7 @@ describe("E011 - Funcionalidad de creación de un post con Spotify embebido", ()
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
-  it("Debe iniciar sesión y crear un post con Spotify embebido", () => {
+  it("Debe iniciar sesión y crear un post con Spotify embebido", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

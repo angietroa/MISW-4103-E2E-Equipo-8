@@ -9,7 +9,7 @@ describe("E060 - Crear página con embebido pseudo-aleatorio", () => {
     cy.request(PAGE_DATA_POOL_PSEUDO_RANDOM_ENDPOINT).as("page_data");
   });
 
-  it("E060 - Crear página con embebido pseudo-aleatorio", () => {
+  it("E060 - Crear página con embebido pseudo-aleatorio", async () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
     // Visitar página e iniciar sesión

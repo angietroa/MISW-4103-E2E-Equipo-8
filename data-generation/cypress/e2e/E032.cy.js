@@ -10,7 +10,7 @@ describe("E032 - Crear página con texto alfanumerico pseudo-aleatorio", () => {
     cy.request(PAGE_DATA_POOL_PSEUDO_RANDOM_ENDPOINT).as("page_data");
   });
 
-  it("E032 - Crear página con texto alfanumerico pseudoaleatorio", () => {
+  it("E032 - Crear página con texto alfanumerico pseudoaleatorio", async () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
 

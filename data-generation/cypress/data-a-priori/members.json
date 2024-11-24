@@ -1,0 +1,66 @@
+[
+    {
+        "id": "E097",
+        "name": "IPZDuRZKArX6aBgARYyJoaALwrR2QBHYeuJCbe7P0Xjah5eDIy2VuxwRHz0NWb9boXrCD5Vk2HlJ8AdsCcEoaj8Ymiya00IABj9AFsc0qZpZ6CDcyvXtKKM47fcZOwRFeyOMdVNhQimachnujAntva9eQuPqfo9hzU1sKLON8v84skdLLEHeS9UkPHbFftz",
+        "email": "email@domain.com",
+        "labels": [],
+        "note": "",
+        "newsletters": true
+    },
+    {
+        "id": "E100",
+        "name": "E100 Member name",
+        "email": "e100@domain.com",
+        "labels": [],
+        "note": "eaeo6egBzXlPNRWUAYh15diMIgEe9inMzK0ukpAvJ5N9JuvRhlM4xYIZZxd6mCRBbGPCPshBkaGb7oOl457I6l1Kzbw68ixIP4EvNfBFXVz0aUdStM3XqLWimByrgprktP8lhVOHmzmdDYOsgY4DUDPbtuAkE6siUZCktIqaDaWPPmJa69s0AzwhEETgUmXxiZkxNOFoGJPPQOKG35YAAgutlLvbLiZOm3RWbf68EGdeZXHoagiDizq0lwkEyGoa3LwuvlhnaUzXBC2aVqPAFFhNF4sQq0NWODeC3z8i5g07JatlelJMY8sEKtJIObhVUAoziyGJefrbxogDKeHPOFZQCyVXUpPph18l7vtZX8rvGP02MrEJWckr4nfHBa9CNXZvZiOBNvycS14OidDoX7Mt5cQZQvVUgKb9npzsMrjoPFMfzM3zxZho8EmVBlgu48oGz1ou0ix5EMIckjNgkEVUOYttc0Wymtzlfr8rGstGAfKBVwhE",
+        "newsletters": true
+    },
+    {
+        "id": "E103",
+        "name": "E103 Member name",
+        "email": "validemail@domain.com",
+        "labels": [],
+        "note": "",
+        "newsletters": true
+    },
+    {
+        "id": "E106",
+        "name": "E106 Member name",
+        "email": "invalidemail",
+        "labels": [],
+        "note": "",
+        "newsletters": true
+    },
+    {
+        "id": "E109",
+        "name": "E109 Member name",
+        "email": "",
+        "labels": [],
+        "note": "",
+        "newsletters": true
+    },
+    {
+        "id": "E110",
+        "name": "E110 Member name",
+        "email": "e110@domain.com",
+        "labels": ["label0","label0"],
+        "note": "",
+        "newsletters": true
+    },
+    {
+        "id": "E113",
+        "name": "E113 Member name",
+        "email": "e113@domain.com",
+        "labels": ["KUQSuo7UpbfNDU1sIeY9NzXqESVEIjPoYyzr0q6xSrSjUyV1hbRMEgaiOdm9tbhvw4IxfYH8h9bDMXC8kHxoIYZv01WrajMYLmflMH9AVQg1tzJiRH2JKaBFhbNuj2ywPo06XD7FR3dQ2q4sXdjLqmDE3PN1hpsdvFxKNp61WORGURYZ0i3R7xyiI8kzikeXlcjQj3sMxKPvVVo2e6fOJktA9jSp2Sn5VFrghFr2OoaoRbPNQ07t4bGkjXG9uGZDqUy0GXnuKsy9Na67zLVRlLzIXQ9dTS9gH8BsOXpxUOUV5JeC8bdyHz9NXRvyph52yUIR4KFSSt18r7gZ5EXeYqtOFqLA907mupjCkkoNzqIbkgPD1Vs2zSiIFR78bhBwdxdaMoF0VE5YgmgjS6ZWjV2KP9gjctBRz1sX1ZLXwfGj5kDhrF18sBBosKTirvNqzG5DqeGXyeHrX45AyhWezl4aoCtKxYSWcq3Zj16OtcMW6MBJRem"],
+        "note": "",
+        "newsletters": true
+    },
+    {
+        "id": "E116",
+        "name": "E116 Member name",
+        "email": "e116@domain.com",
+        "labels": ["Label1", "Label2", "Label3", "Label4", "Label5", "Label6", "Label7", "Label8", "Label9", "Label10", "Label11", "Label12", "Label13", "Label14", "Label15", "Label16", "Label17", "Label18", "Label19", "Label20", "Label21", "Label22", "Label23", "Label24", "Label25", "Label26", "Label27", "Label28", "Label29", "Label30", "Label31", "Label32", "Label33", "Label34", "Label35", "Label36", "Label37", "Label38", "Label39", "Label40", "Label41", "Label42", "Label43", "Label44", "Label45", "Label46", "Label47", "Label48", "Label49", "Label50"],
+        "note": "",
+        "newsletters": true
+    }
+]

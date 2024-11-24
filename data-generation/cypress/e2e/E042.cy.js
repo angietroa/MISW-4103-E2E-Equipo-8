@@ -9,7 +9,7 @@ describe("E042 - Crear página embebiendo link de Spotify con link invalido pseu
     cy.request(PAGE_DATA_POOL_PSEUDO_RANDOM_ENDPOINT).as("page_data");
   });
 
-  it("E042 - Crear página embebiendo link de Spotify con link invalido pseudo-aleatorio", () => {
+  it("E042 - Crear página embebiendo link de Spotify con link invalido pseudo-aleatorio", async () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
     // Visitar página e iniciar sesión

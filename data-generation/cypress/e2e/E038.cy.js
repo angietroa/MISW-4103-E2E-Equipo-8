@@ -4,7 +4,7 @@ const PAGE_DATAPOOL_APRIORI = require("../data-a-priori/page.json");
 
 describe("E038 - Crear página embebiendo link en YouTube con link valido a-priori", () => {
   const data = PAGE_DATAPOOL_APRIORI[8];
-  it("E038 - Crear página embebiendo link en YouTube con link valido a-priori", () => {
+  it("E038 - Crear página embebiendo link en YouTube con link valido a-priori", async () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
     // Visitar página e iniciar sesión

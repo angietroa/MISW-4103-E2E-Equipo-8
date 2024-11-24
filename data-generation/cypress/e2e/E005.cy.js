@@ -7,7 +7,7 @@ describe("E005 - Funcionalidad de creación de un post con HTML aleatorio invali
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
-  it("Debe iniciar sesión y crear un post con HTML aleatorio invalido", () => {
+  it("Debe iniciar sesión y crear un post con HTML aleatorio invalido", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

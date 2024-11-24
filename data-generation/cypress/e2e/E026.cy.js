@@ -6,7 +6,7 @@ describe("E026 - Funcionalidad de creación de un post con botón con un texto d
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
-  it("Debe crear un post con un botón con un texto de 500 caracteres y validarlo", () => {
+  it("Debe crear un post con un botón con un texto de 500 caracteres y validarlo", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

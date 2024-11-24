@@ -6,7 +6,7 @@ describe("E006 - Funcionalidad de creación de un post con markdown", () => {
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
-  it("Debe iniciar sesión y crear un post con markdown", () => {
+  it("Debe iniciar sesión y crear un post con markdown", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

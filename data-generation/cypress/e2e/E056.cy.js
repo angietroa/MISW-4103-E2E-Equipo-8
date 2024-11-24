@@ -4,7 +4,7 @@ const PAGE_DATAPOOL_APRIORI = require("../data-a-priori/page.json");
 
 describe("E056 - Crear página con botón y texto de 500 caracteres a-priori", () => {
   const data = PAGE_DATAPOOL_APRIORI[24];
-  it("E056 - Crear página con botón y texto de 500 caracteres a-priori", () => {
+  it("E056 - Crear página con botón y texto de 500 caracteres a-priori", async () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
     // Visitar página e iniciar sesión
