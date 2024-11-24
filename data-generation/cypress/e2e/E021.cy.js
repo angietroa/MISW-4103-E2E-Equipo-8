@@ -11,7 +11,7 @@ describe("E021 - Funcionalidad de creación de un post con Sound Cloud embebido 
     cy.request(POST_DATA_POOL_PSEUDO_RANDOM_ENDPOINT).as("post_data");
   });
 
-  it("Debe iniciar sesión y crear un post con Sound Cloud embebido pseudo aleatorio invalido", () => {
+  it("Debe iniciar sesión y crear un post con Sound Cloud embebido pseudo aleatorio invalido", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

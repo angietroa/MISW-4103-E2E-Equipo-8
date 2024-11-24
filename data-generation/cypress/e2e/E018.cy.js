@@ -11,7 +11,7 @@ describe("E018 -Funcionalidad de creación de un post con Vimeo embebido pseudo 
     cy.request(POST_DATA_POOL_PSEUDO_RANDOM_ENDPOINT).as("post_data");
   });
 
-  it("Debe iniciar sesión y crear un post con Vimeo embebido pseudo aleatorio invalido", () => {
+  it("Debe iniciar sesión y crear un post con Vimeo embebido pseudo aleatorio invalido", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

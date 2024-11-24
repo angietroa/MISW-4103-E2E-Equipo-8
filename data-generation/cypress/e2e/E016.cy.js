@@ -7,7 +7,7 @@ describe("E016 -Funcionalidad de creación de un post con Twitter embebido aleat
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
-  it("Debe iniciar sesión y crear un post con Twitter embebido aleatorio invalido", () => {
+  it("Debe iniciar sesión y crear un post con Twitter embebido aleatorio invalido", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

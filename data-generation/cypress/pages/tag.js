@@ -1,3 +1,5 @@
+const tagsDataAPriori = require("../data-a-priori/tag.json");
+
 class TagPage {
   constructor(cy) {
     this.cy = cy;
@@ -50,13 +52,15 @@ class TagPage {
   }
 
   async setTagColor(tagColor) {
-    this.cy.get('input[data-test-input="accentColor"]').type(tagColor);
+    this.cy.get('input[data-test-input="accentColor"]').type(tagColor.replace("#",""));
     this.cy.wait(500);
   }
 
   async setTagDescription(tagDescription) {
-    this.cy.get("#tag-description").type(tagDescription);
-    this.cy.wait(500);
+    if (tagDescription !== null && tagDescription.trim() !== "") {
+      this.cy.get("#tag-description").type(tagDescription);
+      this.cy.wait(500);
+    }
   }
 
   async setTagImage(path) {
@@ -77,11 +81,15 @@ class TagPage {
 
   async setXCardValues(title, description) {
     this.cy.get(".gh-twitter-settings").within(() => {
-      this.cy.get("#twitter-title").type(title);
-      this.cy.wait(500);
+      if (title !== null && title.trim() !== "") {
+        this.cy.get("#twitter-title").type(title);
+        this.cy.wait(500);
+      }
 
-      this.cy.get("#twitter-description").type(description);
-      this.cy.wait(500);
+      if (description !== null && description.trim() !== "") {
+        this.cy.get("#twitter-description").type(description);
+        this.cy.wait(500);
+      }
     });
   }
 
@@ -94,6 +102,8 @@ class TagPage {
   }
 
   async findTagNameCreated(tagName) {
+    this.cy.get(".gh-main ").scrollTo('bottom',{ensureScrollable: false});
+    this.cy.wait(500);
     this.cy.get("h3[data-test-tag-name]").contains(tagName);
     this.cy.wait(500);
   }
@@ -106,6 +116,27 @@ class TagPage {
   async findButtonError() {
     this.cy.get('span[data-test-task-button-state="failure"]').should('exist');
     this.cy.wait(500);
+  }
+
+  getAPrioriData(scenarioId) {
+    const result = tagsDataAPriori.filter(d => d.id === scenarioId);
+    if (result.length > 0) {
+      return result[0];
+    }
+    throw new Error("Scenario not found.");
+  }
+
+  getPseudoRandomData(scenarioId) {
+    return this.cy.request({
+      method: 'GET',
+      url: `https://my.api.mockaroo.com/${scenarioId.toLowerCase()}.json?key=c2b603b0`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }).then((response) => {
+      expect(response.status).to.eq(200);
+      return response.body;
+    });
   }
 }
 

@@ -4,7 +4,7 @@ const PAGE_DATAPOOL_APRIORI = require("../data-a-priori/page.json");
 
 describe("E031 - Crear página con texto alfanumerico a-priori", () => {
   const data = PAGE_DATAPOOL_APRIORI[0];
-  it("E031 - Crear página con texto alfanumerico a-priori", () => {
+  it("E031 - Crear página con texto alfanumerico a-priori", async () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
 

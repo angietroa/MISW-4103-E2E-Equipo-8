@@ -7,7 +7,7 @@ describe("E019 -Funcionalidad de creación de un post con Vimeo embebido aleator
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
-  it("Debe iniciar sesión y crear un post con Vimeo embebido aleatorio invalido", () => {
+  it("Debe iniciar sesión y crear un post con Vimeo embebido aleatorio invalido", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

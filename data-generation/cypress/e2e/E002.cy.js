@@ -12,7 +12,7 @@ describe("E002 - Funcionalidad de creación de un post pseudo aleatorio", () => 
     cy.request(POST_DATA_POOL_PSEUDO_RANDOM_ENDPOINT).as("post_data");
   });
 
-  it("Debe iniciar sesión y crear un post con texto", () => {
+  it("Debe iniciar sesión y crear un post con texto", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

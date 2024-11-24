@@ -6,7 +6,7 @@ describe("E029 - Funcionalidad de creación de un post con botón con un único 
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
-  it("Debe crear un post con un botón con un único carácter invisible en pantalla y validarlo", () => {
+  it("Debe crear un post con un botón con un único carácter invisible en pantalla y validarlo", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

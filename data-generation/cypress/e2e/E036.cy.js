@@ -4,7 +4,7 @@ const PAGE_DATAPOOL_APRIORI = require("../data-a-priori/page.json");
 
 describe("E036 - Crear página con markdown valido a-priori", () => {
   const data = PAGE_DATAPOOL_APRIORI[6];
-  it("E036 - Crear página con markdown valido", () => {
+  it("E036 - Crear página con markdown valido", async () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
     // Visitar página e iniciar sesión

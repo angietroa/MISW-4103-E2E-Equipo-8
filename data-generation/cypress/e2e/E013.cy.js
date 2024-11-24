@@ -7,7 +7,7 @@ describe("E013 - Funcionalidad de creación de un post con Spotify embebido alea
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
-  it("Debe iniciar sesión y crear un post con Spotify embebido aleatorio invalido", () => {
+  it("Debe iniciar sesión y crear un post con Spotify embebido aleatorio invalido", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

@@ -4,7 +4,7 @@ const PAGE_DATAPOOL_APRIORI = require("../data-a-priori/page.json");
 
 describe("E033 - Crear página con cero caracteres en título y contenido a-priori", () => {
   const data = PAGE_DATAPOOL_APRIORI[3];
-  it("E033 - Crear página con cero caracteres en título y contenido a-priori", () => {
+  it("E033 - Crear página con cero caracteres en título y contenido a-priori", async () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
     // Visitar página e iniciar sesión

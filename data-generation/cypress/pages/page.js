@@ -4,13 +4,16 @@ class PageObj {
   }
 
   async publishPage() {
-    this.cy.contains("button", "Publish").click();
-    this.cy.contains("button", "Continue, final review").click();
-    this.cy.contains("button", "Publish page, right now").click();
+    this.cy.contains("button", "Publish").click({force: true});
+    this.cy.wait(250);
+    this.cy.contains("button", "Continue, final review").click({force: true});
+    this.cy.wait(250);
+    this.cy.contains("button", "Publish page, right now").click({force: true});
   }
 
   async clickOnSettingsButton() {
     this.cy.get('button[title="Settings"]').should("be.visible").click();
+    this.cy.wait(100);
   }
 
   async setPublishDate(value) {
@@ -64,6 +67,13 @@ class PageObj {
     cy.get("#url").should("have.value", value.toLowerCase());
   }
 
+  async visit() {
+    cy.fixture("properties").then((data) => {
+      this.cy.visit(data.url + "#/pages");
+      this.cy.wait(2000);
+    });
+  }
+
   async visitPagesAndFindPageByTitle(title, click) {
     cy.fixture("properties").then((data) => {
       this.cy.visit(data.url + "#/pages");
@@ -75,7 +85,7 @@ class PageObj {
   async findPageByTitleAndClick(title, click) {
     const element = this.cy.contains("h3", title).should("exist");
     if (click === true) {
-      element.click();
+      element.click({force:true});
     }
   }
 
@@ -98,6 +108,21 @@ class PageObj {
   async setTitleAndTab(title) {
     this.cy.get(".gh-editor-title").should("be.visible").type(title);
     this.cy.get("body").click();
+  }
+
+  async expandMetaDataMenu() {
+    this.cy.get('[data-test-button="meta-data"]').click();
+    this.cy.wait(200);
+  }
+
+  async setMetaTitle(value) {
+    this.cy.get("#meta-title").type(value);
+    this.cy.wait(200);
+  }
+
+  async setMetaDescription(value) {
+    this.cy.get("#meta-description").type(value);
+    this.cy.wait(200);
   }
 
   async addPageElement(elemento) {

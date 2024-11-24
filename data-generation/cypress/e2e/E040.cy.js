@@ -3,7 +3,7 @@ import PageObj from "../pages/page";
 const { faker } = require("@faker-js/faker");
 
 describe("E040 - Crear página embebiendo link en YouTube con link valido aleatorio", () => {
-  it("E040 - Crear página embebiendo link en YouTube con link valido aleatorio", () => {
+  it("E040 - Crear página embebiendo link en YouTube con link valido aleatorio", async () => {
     const loginPage = new LoginPage(cy);
     const page = new PageObj(cy);
     // Visitar página e iniciar sesión

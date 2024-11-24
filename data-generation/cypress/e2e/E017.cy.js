@@ -6,7 +6,7 @@ describe("E017 -Funcionalidad de creación de un post con Vimeo embebido", () =>
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
-  it("Debe iniciar sesión y crear un post con Vimeo embebido", () => {
+  it("Debe iniciar sesión y crear un post con Vimeo embebido", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

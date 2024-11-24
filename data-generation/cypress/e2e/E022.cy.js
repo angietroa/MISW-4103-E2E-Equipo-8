@@ -7,7 +7,7 @@ describe("E022 - Funcionalidad de creación de un post con Sound Cloud embebido 
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
-  it("Debe iniciar sesión y crear un post con Sound Cloud embebido aleatorio invalido", () => {
+  it("Debe iniciar sesión y crear un post con Sound Cloud embebido aleatorio invalido", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 

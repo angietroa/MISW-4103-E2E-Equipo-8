@@ -6,7 +6,7 @@ describe("E008 - Funcionalidad de creación de un post con Youtube embebido", ()
   const loginPage = new LoginPage(cy);
   const postPage = new PostPage();
 
-  it("Debe iniciar sesión y crear un post con Youtube embebido", () => {
+  it("Debe iniciar sesión y crear un post con Youtube embebido", async () => {
     loginPage.visitPage();
     loginPage.signInPage();
 
