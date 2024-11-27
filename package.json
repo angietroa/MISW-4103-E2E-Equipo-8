@@ -8,7 +8,8 @@
     "e2e:kraken": "cd kraken && ../node_modules/kraken-node/bin/kraken-node run",
     "e2e:cypress": "cd cypress && ../node_modules/.bin/cypress run --headless",
     "vrt:cypress": "node cypress/scripts/compareScreenshots.js",
-    "e2e:data": "cd data-generation && ../node_modules/.bin/cypress run --headless"
+    "e2e:data": "cd data-generation && ../node_modules/.bin/cypress run --headless",
+    "e2e:final": "cd final-strategy && ../node_modules/.bin/cypress run --headless"
   },
   "author": "Pruebas automatizadas: Equipo 8",
   "license": "ISC",
