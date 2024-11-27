@@ -40,6 +40,16 @@ class AdminProfile {
   getCurrentPassword() {
     return cy.fixture("properties").then((data) => data.password);
   }
+
+  returnOriginalPassword(newPassword) {
+    return this.getCurrentPassword().then((originalPassword) => {
+      this.clickButton("Change password");
+      this.getAndWrite("Old password", newPassword);
+      this.getAndWrite("New password", originalPassword);
+      this.getAndWrite("Verify password", originalPassword);
+      this.clickButton("Change password");
+    });
+  }
 }
 
 export default AdminProfile;
