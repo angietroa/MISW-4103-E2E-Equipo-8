@@ -1,25 +1,22 @@
 const LoginPage = require("../pages/login");
-const PageObj = require("../pages/page");
+const ConfigPage = require("../pages/config");
 const PAGE_DATAPOOL_APRIORI = require("../data-a-priori/page.json");
 
-describe("E021 - Crear página con texto alfanumerico a-priori", () => {
-  const data = PAGE_DATAPOOL_APRIORI[0];
-  it("E021 - Crear página con texto alfanumerico a-priori", async () => {
+describe("E111 - Editar descripción de sitio con 10 palabras con espacio a-priori", () => {
+  const data = PAGE_DATAPOOL_APRIORI[15];
+  it("E111 - Editar descripciónn de sitio con 10 palabras con espacio a-priori", async () => {
     const loginPage = new LoginPage(cy);
-    const page = new PageObj(cy);
+    const configPage = new ConfigPage(cy);
 
     // Visitar página e iniciar sesión
     loginPage.visitPage();
 
     loginPage.signInPage();
 
-    // Ir a la página de crear nueva página y agregar título
-    page.goToPageAndCreate();
-    page.pageTitle(data.title);
-    // Agregar texto a página
-    page.addTextToPage(data.text);
-    // Realizar la publicación
-    page.publishPage();
-    page.closePublishPopup();
+    configPage.goToSettings();
+
+    configPage.setDescription(data.title);
+
+    configPage.save();
   });
 });

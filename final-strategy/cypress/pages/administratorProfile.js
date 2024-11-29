@@ -50,6 +50,22 @@ class AdminProfile {
       this.clickButton("Change password");
     });
   }
+
+  AddNewPassword(newPassword) {
+    return this.getCurrentPassword().then((originalPassword) => {
+      this.clickButton("Change password");
+      this.getAndWrite("Old password", originalPassword);
+      this.getAndWrite("New password", newPassword);
+      this.getAndWrite("Verify password", newPassword);
+      this.clickButton("Change password");
+    });
+  }
+
+  validatePassword() {
+    cy.get(
+      "span.mt-1.inline-block.text-xs.text-red.dark\\:text-red-500.order-3"
+    ).should("contain.text", "Sorry, you cannot use an insecure password.");
+  }
 }
 
 export default AdminProfile;
