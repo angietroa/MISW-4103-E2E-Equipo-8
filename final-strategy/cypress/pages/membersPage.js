@@ -114,6 +114,10 @@ class MembersPage {
     });
   }
 
+  editMember(email) {
+    this.cy.contains("p", email).should("exist").click({force:true});
+  }
+
 }
 
 module.exports = MembersPage;
