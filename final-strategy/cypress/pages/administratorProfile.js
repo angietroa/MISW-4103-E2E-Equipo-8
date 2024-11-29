@@ -86,6 +86,15 @@ class AdminProfile {
     this.getAndWrite("Email", email);
     this.clickButton("Save");
   }
+
+  validateAdminSlug(slug) {
+    cy.get(".gh-user-avatar").click({ waitForAnimations: false });
+    cy.get('a[data-test-nav="user-profile"]').click();
+    cy.contains("label", "Slug")
+      .closest("div")
+      .find("input")
+      .should("not.have.value", slug);
+  }
 }
 
 module.exports = AdminProfile;
