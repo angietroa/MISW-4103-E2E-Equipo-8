@@ -9,7 +9,11 @@
     "e2e:cypress": "cd cypress && ../node_modules/.bin/cypress run --headless",
     "vrt:cypress": "node cypress/scripts/compareScreenshots.js",
     "e2e:data": "cd data-generation && ../node_modules/.bin/cypress run --headless",
-    "e2e:final": "cd final-strategy && ../node_modules/.bin/cypress run --headless"
+    "e2e:final": "cd final-strategy && ../node_modules/.bin/cypress run --headless",
+    "e2e:final:chrome": "cd final-strategy && ../node_modules/.bin/cypress run --headless --browser chrome",
+    "e2e:final:firefox": "cd final-strategy && ../node_modules/.bin/cypress run --headless --browser firefox",
+    "e2e:final:electron": "cd final-strategy && ../node_modules/.bin/cypress run --headless --browser electron",
+    "e2e:final:edge": "cd final-strategy && ../node_modules/.bin/cypress run --headless --browser edge"
   },
   "author": "Pruebas automatizadas: Equipo 8",
   "license": "ISC",

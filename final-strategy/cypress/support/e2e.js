@@ -18,7 +18,10 @@ import './commands'
 
 Cypress.on('uncaught:exception', (err) => {
   // Ignorar el error relacionado con "play()"
-  if (err.message.includes('The play() request was interrupted')) {
+  if (
+    err.message.includes('The play() request was interrupted')
+    || err.message.includes("ResizeObserver loop completed with undelivered notifications")
+  ) {
     // Retornar false evita que Cypress falle la prueba
     return false;
   }
