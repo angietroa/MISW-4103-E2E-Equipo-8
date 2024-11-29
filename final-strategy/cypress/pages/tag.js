@@ -7,12 +7,10 @@ class TagPage {
 
   async clickOnTagMenu() {
     this.cy.get('a[href="#/tags/"][data-test-nav="tags"]').click();
-    this.cy.wait(500);
   }
 
   async clickOnNewTag() {
     this.cy.get('a[href="#/tags/new/"].gh-btn-primary').click();
-    this.cy.wait(500);
   }
 
   async clickOnSaveTag() {
