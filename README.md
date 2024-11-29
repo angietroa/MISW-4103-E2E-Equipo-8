@@ -6,6 +6,48 @@
 | Andres Folleco | oa.folleco41@uniandes.edu.co |
 | Daniela Suárez |  cd.suarez@uniandes.edu.co |
 
+# *Semana 8: Pruebas e2e en Cypress con generación de datos (a priori) y en diferentes navegadores para GHOST*
+Este apartado del README pretende describir como hacer la ejecución de las pruebas "end to end" con generación de datos (a priori) y en diferentes navegadores de las funcionalidades y escenarios escogidos para GHOST en la versión 5.96.0.
+
+# Cómo ejecutar
+## Prerequisitos
+Debera tener instalado los siguientes paquetes en su entorno:
+| Prerequisito | Versión  | Obsevación
+|--|--|--|
+| [Node.js](https://nodejs.org/en/download/package-manager) | 20.18.0 | - |
+| [Ghost](https://ghost.org/docs/install/) | 5.96.0 | Puede tenerlo instalado localmente (recomendamos instalarlo con [Docker](https://hub.docker.com/_/ghost/)) o tenerlo desplegado en algeun servidor web al que tenga acceso |
+| [Cypress](https://docs.cypress.io/app/get-started/install-cypress) | 13.15.2 |-|
+| [Chrome](https://www.google.com/intl/es-419/chrome/dr/download/?brand=YTUH&ds_kid=43700078776498264&gad_source=1&gclid=CjwKCAiA6aW6BhBqEiwA6KzDc_XmnGu0ocahg_2Vf53rLeKIwViZuFI4uUF2A7tnzK5dn8fUdzX4wRoCKokQAvD_BwE&gclsrc=aw.ds) | 131 | Necesario para la ejeción de pruebas en Chrome |
+| [Firefox](https://www.mozilla.org/es-ES/firefox/new/) | 131 | Necesario para la ejecución de pruebas en Firefox |
+| [Edge](https://www.microsoft.com/es-es/edge/download?form=MA13FJ) | 131 | Necesario para la ejecución de pruebas en Edge |
+
+Al instalar Cypress cuando se escoja qué navegador usar, debería verse así (esta es una manera de comprobar que todos los navegadores están instaladas en su equipo):
+<img width="1419" alt="Screenshot 2024-11-29 at 4 25 20 PM" src="https://github.com/user-attachments/assets/89ee1778-0062-4b4f-99ba-39357e65ec34">
+
+## Instalación de dependencias
+Dirijase a la carpeta raiz del proyecto y haga `npm install`.
+
+## Archivos de configuración
+Dirijase al archivo `final-strategy/cypress/fixtures/properties.json` y modifique las variables de ser necesario:
+
+| Variable | Descripción  | Default |
+|--|--|--|
+| `username` | Correo de usuario que ingresara a la aplicación | johndoe@mail.com |
+| `password` | Contraseña de usuario que ingresara a a la aplicación | 1234567890123456 |
+| `url` | Dirección URL donde esta alojado GHOST en la versión 5.96.0 | http://localhost:2368/ghost/ |
+
+## Ejecución pruebas e2e de Cypress
+Dirijase a la carpeta raiz del proyecto y ejecute: 
+
+* `npm run e2e:final:chrome`
+* `npm run e2e:final:firefox`
+* `npm run e2e:final:electron`
+* `npm run e2e:final:edge`
+
+O también abra la aplicación de Cypress y ejecute cada una de las pruebas ubicadas en `final-strategy/cypress/e2e` por separado y con un navegador escogido.
+
+---
+
 # *Semana 7: Pruebas e2e en Cypress con generación de datos para GHOST*
 Este apartado del README pretende describir como hacer la ejecución de las pruebas "end to end" con generación de datos de las [funcionalidades y escenarios escogidos](https://github.com/angietroa/MISW-4103-E2E-Equipo-8/wiki/semana7-escenarios) para GHOST en la versión 5.96.0.
 
