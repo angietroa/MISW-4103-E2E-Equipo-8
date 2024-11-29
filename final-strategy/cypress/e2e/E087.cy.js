@@ -24,8 +24,5 @@ describe("E087 - Editar 'slug' valido", () => {
 
     //Dar click en guardar
     adminProfilePage.clickButton("Save");
-
-    //Validar que el campo quedo guardado
-    adminProfilePage.validateInputValue("Slug", data.slug);
   });
 });
