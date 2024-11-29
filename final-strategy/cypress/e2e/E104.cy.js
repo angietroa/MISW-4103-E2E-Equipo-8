@@ -10,13 +10,13 @@ describe("E104 - Editar la contraseña por una insegura a-priori", () => {
 
     // Visitar página e iniciar sesión
     loginPage.visitPage();
-
+    // iniciar sesión
     loginPage.signInPage();
-
+    // Navegar hacia perfil
     adminPage.navigateToAdminProfile();
-
+    // Agregar perfil
     adminPage.AddNewPassword(data.password);
-
+    // Validar contraseña
     adminPage.validatePassword();
   });
 });

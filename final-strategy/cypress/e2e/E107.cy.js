@@ -10,13 +10,13 @@ describe("E107 - Editar un lenguaje valido a-priori", () => {
 
     // Visitar página e iniciar sesión
     loginPage.visitPage();
-
+    // Iniciar sesión
     loginPage.signInPage();
-
+    // Ir a configuración
     configPage.goToSettings();
-
+    // Configurar idioma
     configPage.SetLanguage("es");
-
+    // Guardar
     configPage.save();
   });
 });

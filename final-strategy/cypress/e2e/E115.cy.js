@@ -10,13 +10,13 @@ describe("E113 - Editar descripción de metadata con 10 palabras con espacio a-p
 
     // Visitar página e iniciar sesión
     loginPage.visitPage();
-
+    // iniciar sesión
     loginPage.signInPage();
-
+    // ir a configuración
     configPage.goToSettings();
-
+    // cargar descripción de metadata
     configPage.setMetadataDescription(data.title);
-
+    // guardar
     configPage.save();
   });
 });

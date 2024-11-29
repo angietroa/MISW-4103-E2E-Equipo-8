@@ -10,13 +10,13 @@ describe("E105 - Buscar configuración existente a-priori", () => {
 
     // Visitar página e iniciar sesión
     loginPage.visitPage();
-
+    // Iniciar sesión
     loginPage.signInPage();
-
+    // Ir a configuraciones
     configPage.goToSettings();
-
+    // Configurar filtros
     configPage.tryFilter(data.small_text);
-
+    // Validar filtro
     configPage.validateFilter();
   });
 });

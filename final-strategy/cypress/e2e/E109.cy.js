@@ -10,13 +10,13 @@ describe("E109 - Editar título de sitio con 10 palabras con espacio entre ellas
 
     // Visitar página e iniciar sesión
     loginPage.visitPage();
-
+    // Iniciar sesión
     loginPage.signInPage();
-
+    // ir a configuración
     configPage.goToSettings();
-
+    // cargar título
     configPage.setTitle(data.title);
-
+    // guardar
     configPage.save();
   });
 });

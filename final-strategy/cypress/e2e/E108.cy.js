@@ -10,13 +10,13 @@ describe("E108 - Editar un lenguaje invalido a-priori", () => {
 
     // Visitar página e iniciar sesión
     loginPage.visitPage();
-
+    // Iniciar sesión
     loginPage.signInPage();
-
+    // ir a configuración
     configPage.goToSettings();
-
+    // Configurar idioma con texto aleatorio
     configPage.SetLanguage(data.small_text);
-
+    // guardar
     configPage.save();
   });
 });

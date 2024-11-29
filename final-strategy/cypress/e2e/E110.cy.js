@@ -10,13 +10,13 @@ describe("E110 - Editar título de sitio con 10 palabras sin espacio a-priori", 
 
     // Visitar página e iniciar sesión
     loginPage.visitPage();
-
+    // iniciar sesión
     loginPage.signInPage();
-
+    // ir a configuración
     configPage.goToSettings();
-
+    // cargar título
     configPage.setTitle(data.big_text);
-
+    // guardar
     configPage.save();
   });
 });

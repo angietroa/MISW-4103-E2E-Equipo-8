@@ -10,13 +10,13 @@ describe("E111 - Editar descripción de sitio con 10 palabras con espacio a-prio
 
     // Visitar página e iniciar sesión
     loginPage.visitPage();
-
+    // iniciar sesión
     loginPage.signInPage();
-
+    // ir a configuración
     configPage.goToSettings();
-
+    // cargar descripción
     configPage.setDescription(data.title);
-
+    // guardar
     configPage.save();
   });
 });

@@ -9,13 +9,13 @@ describe("E106 - Buscar configuración no existente a-priori", () => {
 
     // Visitar página e iniciar sesión
     loginPage.visitPage();
-
+    // iniciar sesión
     loginPage.signInPage();
-
+    // ir a configuración
     configPage.goToSettings();
-
+    // Probar filtro
     configPage.tryFilter("Timezone");
-
+    // Validar busqueda
     configPage.validateSearch();
   });
 });

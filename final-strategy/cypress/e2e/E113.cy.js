@@ -10,13 +10,13 @@ describe("E113 - Editar título de metadata con 10 palabras con espacio a-priori
 
     // Visitar página e iniciar sesión
     loginPage.visitPage();
-
+    // iniciar sesión
     loginPage.signInPage();
-
+    // ir a configuración
     configPage.goToSettings();
-
+    // cargar título de metadata
     configPage.setMetadataTitle(data.title);
-
+    // guardar
     configPage.save();
   });
 });
