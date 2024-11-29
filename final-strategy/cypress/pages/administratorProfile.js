@@ -8,7 +8,7 @@ class AdminProfile {
     cy.get(
       '[style="background-image: url(/ghost/assets/img/user-image-639a88b784fb5f10964be8b975ca9fdf.png);"]'
     ).click();
-    cy.contains("a", "Your profile").click();
+    cy.contains("a", "Your profile").click({ waitForAnimations: false });
   }
 
   getAndWrite(labelText, value, field = "input") {
