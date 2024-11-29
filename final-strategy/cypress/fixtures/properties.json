@@ -1,5 +1,5 @@
 {
-    "url": "http://localhost:2369/ghost/",
-    "username": "johndoe@mail.com",
-    "password": "1234567890123456"
+  "url": "http://localhost:2368/ghost/",
+  "username": "johndoe@mail.com",
+  "password": "1234567890123456"
 }

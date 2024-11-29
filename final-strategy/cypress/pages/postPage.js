@@ -1,5 +1,3 @@
-const { faker } = require("@faker-js/faker");
-
 class PostPage {
   constructor() {
     this.textarea = "textarea";
@@ -112,77 +110,6 @@ class PostPage {
 
   verifyButtonNoText() {
     cy.get('[data-testid="button-card-btn"]').should("exist");
-  }
-
-  generateRandomURL() {
-    const protocol = faker.internet.protocol();
-    const domain = faker.internet.domainName();
-    const path = faker.word.noun();
-    return `${protocol}://${domain}/${path}`;
-  }
-
-  generateRandomText(minChars = null, maxChars = null) {
-    const min = minChars ?? faker.number.int({ min: 50, max: 100 });
-    const max = maxChars ?? faker.number.int({ min: min, max: min + 50 });
-    let randomText = faker.lorem.paragraphs(1);
-
-    const specialChars = [
-      "!",
-      "@",
-      "#",
-      "$",
-      "%",
-      "^",
-      "&",
-      "*",
-      "(",
-      ")",
-      "-",
-      "=",
-      "+",
-      "[",
-      "]",
-      "{",
-      "}",
-      "\\",
-      "|",
-      ";",
-      ":",
-      '"',
-      "'",
-      "<",
-      ">",
-      ",",
-      ".",
-      "/",
-      "?",
-    ];
-
-    while (randomText.length < min) {
-      randomText +=
-        " " + faker.lorem.words(faker.number.int({ min: 5, max: 10 }));
-    }
-
-    const charCount = faker.number.int({ min: 3, max: 10 });
-    const words = randomText.split(" ");
-
-    for (let i = 0; i < charCount; i++) {
-      const randomChar =
-        specialChars[
-          faker.number.int({ min: 0, max: specialChars.length - 1 })
-        ];
-      const randomNumber = faker.number.int({ min: 0, max: 9999 });
-      const insertPos = faker.number.int({ min: 0, max: words.length - 1 });
-      words.splice(insertPos, 0, `${randomChar}${randomNumber}`);
-    }
-
-    randomText = words.join(" ");
-
-    if (randomText.length > max) {
-      randomText = randomText.substring(0, max);
-    }
-
-    return randomText;
   }
 }
 
