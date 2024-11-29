@@ -75,6 +75,17 @@ class AdminProfile {
     cy.get(".gh-user-avatar").click({ waitForAnimations: false });
     cy.get(".gh-user-name").should("have.text", name);
   }
+
+  validateAdminMail(email) {
+    cy.get(".gh-user-avatar").click({ waitForAnimations: false });
+    cy.get(".gh-user-email").should("have.text", email);
+  }
+
+  restoreMail(email) {
+    cy.get('a[data-test-nav="user-profile"]').click();
+    this.getAndWrite("Email", email);
+    this.clickButton("Save");
+  }
 }
 
 module.exports = AdminProfile;
