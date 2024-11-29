@@ -1,4 +1,5 @@
 class AuthenticationPage {
+
   constructor(cy) {
     this.cy = cy;
   }
@@ -14,4 +15,10 @@ class AuthenticationPage {
   clickOnSignIn() {
     this.cy.get('button[type="submit"]').click();
   }
+
+  findAuthenticationButtonError() {
+    this.cy.get('span[data-test-task-button-state="failure"]').should('exist');
+  }
 }
+
+module.exports = AuthenticationPage;
