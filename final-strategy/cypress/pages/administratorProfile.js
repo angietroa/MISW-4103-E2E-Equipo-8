@@ -66,6 +66,35 @@ class AdminProfile {
       "span.mt-1.inline-block.text-xs.text-red.dark\\:text-red-500.order-3"
     ).should("contain.text", "Sorry, you cannot use an insecure password.");
   }
+
+  clickOnDoneButton() {
+    cy.get("#done-button").click();
+  }
+
+  validateAdminName(name) {
+    cy.get(".gh-user-avatar").click({ waitForAnimations: false });
+    cy.get(".gh-user-name").should("have.text", name);
+  }
+
+  validateAdminMail(email) {
+    cy.get(".gh-user-avatar").click({ waitForAnimations: false });
+    cy.get(".gh-user-email").should("have.text", email);
+  }
+
+  restoreMail(email) {
+    cy.get('a[data-test-nav="user-profile"]').click();
+    this.getAndWrite("Email", email);
+    this.clickButton("Save");
+  }
+
+  validateAdminSlug(slug) {
+    cy.get(".gh-user-avatar").click({ waitForAnimations: false });
+    cy.get('a[data-test-nav="user-profile"]').click();
+    cy.contains("label", "Slug")
+      .closest("div")
+      .find("input")
+      .should("not.have.value", slug);
+  }
 }
 
-export default AdminProfile;
+module.exports = AdminProfile;

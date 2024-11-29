@@ -5,3 +5,4 @@ cypress/cypress/screenshots
 cypress/cypress/results
 kraken/screenshots
 kraken/make_report/node_modules
+final-strategy/cypress/screenshots
