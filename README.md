@@ -46,6 +46,8 @@ Dirijase a la carpeta raiz del proyecto y ejecute:
 
 O también abra la aplicación de Cypress y ejecute cada una de las pruebas ubicadas en `final-strategy/cypress/e2e` por separado y con un navegador escogido.
 
+**Importante**: antes de hacer la ejecución en cada navegador, borre la base de datos de la aplicación o la instancia, para tener pruebas limpias (sin datos anteriores).
+
 ---
 
 # *Semana 7: Pruebas e2e en Cypress con generación de datos para GHOST*
