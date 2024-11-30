@@ -95,6 +95,10 @@ class AdminProfile {
       .find("input")
       .should("not.have.value", slug);
   }
+
+  validateRedSpan() {
+    cy.get("span").should("have.class", "text-red");
+  }
 }
 
 module.exports = AdminProfile;

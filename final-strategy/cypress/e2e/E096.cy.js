@@ -18,8 +18,6 @@ describe("E096 - Funcionalidad de editar perfil de administrador con twitter (x)
 
     cy.get("body").click();
 
-    adminProfile.validateHelperText(
-      "object null is not iterable (cannot read property Symbol(Symbol.iterator))"
-    );
+    adminProfile.validateRedSpan();
   });
 });
