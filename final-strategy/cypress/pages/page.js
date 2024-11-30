@@ -1,3 +1,5 @@
+const pageDataAPriori = require("../data-a-priori/page.json");
+
 class PageObj {
   constructor(cy) {
     this.cy = cy;
@@ -212,6 +214,14 @@ class PageObj {
     this.cy
       .get('button[data-test-button="publish-save"]')
       .click({ multiple: true, force: true });
+  }
+
+  getAPrioriData(scenarioId) {
+    const result = pageDataAPriori.filter(d => d.id === scenarioId);
+    if (result.length > 0) {
+      return result[0];
+    }
+    throw new Error("Scenario not found.");
   }
 }
 
