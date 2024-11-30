@@ -1,0 +1,92 @@
+[
+    {
+        "id": "E116",
+        "metadata_description": "Palabra1Palabra2Palabra3Palabra4Palabra5Palabra6Palabra7Palabra8Palabra9Palabra10",
+        "x_card_title": "",
+        "x_card_description": "",
+        "facebook_card_title": "",
+        "facebook_card_description": "",
+        "facebook_profile": "",
+        "x_profile": ""
+    },
+    {
+        "id": "E117",
+        "metadata_description": "",
+        "x_card_title": "título x card",
+        "x_card_description": "",
+        "facebook_card_title": "",
+        "facebook_card_description": "",
+        "facebook_profile": "",
+        "x_profile": ""
+    },
+    {
+        "id": "E118",
+        "metadata_description": "",
+        "x_card_title": "",
+        "x_card_description": "descripción x card",
+        "facebook_card_title": "",
+        "facebook_card_description": "",
+        "facebook_profile": "",
+        "x_profile": ""
+    },
+    {
+        "id": "E119",
+        "metadata_description": "",
+        "x_card_title": "",
+        "x_card_description": "",
+        "facebook_card_title": "título facebook card",
+        "facebook_card_description": "",
+        "facebook_profile": "",
+        "x_profile": ""
+    },
+    {
+        "id": "E120",
+        "metadata_description": "",
+        "x_card_title": "",
+        "x_card_description": "",
+        "facebook_card_title": "",
+        "facebook_card_description": "descripción facebook card",
+        "facebook_profile": "",
+        "x_profile": ""
+    },
+    {
+        "id": "E121",
+        "metadata_description": "",
+        "x_card_title": "",
+        "x_card_description": "",
+        "facebook_card_title": "",
+        "facebook_card_description": "",
+        "facebook_profile": "https://www.facebook.com/perfilvalido",
+        "x_profile": ""
+    },
+    {
+        "id": "E122",
+        "metadata_description": "",
+        "x_card_title": "",
+        "x_card_description": "",
+        "facebook_card_title": "",
+        "facebook_card_description": "",
+        "facebook_profile": "https://www.facebook.com/!#$%&/()=@",
+        "x_profile": ""
+    },
+    {
+        "id": "E123",
+        "metadata_description": "",
+        "x_card_title": "",
+        "x_card_description": "",
+        "facebook_card_title": "",
+        "facebook_card_description": "",
+        "facebook_profile": "",
+        "x_profile": "https://x.com/perfilvalido"
+    },
+    {
+        "id": "E124",
+        "metadata_description": "",
+        "x_card_title": "",
+        "x_card_description": "",
+        "facebook_card_title": "",
+        "facebook_card_description": "",
+        "facebook_profile": "",
+        "x_profile": "https://x.com/!#$%&/()=@"
+    }
+]
